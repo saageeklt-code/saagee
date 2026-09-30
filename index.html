@@ -113,19 +113,21 @@ nav button.ac{border-color:var(--or)}
 <script>var FB={apiKey:"AIzaSyDW4TMcBFkj_UM14AY3RIcd6rm8T5PavcM",authDomain:"saagee-ads.firebaseapp.com",projectId:"saagee-ads",appId:"1:746691295087:web:e0151dd5fe4ee6a536da9a"};</script>
 <div id="v-login" hidden><div class="lg-hero"><div class="lg-brand">Saagee <i>Ads</i></div><p>Quotations, estimates and invoices – professional, branded and ready in minutes.</p></div>
 <div class="lg-card"><h2>Welcome back</h2><small>Sign in to continue</small>
-<form id="lf"><input id="lnm" placeholder="Your name" hidden style="margin-bottom:8px"><label for="lem">Email</label><input id="lem" type="email" autocomplete="username" required><label for="lpw">Password</label><input id="lpw" type="password" autocomplete="current-password" required>
+<form id="lf"><div id="lsu" hidden><label for="lnm">Name *</label><input id="lnm"><label for="lun">Username *</label><input id="lun" placeholder="small letters/numbers"><label for="lph">Phone *</label><input id="lph" type="tel" placeholder="10 digit"><label for="lad">Address</label><textarea id="lad"></textarea><div class="r2"><div><label for="ldob">Date of birth</label><input id="ldob" type="date"></div><div><label for="ldoj">Date of joining</label><input id="ldoj" type="date"></div></div></div><label for="lem" id="lel">Username / Email / Phone</label><input id="lem" type="text" autocomplete="username" required><label for="lpw">Password</label><input id="lpw" type="password" autocomplete="current-password" required>
 <label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px"><input type="checkbox" id="lrm" style="width:auto"> Keep me signed in for today</label>
 <div class="acts"><button class="pri" id="lgb" type="submit" style="width:100%;padding:10px">Login</button></div></form><div class="acts"><button id="lsw" type="button" class="lk">New worker? Create account</button></div><div id="lerr"></div></div></div>
 <style>body.w .adm,body.w .adm-only,body.w #hc,body.w #ht,body.w #status,body.w label[for=status],body.w #dtype,body.w label[for=dtype],body.w #pf,body.w #cv,body.w #sc,body.w [data-a=del],body.w [data-a=rem],body.w [data-a=rest],body.w [data-a=purge]{display:none!important}</style>
 <div id="v-wait" hidden><div style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px"><div><h2>Waiting for admin approval</h2><p id="wm"></p><button id="wlo">Logout</button></div></div></div>
-<nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients">Clients</button><button data-v="reports">Reports</button><button data-v="settings">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button><button id="lo">Logout</button></nav>
-<div id="v-home" class="pg" hidden><div class="cards" id="hc"></div>
+<nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button><button id="lo">Logout</button></nav>
+<div id="v-home" class="pg" hidden><div id="att"></div><div class="cards" id="hc"></div>
 <div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
 <div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th class="adm">Due</th><th class="adm r">Amount</th><th class="adm">Status</th><th class="adm">By</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
 <div id="v-clients" class="pg" hidden><fieldset><legend>Client</legend><div class="r2"><div><label for="cn">Name</label><input id="cn"></div><div><label for="cp">Phone</label><input id="cp"></div></div><label for="ca">Address</label><textarea id="ca"></textarea><div class="acts"><button class="pri" id="cs">Save client</button><button id="cc">Clear</button></div></fieldset>
 <div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th></th></tr></thead><tbody id="cb"></tbody></table></div><div id="cst"></div></div>
 <div id="v-reports" class="pg" hidden><div class="acts" style="margin:0 0 10px"><input id="rmn" type="month" style="width:auto"><button id="rcsv">Download CSV</button></div><div id="rp"></div></div>
 <div id="v-settings" class="pg" hidden><fieldset><legend>Bank &amp; UPI</legend><label for="sbk">Bank details</label><textarea id="sbk" placeholder="Account name, number, IFSC, bank"></textarea><div class="r2"><div><label for="sup">UPI ID</label><input id="sup" placeholder="name@bank"></div><div><label for="sun">UPI payee name</label><input id="sun"></div></div><label for="sgs">Your GSTIN (optional, shown on documents)</label><input id="sgs" placeholder="e.g. 33ABCDE1234F1Z5"><div class="acts"><button class="pri" id="ssv">Save settings</button></div><small>Letterhead, signature and company seal are uploaded inside the editor and saved to your account automatically.</small></fieldset><fieldset><legend>Saved items (catalogue)</legend><div class="tw"><table class="tb"><tbody id="cat"></tbody></table></div></fieldset></div>
+<div id="v-att" class="pg" hidden><input id="adt" type="date" style="width:200px;margin-bottom:10px"><div class="tw"><table class="tb"><thead><tr><th>Worker</th><th>Status</th><th>Time</th><th>Marked at</th><th>Edits</th><th>Month P / A</th><th></th></tr></thead><tbody id="atb"></tbody></table></div></div>
+<div id="v-money" class="pg" hidden><div id="mst"></div><fieldset><legend>Add entry</legend><div class="r2"><div><label for="mty">Type</label><select id="mty"><option value="income">Income</option><option value="expense">Expense</option><option value="pending" class="adm">Pending (to receive)</option></select></div><div><label for="mam">Amount</label><input id="mam" type="number" min="0"></div></div><div class="r2"><div><label for="mds">Description</label><input id="mds"></div><div><label for="mcl">Client (optional)</label><input id="mcl"></div></div><div class="r2"><div><label for="mct">Category</label><select id="mct"><option>Sales</option><option>Advance</option><option>Material</option><option>Salary</option><option>Travel</option><option>Food</option><option>Other</option></select></div><div><label for="mmd">Mode</label><select id="mmd"><option>Cash</option><option>UPI</option><option>Bank</option></select></div></div><label for="mdt">Date</label><input id="mdt" type="date"><div class="acts"><button class="pri" id="msv">Save entry</button><button id="mcc">Clear</button></div></fieldset><div class="tw"><table class="tb"><thead><tr><th>Date</th><th>Type</th><th>Description</th><th class="r">Amount</th><th>Mode</th><th class="adm">By</th><th></th></tr></thead><tbody id="mtb"></tbody></table></div></div>
 <div id="v-team" class="pg" hidden><div id="tmw"></div></div>
 <div id="toast" hidden></div>
 <div class="app" id="v-ed" hidden>
@@ -374,7 +376,7 @@ document.querySelectorAll(".sw").forEach(function(b){b.onclick=function(){S.col=
 var cur={id:null},tm=0,DOCS=[],CL=[],ccur=null,ST={bank:"",upi:"",upn:"",gstin:""},CAT=[],LAST="",STM=null,tt=0,auth,db,
 TT={quotation:"QUOTATION",estimate:"ESTIMATE",bill:"INVOICE"},NLB={quotation:"Quote No:",estimate:"Estimate No:",bill:"Invoice No:"},
 STAT={quotation:["Draft","Sent","Accepted","Rejected"],estimate:["Draft","Sent","Accepted","Rejected"],bill:["Unpaid","Partial","Paid"]},
-PFX={quotation:"QTN-",estimate:"EST-",bill:"INV-"},VW=["home","clients","reports","settings","team","ed"];
+PFX={quotation:"QTN-",estimate:"EST-",bill:"INV-"},VW=["home","clients","reports","settings","team","att","money","ed"];
 function today(){return new Date().toISOString().slice(0,10)}
 function NL(){return NLB[S.type||"quotation"]}
 function paidAmt(){return(S.pay||[]).reduce(function(a,p){return a+nm(p.amt)},0)}
@@ -392,7 +394,7 @@ function plist(){$("pl").innerHTML=(S.pay||[]).map(function(p,i){return'<div cla
 $("pl").oninput=function(ev){var r=ev.target.closest("[data-i]");if(r&&ev.target.dataset.k){S.pay[r.dataset.i][ev.target.dataset.k]=ev.target.value;render()}};
 $("pl").onclick=function(ev){var b=ev.target.closest("[data-del]");if(b){S.pay.splice(b.dataset.del,1);plist();render()}};
 $("pa").onclick=function(){S.pay=S.pay||[];S.pay.push({date:today(),amt:Math.max(calc().tot-paidAmt(),0)});plist();render()};
-function go(v){if(ROLE!=="admin"&&v!=="home"&&v!=="ed")v="home";$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();if(v==="home")home();if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist();if(v==="team")team()}
+function go(v){if(ROLE!=="admin"&&v!=="home"&&v!=="ed"&&v!=="money")v="home";$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();if(v==="home"){home();attRender()}if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist();if(v==="team")team();if(v==="att")attView();if(v==="money")money()}
 function out(){$("v-wait").hidden=true;$("nav").hidden=true;VW.forEach(function(x){$("v-"+x).hidden=true});$("v-login").hidden=false}
 document.querySelectorAll("nav [data-v]").forEach(function(b){b.onclick=function(){if(canLeave())go(b.dataset.v)}});
 document.querySelectorAll("nav [data-n]").forEach(function(b){b.onclick=function(){if(canLeave())newDoc(b.dataset.n)}});
@@ -423,7 +425,7 @@ function remind(d){var ph=(d.phone||"").replace(/\D/g,"");if(!ph){alert("No phon
 function by(d){return e(d.by||"")+(d.editedAt?"<br><small>Edited "+new Date(d.editedAt).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})+(d.editedBy?" by "+e(d.editedBy):"")+"</small>":"")}
 function team(){var P=USERS.filter(function(u){return u.role==="pending"}),A=USERS.filter(function(u){return u.role!=="pending"});
  function dt(u){return u.created?new Date(u.created).toLocaleDateString("en-IN"):""}
- function tb(L,f,em){return'<div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Email</th><th>Since</th><th>Role</th><th></th></tr></thead><tbody>'+(L.length?L.map(function(u){return'<tr data-u="'+u.id+'"><td>'+e(u.name||"")+"</td><td>"+e(u.email||"")+"</td><td>"+dt(u)+"</td><td>"+e(u.role)+" · "+DOCS.filter(function(d){return d.createdBy===u.id}).length+" docs</td><td>"+f(u)+"</td></tr>"}).join(""):'<tr><td colspan="5">'+em+"</td></tr>")+"</tbody></table></div>"}
+ function tb(L,f,em){return'<div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Email</th><th>Since</th><th>Role</th><th></th></tr></thead><tbody>'+(L.length?L.map(function(u){return'<tr data-u="'+u.id+'"><td>'+e(u.name||"")+(u.phone?"<br><small>"+e(u.phone)+" · @"+e(u.username||"")+"</small>":"")+"</td><td>"+e(u.email||"")+(u.address?"<br><small>"+e(u.address)+"</small>":"")+"</td><td>"+dt(u)+(u.doj?"<br><small>Joined "+e(u.doj)+"</small>":"")+(u.dob?"<br><small>DOB "+e(u.dob)+"</small>":"")+"</td><td>"+e(u.role)+" · "+DOCS.filter(function(d){return d.createdBy===u.id}).length+" docs</td><td>"+f(u)+"</td></tr>"}).join(""):'<tr><td colspan="5">'+em+"</td></tr>")+"</tbody></table></div>"}
  $("tmw").innerHTML='<fieldset><legend>Pending requests</legend>'+tb(P,function(){return'<button class="pri" data-r="worker">Approve</button> <button data-r="rejected">Reject</button>'},"No pending requests.")+'</fieldset><fieldset><legend>Team</legend>'+tb(A,function(u){if(u.id===UID)return"You";return u.role==="worker"?'<button data-r="disabled">Disable</button> <button data-r="admin">Make admin</button>':u.role==="admin"?'<button data-r="worker">Make worker</button>':'<button data-r="worker">Enable</button>'},"No team members yet.")+"</fieldset>"}
 $("tmw").onclick=function(ev){var b=ev.target.closest("[data-r]");if(!b)return;var id=b.closest("[data-u]").dataset.u;if(id===UID)return;if(b.dataset.r==="admin"&&!confirm("Give this person full admin access?"))return;db.collection("users").doc(id).update({role:b.dataset.r})};
 function home(){var q=$("hq").value.toLowerCase(),t=$("ht").value,m=today().slice(0,7),A=LIVE();
@@ -485,7 +487,7 @@ function until(){return+localStorage.getItem("sa-until")||0}
 if(!okcfg){$("v-login").hidden=false;$("lerr").textContent="Firebase is not set up yet. Paste your Firebase config at the top of this file."}
 else{firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();
 function route(u){UID=u.uid;var ref=db.collection("users").doc(u.uid),first=true;
- ref.get().then(function(x){return x.exists?x:ref.set({name:window.SNAME||u.displayName||u.email,email:u.email,role:"pending",created:Date.now()})}).then(function(){
+ ref.get().then(function(x){return x.exists?x:ref.set(Object.assign({name:window.SNAME||u.displayName||u.email,email:u.email,role:"pending",created:Date.now()},window.SDATA||{}))}).then(function(){
   ref.onSnapshot(function(x){var d=x.data()||{},r=d.role||"pending";UNAME=d.name||u.email;
    if(!first&&r!==ROLE){location.reload();return}
    first=false;ROLE=r;
@@ -494,12 +496,63 @@ function route(u){UID=u.uid;var ref=db.collection("users").doc(u.uid),first=true
  }).catch(function(x){$("v-login").hidden=false;$("lerr").textContent="Could not check your account: "+x.message})}
  auth.onAuthStateChanged(function(u){if(u&&until()&&Date.now()>until()){auth.signOut();return}if(u)route(u);else out()});
  setInterval(function(){if(auth.currentUser&&until()&&Date.now()>until())auth.signOut().then(function(){location.reload()})},60000)}
+async function doAuth(){var id=$("lem").value.trim(),pw=$("lpw").value,L=function(k){return db.collection("loginIndex").doc(k)};
+ if(SIGNUP){var un=$("lun").value.trim().toLowerCase(),ph=$("lph").value.replace(/\D/g,"").slice(-10);
+  if(id.indexOf("@")<0)throw new Error("Enter a valid email");if(!/^[a-z0-9_]{3,20}$/.test(un))throw new Error("Username: 3-20 small letters/numbers");if(ph.length!==10)throw new Error("Enter 10 digit phone");
+  if((await L("u_"+un).get()).exists)throw new Error("Username already used");if((await L("p_"+ph).get()).exists)throw new Error("Phone already used");
+  window.SDATA={name:$("lnm").value.trim(),username:un,phone:ph,address:$("lad").value.trim(),dob:$("ldob").value,doj:$("ldoj").value};window.SNAME=SDATA.name;
+  var c=await auth.createUserWithEmailAndPassword(id,pw);await L("u_"+un).set({email:id,uid:c.user.uid});await L("p_"+ph).set({email:id,uid:c.user.uid});return}
+ var em=id;if(id.indexOf("@")<0){var dg=id.replace(/\D/g,"").slice(-10),k=/^[\d\s+-]+$/.test(id)&&dg.length===10?"p_"+dg:"u_"+id.toLowerCase(),x=await L(k).get();if(!x.exists)throw new Error("none");em=x.data().email}
+ await auth.signInWithEmailAndPassword(em,pw)}
 $("lf").onsubmit=async function(ev){ev.preventDefault();if(!okcfg)return;var r=$("lrm").checked,eb=$("lerr");eb.textContent="";
- try{await auth.setPersistence(r?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION);var d=new Date();d.setHours(23,59,59,999);localStorage.setItem("sa-until",r?d.getTime():0);(SIGNUP?(window.SNAME=$("lnm").value.trim(),await auth.createUserWithEmailAndPassword($("lem").value.trim(),$("lpw").value)):await auth.signInWithEmailAndPassword($("lem").value.trim(),$("lpw").value))}
+ try{await auth.setPersistence(r?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION);var d=new Date();d.setHours(23,59,59,999);localStorage.setItem("sa-until",r?d.getTime():0);await doAuth()}
  catch(x){eb.textContent=SIGNUP?"Could not create account: "+x.message:"Login failed. Check email and password."}};
-var SIGNUP=false;$("lsw").onclick=function(){SIGNUP=!SIGNUP;$("lnm").hidden=!SIGNUP;$("lnm").required=SIGNUP;$("lgb").textContent=SIGNUP?"Create account":"Login";this.textContent=SIGNUP?"Have an account? Login":"New worker? Create account"};
+var SIGNUP=false;$("lsw").onclick=function(){SIGNUP=!SIGNUP;$("lsu").hidden=!SIGNUP;["lnm","lun","lph"].forEach(function(k){$(k).required=SIGNUP});$("lel").textContent=SIGNUP?"Email *":"Username / Email / Phone";$("lgb").textContent=SIGNUP?"Create account":"Login";this.textContent=SIGNUP?"Have an account? Login":"New worker? Create account"};
 $("wlo").onclick=function(){auth.signOut().then(function(){location.reload()})};
 $("lo").onclick=function(){auth.signOut().then(function(){location.reload()})};
+function fdt(t){return t?new Date(t).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}):""}
+function attRender(){if(ROLE!=="worker"){$("att").innerHTML="";return}var d=today(),r=db.collection("attendance").doc(UID+"_"+d);
+ r.get().then(function(x){var o=x.exists?x.data():null,n=new Date(),hm=String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");
+  $("att").innerHTML='<fieldset><legend>Attendance – '+fd(d)+'</legend><p><b>'+(o?(o.status==="present"?"Present · "+e(o.time):"Absent")+(o.edits?" (edited "+o.edits+"x)":""):"Not marked yet")+'</b></p><label style="display:inline"><input type="radio" name="as" value="present" style="width:auto" '+(!o||o.status==="present"?"checked":"")+'> Present</label> &nbsp; <label style="display:inline"><input type="radio" name="as" value="absent" style="width:auto" '+(o&&o.status==="absent"?"checked":"")+'> Absent</label><div class="r2"><div><label for="atm">Time</label><input id="atm" type="time" value="'+((o&&o.time)||hm)+'"></div><div><label for="arn">Reason (if absent)</label><input id="arn" value="'+e((o&&o.reason)||"")+'"></div></div><div class="acts"><button class="pri" id="asv">'+(o?"Update":"Mark")+'</button></div></fieldset>';
+  $("asv").onclick=function(){var st=document.querySelector("[name=as]:checked").value,t=$("atm").value;if(st==="present"&&!t){alert("Enter the time");return}
+   var y={uid:UID,name:UNAME,date:d,status:st,time:st==="present"?t:"",reason:st==="absent"?$("arn").value:"",markedAt:o?o.markedAt:Date.now(),edits:o?(o.edits||0)+1:0};
+   if(o){y.editedAt=Date.now();y.editedBy=UNAME;y.first=o.first||{status:o.status,time:o.time}}
+   r.set(y).then(attRender).catch(function(z){alert(z.message)})}})}
+var ATT=[];
+function attView(){if(!$("adt").value)$("adt").value=today();var d=$("adt").value,m=d.slice(0,7);
+ db.collection("attendance").where("date",">=",m+"-01").where("date","<=",m+"-31").get().then(function(q){ATT=q.docs.map(function(x){return x.data()});
+  var W=USERS.filter(function(u){return u.role==="worker"});
+  $("atb").innerHTML=W.length?W.map(function(u){var o=ATT.filter(function(a){return a.uid===u.id&&a.date===d})[0],P=ATT.filter(function(a){return a.uid===u.id&&a.status==="present"}).length,A=ATT.filter(function(a){return a.uid===u.id&&a.status==="absent"}).length;
+   return'<tr data-w="'+u.id+'"><td>'+e(u.name)+"</td><td>"+(o?(o.status==="present"?"Present":"Absent"):"Not marked")+"</td><td>"+(o?e(o.time||o.reason||""):"")+"</td><td>"+(o?fdt(o.markedAt):"")+"</td><td>"+(o&&o.edits?"Edited "+o.edits+"x · "+fdt(o.editedAt)+" by "+e(o.editedBy)+(o.first?" (was "+e(o.first.status+" "+(o.first.time||""))+")":""):"")+"</td><td>"+P+" / "+A+'</td><td><button data-s="present">Present</button> <button data-s="absent">Absent</button></td></tr>'}).join(""):'<tr><td colspan="7">No approved workers yet.</td></tr>'})}
+$("adt").onchange=attView;
+$("atb").onclick=function(ev){var b=ev.target.closest("[data-s]");if(!b)return;var w=b.closest("[data-w]").dataset.w,u=USERS.filter(function(x){return x.id===w})[0],d=$("adt").value,o=ATT.filter(function(a){return a.uid===w&&a.date===d})[0],st=b.dataset.s,t="";
+ if(st==="present"){t=prompt("Time (HH:MM)",(o&&o.time)||"09:00");if(!t)return}
+ var y={uid:w,name:u.name,date:d,status:st,time:t,reason:"",markedAt:o?o.markedAt:Date.now(),edits:o?(o.edits||0)+1:0};
+ if(o){y.editedAt=Date.now();y.editedBy=UNAME+" (admin)";y.first=o.first||{status:o.status,time:o.time}}
+ db.collection("attendance").doc(w+"_"+d).set(y).then(attView)};
+var MON=[],mcur=null;
+function money(){if(!$("mdt").value)$("mdt").value=today();if(ROLE!=="admin")$("mty").value=$("mty").value==="pending"?"income":$("mty").value;
+ var q=ROLE==="admin"?db.collection("money"):db.collection("money").where("createdBy","==",UID);
+ q.get().then(function(s){MON=s.docs.map(function(d){var o=d.data();o.id=d.id;return o}).sort(function(a,b){return(b.date||"").localeCompare(a.date||"")||(b.created||0)-(a.created||0)});mrender()})}
+function ms(L,t){return L.filter(function(x){return x.type===t}).reduce(function(a,x){return a+nm(x.amt)},0)}
+function mbox(t,L){return"<fieldset><legend>"+t+"</legend>Income ₹"+fmt(ms(L,"income"))+" · Expense ₹"+fmt(ms(L,"expense"))+" · <b>Profit ₹"+fmt(ms(L,"income")-ms(L,"expense"))+"</b></fieldset>"}
+function mrender(){var T=today();
+ if(ROLE==="admin"){var bl=DOCS.filter(function(d){return d.type==="bill"&&!d.del&&d.total-d.paid>0.005}),pm=MON.filter(function(x){return x.type==="pending"}),tot=bl.reduce(function(a,d){return a+d.total-d.paid},0)+ms(pm,"pending"),
+  md=["Cash","UPI","Bank"].map(function(k){var L=MON.filter(function(x){return x.mode===k});return k+" ₹"+fmt(ms(L,"income")-ms(L,"expense"))}).join(" · ");
+  $("mst").innerHTML=mbox("Today",MON.filter(function(x){return x.date===T}))+mbox("This month",MON.filter(function(x){return(x.date||"").slice(0,7)===T.slice(0,7)}))+"<fieldset><legend>Balance by mode</legend>"+md+"</fieldset><fieldset><legend>Pending to receive – ₹"+fmt(tot)+'</legend><table class="tb"><tbody>'+bl.map(function(d){return"<tr><td>"+e(d.name)+"</td><td>"+e(d.no)+"</td><td>₹"+fmt(d.total-d.paid)+"</td><td>"+(d.due?fd(d.due):"")+(overdue(d)?" · Overdue":"")+"</td><td></td></tr>"}).join("")+pm.map(function(x){return'<tr data-id="'+x.id+'"><td>'+e(x.client||x.desc)+"</td><td>Manual</td><td>₹"+fmt(nm(x.amt))+"</td><td>"+fd(x.date)+'</td><td><button data-a="mr">Received</button></td></tr>'}).join("")+(bl.length||pm.length?"":"<tr><td>Nothing pending.</td></tr>")+"</tbody></table></fieldset>"}
+ else $("mst").innerHTML="";
+ $("mtb").innerHTML=MON.length?MON.map(function(x){return'<tr data-id="'+x.id+'"><td>'+fd(x.date)+"</td><td>"+e(x.type)+"</td><td>"+e(x.desc||"")+(x.client?" · "+e(x.client):"")+(x.editedAt?"<br><small>Edited "+fdt(x.editedAt)+"</small>":"")+'</td><td class="r">₹'+fmt(nm(x.amt))+"</td><td>"+e(x.mode||"")+'</td><td class="adm">'+e(x.by||"")+'</td><td class="adm"><button data-a="me">Edit</button> <button data-a="md">✕</button></td></tr>'}).join(""):'<tr><td colspan="7">No entries yet.</td></tr>'}
+function mclear(){mcur=null;["mam","mds","mcl"].forEach(function(k){$(k).value=""});$("mdt").value=today();$("msv").textContent="Save entry"}
+$("mcc").onclick=mclear;
+$("msv").onclick=function(){var a=nm($("mam").value);if(!(a>0)){alert("Enter the amount");return}
+ var d={type:$("mty").value,amt:a,desc:$("mds").value.trim(),client:$("mcl").value.trim(),cat:$("mct").value,mode:$("mmd").value,date:$("mdt").value||today()};
+ var r=mcur?db.collection("money").doc(mcur).update(Object.assign(d,{editedAt:Date.now(),editedBy:UNAME})):db.collection("money").add(Object.assign(d,{createdBy:UID,by:UNAME,created:Date.now()}));
+ r.then(function(){mclear();money()}).catch(function(x){alert(x.message)})};
+function mact(ev){var b=ev.target.closest("[data-a]");if(!b)return;var id=b.closest("[data-id]").dataset.id,x=MON.filter(function(m){return m.id===id})[0],a=b.dataset.a;
+ if(a==="md"){if(confirm("Delete this entry?"))db.collection("money").doc(id).delete().then(money)}
+ else if(a==="mr")db.collection("money").doc(id).update({type:"income",editedAt:Date.now(),editedBy:UNAME}).then(money)
+ else if(a==="me"){mcur=id;$("mty").value=x.type;$("mam").value=x.amt;$("mds").value=x.desc||"";$("mcl").value=x.client||"";$("mct").value=x.cat||"Other";$("mmd").value=x.mode||"Cash";$("mdt").value=x.date;$("msv").textContent="Update entry";scrollTo(0,document.body.scrollHeight/3)}}
+$("mtb").onclick=mact;$("mst").onclick=mact;
 sync();
 </script>
 </body>
