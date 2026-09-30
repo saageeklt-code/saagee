@@ -123,10 +123,16 @@ nav button.ac{border-color:var(--or)}
 .sheet.gst .tot{width:100%}.sheet.gst .tot td{border:1.5px solid var(--th);padding:.3em .5em}
 .sheet.gst .tot tr.gt td{background:none;color:#222;font-size:1.05em}
 .sheet.gst .w{border:1.5px solid var(--th);padding:.4em .6em;margin-top:-1.5px}
-nav{flex-wrap:wrap}.tw{overflow-x:auto}
+.tw{overflow-x:auto}#pvb{display:none}
+@media(max-width:900px){
+ nav{padding:0 8px;gap:4px;-webkit-overflow-scrolling:touch}nav b.brand{font-size:16px;margin-right:6px}nav button{padding:6px 10px;font-size:13px;flex:0 0 auto}
+ .pg{padding:10px}main{padding:10px 0 70px}.cards{grid-template-columns:1fr 1fr}aside{padding:10px}
+ #pvb:not([hidden]){display:block;position:fixed;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--br,#a30f5e);color:#fff;border:0;border-radius:24px;padding:11px 18px;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+}
 html.dark{filter:invert(1) hue-rotate(180deg)}html.dark .sheet,html.dark img{filter:invert(1) hue-rotate(180deg)}
 body.w .adm,body.w .adm-only,body.w #hc,body.w #ht,body.w #status,body.w label[for=status],body.w #dtype,body.w label[for=dtype],body.w #pf,body.w #cv,body.w #sc,body.w [data-a=del],body.w [data-a=rem],body.w [data-a=rest],body.w [data-a=purge]{display:none!important}</style>
 <div id="v-wait" hidden><div style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px"><div><h2>Waiting for admin approval</h2><p id="wm"></p><button id="wlo">Logout</button></div></div></div>
+<button id="pvb" hidden>Preview ↓</button>
 <nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><button data-v="tasks">Tasks</button><button data-v="sal" class="adm-only">Salary</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button><button id="dk" title="Dark mode">🌙</button><button id="lo">Logout</button></nav>
 <div id="v-home" class="pg" hidden><div id="att"></div><div id="dlb"></div><div class="cards" id="hc"></div>
 <div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
@@ -407,7 +413,7 @@ function plist(){$("pl").innerHTML=(S.pay||[]).map(function(p,i){return'<div cla
 $("pl").oninput=function(ev){var r=ev.target.closest("[data-i]");if(r&&ev.target.dataset.k){S.pay[r.dataset.i][ev.target.dataset.k]=ev.target.value;render()}};
 $("pl").onclick=function(ev){var b=ev.target.closest("[data-del]");if(b){S.pay.splice(b.dataset.del,1);plist();render()}};
 $("pa").onclick=function(){S.pay=S.pay||[];S.pay.push({date:today(),amt:Math.max(calc().tot-paidAmt(),0)});plist();render()};
-function go(v){if(ROLE!=="admin"&&v!=="home"&&v!=="ed"&&v!=="money"&&v!=="tasks")v="home";$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();if(v==="home"){home();attRender();dlvBanner()}if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist();if(v==="team"){team();teamLog()}if(v==="att")attView();if(v==="money")money();if(v==="tasks")tasks();if(v==="sal")salView()}
+function go(v){if(ROLE!=="admin"&&v!=="home"&&v!=="ed"&&v!=="money"&&v!=="tasks")v="home";$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();$("pvb").hidden=v!=="ed";if(v==="home"){home();attRender();dlvBanner()}if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist();if(v==="team"){team();teamLog()}if(v==="att")attView();if(v==="money")money();if(v==="tasks")tasks();if(v==="sal")salView()}
 function out(){$("v-wait").hidden=true;$("nav").hidden=true;VW.forEach(function(x){$("v-"+x).hidden=true});$("v-login").hidden=false}
 document.querySelectorAll("nav [data-v]").forEach(function(b){b.onclick=function(){if(canLeave())go(b.dataset.v)}});
 document.querySelectorAll("nav [data-n]").forEach(function(b){b.onclick=function(){if(canLeave())newDoc(b.dataset.n)}});
@@ -598,6 +604,7 @@ function fullBackup(){var C=["docs","clients","settings","money","tasks","attend
  Promise.all(C.map(function(c){return db.collection(c).get().then(function(q){var o={};q.docs.forEach(function(d){o[d.id]=d.data()});return[c,o]})})).then(function(r){var o={};r.forEach(function(x){o[x[0]]=x[1]});dl("Saagee_FullBackup_"+today()+".json",new Blob([JSON.stringify(o)],{type:"application/json"}))}).catch(function(x){alert(x.message)})}
 (function(){var h=document.documentElement;try{if(localStorage.getItem("sa-dark")==="1")h.classList.add("dark")}catch(x){}
  $("dk").onclick=function(){h.classList.toggle("dark");try{localStorage.setItem("sa-dark",h.classList.contains("dark")?"1":"0")}catch(x){}}})();
+$("pvb").onclick=function(){var up=this.dataset.up==="1";if(up){scrollTo({top:0,behavior:"smooth"});this.dataset.up="";this.textContent="Preview ↓"}else{document.querySelector("main").scrollIntoView({behavior:"smooth"});this.dataset.up="1";this.textContent="Edit ↑"}};
 sync();
 </script>
 </body>
