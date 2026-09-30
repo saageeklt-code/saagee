@@ -3,75 +3,102 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#d81b7a">
 <title>Saagee Ads – Quotation Maker</title>
 <style>
-:root{--bg:#efeaec;--pn:#fff;--ink:#251a1f;--ln:#ddd3d8;--br:#c4003f;--or:#f07a1a}
-@media (prefers-color-scheme:dark){:root{--bg:#1b1719;--pn:#272225;--ink:#f1eaec;--ln:#43393e}}
+:root{--bg:#fff8fb;--pn:#fff;--ink:#2a1a24;--mu:#7a6872;--ln:#f0dde7;--br:#d81b7a;--bd:#b5135f;--bt:#fde7f2;--or:#ffb300;--ot:#fff4d6;--sh:0 6px 22px rgba(216,27,122,.10)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 "Segoe UI","Nirmala UI",Roboto,"Noto Sans Tamil",Arial,sans-serif}
-.app{display:grid;grid-template-columns:380px 1fr;min-height:100vh}
-aside{background:var(--pn);border-right:1px solid var(--ln);padding:16px;height:calc(100vh - 52px);overflow:auto;position:sticky;top:52px}
-aside h1{font-size:18px;margin:0 0 2px;color:var(--br)}
-aside small{opacity:.7}
-fieldset{border:1px solid var(--ln);border-radius:8px;margin:12px 0;padding:10px 12px}
-legend{font-weight:600;padding:0 6px}
-label{display:block;font-size:12px;opacity:.8;margin:8px 0 3px}
-input,textarea,select{width:100%;font:inherit;padding:7px 9px;border:1px solid var(--ln);border-radius:6px;background:transparent;color:inherit}
-input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--or);outline-offset:1px}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI","Nirmala UI",Roboto,"Noto Sans Tamil",Arial,sans-serif}
+.app{display:grid;grid-template-columns:400px 1fr;min-height:100vh}
+aside{background:#fff;border-right:1px solid var(--ln);padding:16px;height:calc(100vh - 60px);overflow:auto;position:sticky;top:60px}
+small{color:var(--mu)}
+fieldset{border:1px solid var(--ln);border-radius:12px;margin:12px 0;padding:10px 14px 14px;background:#fff}
+legend{font-weight:700;padding:0 8px;color:var(--br)}
+label{display:block;font-size:12px;color:var(--mu);margin:8px 0 3px;font-weight:500}
+input,textarea,select{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--ln);border-radius:8px;background:#fff;color:inherit}
+input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--or);outline-offset:1px;border-color:var(--br)}
 textarea{resize:vertical;min-height:64px}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .it{border-bottom:1px dashed var(--ln);padding-bottom:10px;margin-bottom:10px}
 .it textarea{min-height:38px;margin-bottom:6px}
 .it textarea[data-k=s]{font-size:12px;min-height:44px}
+.it input[data-k=h]{margin-bottom:6px;font-size:12px}
 .qr{display:grid;grid-template-columns:1fr 1fr 28px;gap:6px}
 .cl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.cl input[type=color]{width:44px;height:32px;padding:2px}
-.sw{width:26px;height:26px;border-radius:50%;padding:0;border:2px solid var(--ln)}
+.sw{width:26px;height:26px;border-radius:50%;padding:0;border:2px solid #fff;box-shadow:0 0 0 1px var(--ln)}
 .tm{display:grid;grid-template-columns:20px 1fr 28px;gap:6px;margin-bottom:6px;align-items:start}
 .tm input[type=checkbox]{width:16px;height:16px;margin-top:8px}
 .tm textarea{min-height:52px;font-size:12px}
-button{font:inherit;padding:7px 12px;border-radius:7px;border:1px solid var(--ln);background:transparent;color:inherit;cursor:pointer}
-button:hover{border-color:var(--br)}
-button.pri{background:var(--br);border-color:var(--br);color:#fff}
+button{font:inherit;padding:7px 13px;border-radius:8px;border:1px solid var(--ln);background:#fff;color:inherit;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--br);color:var(--br)}
+button.pri{background:linear-gradient(135deg,#e6238a,#c4126b);border-color:var(--br);color:#fff;font-weight:600}
+button.pri:hover{filter:brightness(1.07);color:#fff}
+button.ac{background:var(--or);border-color:var(--or);color:#3b2600;font-weight:600}
+button.ac:hover{filter:brightness(1.05);color:#3b2600}
+button.lk{border:0;background:none;padding:2px 0;color:var(--br);font-size:12px}
 .x{padding:6px 0;width:28px}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.warn{display:none;background:#fff3cd;color:#664d03;border-radius:6px;padding:8px;margin-top:8px;font-size:12px}
-main{padding:16px 8px 60px;overflow-x:auto}
-.sheet{width:210mm;height:297mm;margin:0 auto 18px;position:relative;background:#fff;color:#222;box-shadow:0 2px 14px rgba(0,0,0,.25);overflow:hidden}
+.warn{display:none;background:var(--ot);color:#7a5200;border:1px solid var(--or);border-radius:8px;padding:8px;margin-top:8px;font-size:12px}
+main{padding:20px 8px 60px;overflow-x:auto;background:linear-gradient(180deg,#ffeaf4,var(--bg) 260px)}
+.sheet{width:210mm;height:297mm;margin:0 auto 18px;position:relative;background:#fff;color:#222;box-shadow:0 6px 28px rgba(120,20,70,.22);overflow:hidden}
 .sheet>img{position:absolute;inset:0;width:100%;height:100%}
 .body{position:absolute;left:16mm;right:16mm;top:52mm;bottom:38mm;overflow:hidden;font-size:11pt;line-height:1.4;font-family:var(--ff)}
+.pgn{position:absolute;right:16mm;bottom:8mm;font:8pt "Segoe UI",Arial,sans-serif;color:#888}
 .body h1{margin:0 0 .5em;text-align:center;color:var(--th);font-size:2em}
 .meta{display:flex;justify-content:space-between;gap:2em;margin-bottom:.8em}
 .meta div{flex:1}
-table{width:100%;border-collapse:collapse;margin:.3em 0}
-th{background:var(--th);color:#fff;text-align:left;padding:.35em .5em}
-td{padding:.35em .5em;border-bottom:1px solid #ddd;vertical-align:top}
+.sheet table{width:100%;border-collapse:collapse;margin:.3em 0}
+.sheet th{background:var(--th);color:var(--tt,#fff);text-align:left;padding:.35em .5em}
+.sheet td{padding:.35em .5em;border-bottom:1px solid #ddd;vertical-align:top}
 .n{text-align:right;width:6.5em}.q{text-align:right;width:3.5em}.s{width:2.5em}
-.tot{width:20em;margin-left:auto}.tot td{border:0;padding:.2em .5em}
-.tot tr:last-child td{background:var(--tl);font-weight:700;color:var(--th)}
+.sheet .tot{width:20em;margin-left:auto}.sheet .tot td{border:0;padding:.2em .5em}
+.sheet .tot tr.gt td{background:var(--th);font-weight:700;color:var(--tt,#fff)}
 .sub{color:var(--sc);font-size:.92em;line-height:1.35}
 .w{text-align:right;font-style:italic;font-weight:600;font-size:.92em;margin:.4em 0 .8em}
 .terms{font-size:.85em}.terms p{margin:0 0 .35em}
 .note{margin-top:.8em}
 [hidden]{display:none!important}
-nav{position:sticky;top:0;z-index:20;height:52px;background:var(--pn);border-bottom:1px solid var(--ln);display:flex;gap:6px;align-items:center;padding:0 12px;overflow-x:auto;white-space:nowrap}
-nav b{color:var(--br);margin-right:8px}.sp{flex:1}
-.pg{max-width:1100px;margin:0 auto;padding:16px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:14px}
-.card{background:var(--pn);border:1px solid var(--ln);border-radius:10px;padding:12px;font-size:13px}.card b{display:block;font-size:20px;color:var(--br)}
-.tw{overflow-x:auto}.tb{width:100%;border-collapse:collapse;background:var(--pn);font-size:13px}
-.tb th,.tb td{padding:8px;border-bottom:1px solid var(--ln);text-align:left;background:transparent;color:inherit}.tb th{font-weight:600}
-.tb tr[data-id]{cursor:pointer}.tb tr[data-id]:hover{background:rgba(196,0,63,.07)}.r{text-align:right!important}
-.bd{padding:2px 9px;border-radius:10px;background:var(--ln);font-size:12px}
-#v-login{max-width:340px;margin:12vh auto;padding:20px;background:var(--pn);border:1px solid var(--ln);border-radius:12px}
-#lerr{color:#c4003f;font-size:13px;margin-top:8px}
+nav{position:sticky;top:0;z-index:20;height:60px;background:#fff;border-bottom:3px solid var(--or);box-shadow:0 2px 14px rgba(216,27,122,.10);display:flex;gap:6px;align-items:center;padding:0 16px;overflow-x:auto;white-space:nowrap}
+nav b.brand{font-size:20px;color:var(--br);margin-right:14px;letter-spacing:.2px}
+nav b.brand i{font-style:normal;background:var(--or);color:#3b2600;padding:1px 8px;border-radius:7px;margin-left:2px}
+nav button{border-color:transparent}
+nav button.on{background:var(--bt);color:var(--br);font-weight:600}
+nav button.ac{border-color:var(--or)}
+.sp{flex:1}
+.pg{max-width:1100px;margin:0 auto;padding:18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--ln);border-top:4px solid var(--or);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--mu);box-shadow:var(--sh)}
+.card:nth-child(even){border-top-color:var(--br)}
+.card b{display:block;font-size:22px;color:var(--br);margin-top:2px}
+.tw{overflow-x:auto;border:1px solid var(--ln);border-radius:12px;background:#fff;box-shadow:var(--sh)}
+.tb{width:100%;border-collapse:collapse;background:#fff;font-size:13px}
+.tb th,.tb td{padding:9px 10px;border-bottom:1px solid var(--ln);text-align:left;color:inherit}
+.tb th{background:var(--bt);color:var(--bd);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+.tb tr[data-id]{cursor:pointer}.tb tr[data-id]:hover{background:#fff6fa}
+.tb tr[data-trash]{cursor:default;opacity:.8}
+.tb td button{padding:3px 9px;font-size:12px}
+.r{text-align:right!important}
+.bd{padding:2px 10px;border-radius:999px;background:var(--ot);color:#7a5200;font-size:12px;font-weight:600}
+.bd.ok{background:#e3f6ea;color:#0f6a3a}.bd.bad{background:#fde1e1;color:#b3122a}.bd.pk{background:var(--bt);color:var(--bd)}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2a1a24;color:#fff;padding:10px 18px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.28);z-index:60}
+#toast button{background:var(--or);border-color:var(--or);color:#3b2600;padding:3px 12px;margin-left:10px;font-weight:600}
+#v-login{min-height:100vh;display:grid;grid-template-columns:1.15fr 1fr;background:#fff}
+.lg-hero{background:linear-gradient(145deg,#f0268f 0%,#d81b7a 45%,#a30f5e 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:48px;position:relative;overflow:hidden}
+.lg-hero:after{content:"";position:absolute;right:-90px;bottom:-90px;width:280px;height:280px;border-radius:50%;background:var(--or);opacity:.95}
+.lg-brand{font-size:44px;font-weight:800;letter-spacing:.3px}
+.lg-brand i{font-style:normal;background:var(--or);color:#3b2600;padding:0 12px;border-radius:12px;margin-left:6px}
+.lg-hero p{font-size:17px;max-width:420px;opacity:.96;margin:14px 0 0}
+.lg-card{display:flex;flex-direction:column;justify-content:center;padding:48px;max-width:480px;width:100%;margin:0 auto}
+.lg-card h2{margin:0 0 6px;color:var(--br);font-size:26px}
+#lerr{color:#b3122a;font-size:13px;margin-top:8px}
 @page{size:A4;margin:0}
 @media print{
- body{background:#fff}aside,nav{display:none}.app{display:block}
- main{padding:0;overflow:visible}#pages{zoom:1!important}
+ body{background:#fff}aside,nav,#toast{display:none}.app{display:block}
+ main{padding:0;overflow:visible;background:#fff}#pages{zoom:1!important}
  .sheet{margin:0;box-shadow:none;break-after:page}.sheet:last-child{break-after:auto}
  .sheet *,.sheet{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-@media (max-width:900px){.app{display:block}aside{position:static;height:auto}}
+@media (max-width:900px){.app{display:block}aside{position:static;height:auto}#v-login{grid-template-columns:1fr}.lg-hero{padding:32px 24px}.lg-hero:after{display:none}.lg-card{padding:28px 24px}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -84,18 +111,20 @@ nav b{color:var(--br);margin-right:8px}.sp{flex:1}
 </head>
 <body>
 <script>var FB={apiKey:"AIzaSyDW4TMcBFkj_UM14AY3RIcd6rm8T5PavcM",authDomain:"saagee-ads.firebaseapp.com",projectId:"saagee-ads",appId:"1:746691295087:web:e0151dd5fe4ee6a536da9a"};</script>
-<div id="v-login" hidden><h1 style="color:var(--br);margin:0 0 12px;font-size:20px">Saagee Ads</h1>
+<div id="v-login" hidden><div class="lg-hero"><div class="lg-brand">Saagee <i>Ads</i></div><p>Quotations, estimates and invoices – professional, branded and ready in minutes.</p></div>
+<div class="lg-card"><h2>Welcome back</h2><small>Sign in to continue</small>
 <form id="lf"><label for="lem">Email</label><input id="lem" type="email" autocomplete="username" required><label for="lpw">Password</label><input id="lpw" type="password" autocomplete="current-password" required>
 <label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px"><input type="checkbox" id="lrm" style="width:auto"> Keep me signed in for today</label>
-<div class="acts"><button class="pri" type="submit">Login</button></div></form><div id="lerr"></div></div>
-<nav id="nav" hidden><b>Saagee Ads</b><button data-v="home">Home</button><button data-v="clients">Clients</button><button data-v="reports">Reports</button><button data-v="settings">Settings</button><span class="sp"></span><button data-n="quotation">+ Quotation</button><button data-n="estimate">+ Estimate</button><button data-n="bill">+ Bill</button><button id="lo">Logout</button></nav>
+<div class="acts"><button class="pri" type="submit" style="width:100%;padding:10px">Login</button></div></form><div id="lerr"></div></div></div>
+<nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients">Clients</button><button data-v="reports">Reports</button><button data-v="settings">Settings</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button><button id="lo">Logout</button></nav>
 <div id="v-home" class="pg" hidden><div class="cards" id="hc"></div>
-<div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option></select></div>
-<div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th class="r">Amount</th><th>Status</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
+<div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
+<div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th>Due</th><th class="r">Amount</th><th>Status</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
 <div id="v-clients" class="pg" hidden><fieldset><legend>Client</legend><div class="r2"><div><label for="cn">Name</label><input id="cn"></div><div><label for="cp">Phone</label><input id="cp"></div></div><label for="ca">Address</label><textarea id="ca"></textarea><div class="acts"><button class="pri" id="cs">Save client</button><button id="cc">Clear</button></div></fieldset>
-<div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th></th></tr></thead><tbody id="cb"></tbody></table></div></div>
+<div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th></th></tr></thead><tbody id="cb"></tbody></table></div><div id="cst"></div></div>
 <div id="v-reports" class="pg" hidden><div class="acts" style="margin:0 0 10px"><input id="rmn" type="month" style="width:auto"><button id="rcsv">Download CSV</button></div><div id="rp"></div></div>
-<div id="v-settings" class="pg" hidden><fieldset><legend>Bank &amp; UPI</legend><label for="sbk">Bank details</label><textarea id="sbk" placeholder="Account name, number, IFSC, bank"></textarea><div class="r2"><div><label for="sup">UPI ID</label><input id="sup" placeholder="name@bank"></div><div><label for="sun">UPI payee name</label><input id="sun"></div></div><div class="acts"><button class="pri" id="ssv">Save settings</button></div><small>Letterhead, signature and company seal are uploaded inside the editor and saved to your account automatically.</small></fieldset></div>
+<div id="v-settings" class="pg" hidden><fieldset><legend>Bank &amp; UPI</legend><label for="sbk">Bank details</label><textarea id="sbk" placeholder="Account name, number, IFSC, bank"></textarea><div class="r2"><div><label for="sup">UPI ID</label><input id="sup" placeholder="name@bank"></div><div><label for="sun">UPI payee name</label><input id="sun"></div></div><label for="sgs">Your GSTIN (optional, shown on documents)</label><input id="sgs" placeholder="e.g. 33ABCDE1234F1Z5"><div class="acts"><button class="pri" id="ssv">Save settings</button></div><small>Letterhead, signature and company seal are uploaded inside the editor and saved to your account automatically.</small></fieldset><fieldset><legend>Saved items (catalogue)</legend><div class="tw"><table class="tb"><tbody id="cat"></tbody></table></div></fieldset></div>
+<div id="toast" hidden></div>
 <div class="app" id="v-ed" hidden>
 <aside>
  <button id="bh">← Home</button>
@@ -110,7 +139,7 @@ nav b{color:var(--br);margin-right:8px}.sp{flex:1}
   <input type="file" id="lhf" accept="image/*,.html,.htm" hidden>
  </fieldset>
  <fieldset><legend>Quote details</legend>
-  <div class="r2"><div><label for="no">Quote No</label><input id="no"></div><div><label for="date">Date</label><input id="date" type="date"></div></div>
+  <div class="r2"><div><label for="no">Quote No</label><input id="no"></div><div><label for="date">Date</label><input id="date" type="date"></div></div><div class="r2"><div><label for="due" id="duel">Valid till</label><input id="due" type="date"></div><div><label for="cgst">Client GSTIN</label><input id="cgst"></div></div>
   <label for="name">Client name</label><input id="name" placeholder="Client name">
   <label for="addr">Client address</label><textarea id="addr" placeholder="Address"></textarea>
   <label for="phone">Client phone (for WhatsApp)</label><input id="phone" placeholder="10-digit number"><div class="acts"><button id="sc">Save to clients</button></div>
@@ -121,13 +150,13 @@ nav b{color:var(--br);margin-right:8px}.sp{flex:1}
  </fieldset>
  <fieldset><legend>Colours</legend>
   <div class="cl"><label for="col" style="margin:0">Theme</label><input type="color" id="col"><label for="subc" style="margin:0">Sub text</label><input type="color" id="subc"></div>
-  <div class="cl" style="margin-top:8px"><span>Quick:</span><button class="sw" data-c="#c4003f" style="background:#c4003f" aria-label="Red"></button><button class="sw" data-c="#1f4fbf" style="background:#1f4fbf" aria-label="Blue"></button><button class="sw" data-c="#0f7a4a" style="background:#0f7a4a" aria-label="Green"></button><button class="sw" data-c="#f07a1a" style="background:#f07a1a" aria-label="Orange"></button><button class="sw" data-c="#222222" style="background:#222222" aria-label="Black"></button></div>
+  <div class="cl" style="margin-top:8px"><span>Quick:</span><button class="sw" data-c="#d81b7a" style="background:#d81b7a" aria-label="Pink"></button><button class="sw" data-c="#ffb300" style="background:#ffb300" aria-label="Amber"></button><button class="sw" data-c="#a30f5e" style="background:#a30f5e" aria-label="Magenta"></button><button class="sw" data-c="#1f4fbf" style="background:#1f4fbf" aria-label="Blue"></button><button class="sw" data-c="#222222" style="background:#222222" aria-label="Black"></button></div>
  </fieldset>
  <fieldset><legend>Items</legend>
-  <div id="il"></div><button id="ia">+ Add item</button>
+  <div id="il"></div><div class="acts"><button id="ia">+ Add item</button></div><label for="ipick">Add from saved items</label><select id="ipick"></select>
  </fieldset>
  <fieldset><legend>Totals</legend>
-  <div class="r2"><div><label for="disc">Discount (₹)</label><input id="disc" type="number" min="0"></div><div><label for="gst">GST %</label><input id="gst" type="number" min="0"></div></div>
+  <div class="r2"><div><label for="disc">Discount</label><input id="disc" type="number" min="0"></div><div><label for="dt">Discount in</label><select id="dt"><option value="amt">₹ amount</option><option value="pct">% percent</option></select></div></div><div class="r2"><div><label for="gst">GST %</label><input id="gst" type="number" min="0"></div><div><label for="gm">GST type</label><select id="gm"><option value="g">Single GST line</option><option value="cs">CGST + SGST</option><option value="ig">IGST</option></select></div></div>
   <label for="notes">Notes</label><textarea id="notes"></textarea>
  </fieldset>
  <fieldset><legend>Bank &amp; UPI</legend><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="sb" style="width:auto"> Show bank details and UPI QR</label></fieldset>
@@ -169,8 +198,8 @@ nav b{color:var(--br);margin-right:8px}.sp{flex:1}
 <script>
 var KEY="saagee-maker-v1",KB="saagee-maker-bg",KS="saagee-maker-sig",KL="saagee-maker-seal",$=function(i){return document.getElementById(i)};
 var DT=["Minimum Commitment: A minimum commitment of 3 months is recommended to ensure consistency and build audience engagement.","Professional Shoot: Professional shooting is subject to location, availability, and production requirements.","Travel Charges: Travel expenses for professional shooting may be charged separately, depending on the shooting location.","Additional Production Requirements: Charges for actors, locations, props, equipment, or any major third-party production requirements will be quoted separately.","Monthly Deliverables: The monthly package includes up to 2 professional shooting days and the deliverables specified in this quotation. Any additional shooting days or deliverables beyond the agreed scope will be charged separately.","Paid Advertising: Paid advertising, media spend, and promotional/boosting budgets are not included in the quotation and will be borne separately by the client.","Revisions & Re-shoots: Any major revisions, additional editing requirements, or re-shoots outside the agreed scope may be charged separately.","Client Coordination: Timely delivery of required information, approvals, brand materials, and customer-generated content from the client is necessary to maintain the planned content schedule and deliverables."];
-function fresh(){return {no:"SA-001",date:new Date().toISOString().slice(0,10),name:"",addr:"",items:[{d:"",s:"",q:1,r:0}],disc:0,gst:0,notes:"Looking forward for your business.",terms:DT.map(function(t){return{t:t,on:true}}),tpos:"2",sgp:"right",sgh:20,slh:25,col:"#c4003f",subc:"#777777",font:"Segoe UI",fsz:11,bn:true,ba:true,sgn:"",sgt:"",sgl:"Authorized Signature",sgns:11,sgls:10,sgnb:true,sglb:false,type:"quotation",status:"Draft",phone:"",sb:false,pay:[]}}
-var S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(x){}S=Object.assign(fresh(),S||{});
+function fresh(){return {no:"SA-001",date:new Date().toISOString().slice(0,10),name:"",addr:"",items:[{d:"",s:"",q:1,r:0}],disc:0,gst:0,notes:"Looking forward for your business.",terms:DT.map(function(t){return{t:t,on:true}}),tpos:"2",sgp:"right",sgh:20,slh:25,due:"",cgst:"",dt:"amt",gm:"g",col:"#d81b7a",subc:"#777777",font:"Segoe UI",fsz:11,bn:true,ba:true,sgn:"",sgt:"",sgl:"Authorized Signature",sgns:11,sgls:10,sgnb:true,sglb:false,type:"quotation",status:"Draft",phone:"",sb:false,pay:[]}}
+var S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(x){}S=Object.assign(fresh(),S||{});if(S.col==="#c4003f")S.col="#d81b7a";
 var BG="",SG="",SL="";try{BG=localStorage.getItem(KB)||"";SG=localStorage.getItem(KS)||"";SL=localStorage.getItem(KL)||""}catch(x){}
 function e(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function nm(v){v=parseFloat(v);return isNaN(v)?0:v}
@@ -184,31 +213,44 @@ function words(v){var r=Math.floor(v),p=Math.round((v-r)*100),a=[];if(!r&&!p)ret
  if(r)a.push(w3(r));return"Indian Rupee "+(a.join(" ")||"Zero")+(p?" and "+w2(p)+" Paise":"")+" Only"}
 function tint(h){var n=parseInt(h.slice(1),16);return"#"+[n>>16,n>>8&255,n&255].map(function(v){return Math.round(v+(255-v)*.9).toString(16).padStart(2,"0")}).join("")}
 function hx(h){return h.slice(1).toUpperCase()}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(x){}if(cur.id){clearTimeout(tm);tm=setTimeout(saveDoc,1500)}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(x){}if(cur.id&&JSON.stringify(S)!==LAST){clearTimeout(tm);tm=setTimeout(saveDoc,1500)}}
 function bold(t){return e(t).replace(/^([^:]{1,45}:)/,"<b>$1</b>")}
-function calc(){var sum=0,rows=S.items.map(function(it){var a=nm(it.q)*nm(it.r);sum+=a;return{d:it.d,s:it.s||"",q:nm(it.q),r:nm(it.r),a:a}}),d=nm(S.disc),g=nm(S.gst),gs=Math.max(sum-d,0)*g/100;return{rows:rows,sum:sum,d:d,g:g,gs:gs,tot:Math.max(sum-d,0)+gs}}
+function calc(){var sum=0,rows=S.items.map(function(it){var a=nm(it.q)*nm(it.r);sum+=a;var hs=String(it.h||"").trim();return{d:it.d,s:((it.s||"")+(hs?"\nHSN/SAC: "+hs:"")).replace(/^\n/,""),q:nm(it.q),r:nm(it.r),a:a}}),d=S.dt==="pct"?sum*Math.min(nm(S.disc),100)/100:nm(S.disc),g=nm(S.gst),gs=Math.max(sum-d,0)*g/100;return{rows:rows,sum:sum,d:d,g:g,gs:gs,tot:Math.max(sum-d,0)+gs}}
+function taxRows(c){var g=c.g;if(!g)return[];if(S.gm==="cs")return[["CGST "+g/2+"%",c.gs/2],["SGST "+g/2+"%",c.gs/2]];if(S.gm==="ig")return[["IGST "+g+"%",c.gs]];return[["GST "+g+"%",c.gs]]}
+function discLabel(){return"Discount"+(S.dt==="pct"?" ("+nm(S.disc)+"%)":" (₹)")}
+function DL(){return S.type==="bill"?"Due date":"Valid till"}
+function onCol(h){var n=parseInt(h.slice(1),16),l=(0.299*(n>>16)+0.587*(n>>8&255)+0.114*(n&255))/255;return l>0.62?"#222222":"#ffffff"}
+function addDays(i,n){var d=new Date(i+"T00:00:00");d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function tlist(){return S.tpos==="0"?[]:S.terms.filter(function(t){return t.on&&t.t.trim()}).map(function(t){return t.t})}
 function termsHTML(){var l=tlist();return l.length?'<div class="terms"><p><b>Terms &amp; Conditions</b></p>'+l.map(function(t,i){return"<p>"+(i+1)+". "+bold(t)+"</p>"}).join("")+"</div>":""}
 function sigHTML(){return'<div style="margin-top:1.5em;text-align:'+(S.sgp||"right")+'"><div style="display:inline-block;text-align:center;min-width:14em"><div style="height:'+nm(S.sgh||20)+'mm">'+(SG?'<img alt="" src="'+SG+'" style="height:100%;max-width:60mm">':"")+'</div><div style="border-top:1px solid #222;padding-top:.2em;font-size:'+nm(S.sgls||10)+'pt;font-weight:'+(S.sglb?700:400)+'">'+e(S.sgl||"Authorized Signature")+'</div>'+(S.sgn?'<div style="font-size:'+nm(S.sgns||11)+'pt;font-weight:'+(S.sgnb!==false?700:400)+'">'+e(S.sgn)+'</div>':"")+(S.sgt?'<div style="font-size:'+nm(S.sgls||10)+'pt">'+e(S.sgt)+'</div>':"")+(SL?'<div style="margin-top:2mm"><img alt="Company seal" src="'+SL+'" style="height:'+nm(S.slh||25)+'mm;max-width:60mm"></div>':"")+'</div></div>'}
-function mainHTML(){var c=calc(),rows=c.rows.map(function(x,i){return"<tr><td class='s'>"+(i+1)+"</td><td>"+e(x.d).replace(/\n/g,"<br>")+(x.s.trim()?"<div class='sub'>"+e(x.s.trim()).replace(/\n/g,"<br>")+"</div>":"")+"</td><td class='q'>"+x.q+"</td><td class='n'>"+fmt(x.r)+"</td><td class='n'>"+fmt(x.a)+"</td></tr>"}).join("");
- return"<h1>"+TT[S.type||"quotation"]+"</h1><div class='meta'><div><b>To:</b><br><span style='font-weight:"+(S.bn?700:400)+"'>"+e(S.name)+"</span><br><span style='font-weight:"+(S.ba?700:400)+"'>"+e(S.addr).replace(/\n/g,"<br>")+"</span></div><div style='text-align:right'><b>"+NL()+"</b> "+e(S.no)+"<br><b>Date:</b> "+fd(S.date)+"</div></div>"+
- "<table><thead><tr><th class='s'>#</th><th>Item &amp; Description</th><th class='q'>Qty</th><th class='n'>Rate</th><th class='n'>Amount</th></tr></thead><tbody>"+rows+"</tbody></table>"+
- "<table class='tot'><tr><td>Sub Total</td><td class='n'>"+fmt(c.sum)+"</td></tr>"+(c.d?"<tr><td>Discount (₹)</td><td class='n'>"+fmt(c.d)+"</td></tr>":"")+(c.g?"<tr><td>GST "+c.g+"%</td><td class='n'>"+fmt(c.gs)+"</td></tr>":"")+"<tr><td>Total</td><td class='n'>₹"+fmt(c.tot)+"</td></tr>"+payRows(c)+"</table>"+
- "<div class='w'>"+words(c.tot)+"</div>"+(S.notes.trim()?"<p class='note'><b>Notes:</b> "+e(S.notes).replace(/\n/g,"<br>")+"</p>":"")+bankHTML(c)}
-function sheet(h){var s=document.createElement("div");s.className="sheet";s.style.cssText="--th:"+S.col+";--tl:"+tint(S.col)+";--sc:"+S.subc+";--ff:'"+S.font+"','Nirmala UI','Noto Sans Tamil',Arial,sans-serif;";s.innerHTML=(BG?'<img alt="" src="'+BG+'">':"")+'<div class="body">'+h+"</div>";return s}
+function headHTML(){return"<h1>"+TT[S.type||"quotation"]+"</h1><div class='meta'><div><b>To:</b><br><span style='font-weight:"+(S.bn?700:400)+"'>"+e(S.name)+"</span><br><span style='font-weight:"+(S.ba?700:400)+"'>"+e(S.addr).replace(/\n/g,"<br>")+"</span>"+(S.cgst?"<br>GSTIN: "+e(S.cgst):"")+"</div><div style='text-align:right'><b>"+NL()+"</b> "+e(S.no)+"<br><b>Date:</b> "+fd(S.date)+(S.due?"<br><b>"+DL()+":</b> "+fd(S.due):"")+(ST.gstin?"<br><b>GSTIN:</b> "+e(ST.gstin):"")+"</div></div>"}
+function thHTML(){return"<table><thead><tr><th class='s'>#</th><th>Item &amp; Description</th><th class='q'>Qty</th><th class='n'>Rate</th><th class='n'>Amount</th></tr></thead><tbody></tbody></table>"}
+function rowsHTML(c){return c.rows.map(function(x,i){return"<tr><td class='s'>"+(i+1)+"</td><td>"+e(x.d).replace(/\n/g,"<br>")+(x.s.trim()?"<div class='sub'>"+e(x.s.trim()).replace(/\n/g,"<br>")+"</div>":"")+"</td><td class='q'>"+x.q+"</td><td class='n'>"+fmt(x.r)+"</td><td class='n'>"+fmt(x.a)+"</td></tr>"})}
+function tailHTML(c){return"<div><table class='tot'><tr><td>Sub Total</td><td class='n'>"+fmt(c.sum)+"</td></tr>"+(c.d?"<tr><td>"+discLabel()+"</td><td class='n'>"+fmt(c.d)+"</td></tr>":"")+taxRows(c).map(function(x){return"<tr><td>"+x[0]+"</td><td class='n'>"+fmt(x[1])+"</td></tr>"}).join("")+"<tr class='gt'><td>Total</td><td class='n'>₹"+fmt(c.tot)+"</td></tr>"+payRows(c)+"</table><div class='w'>"+words(c.tot)+"</div>"+(S.notes.trim()?"<p class='note'><b>Notes:</b> "+e(S.notes).replace(/\n/g,"<br>")+"</p>":"")+bankHTML(c)+"</div>"}
+function sheet(h){var s=document.createElement("div");s.className="sheet";s.style.cssText="--th:"+S.col+";--tt:"+onCol(S.col)+";--tl:"+tint(S.col)+";--sc:"+S.subc+";--ff:'"+S.font+"','Nirmala UI','Noto Sans Tamil',Arial,sans-serif;";s.innerHTML=(BG?'<img alt="" src="'+BG+'">':"")+'<div class="body">'+h+"</div>";return s}
 function fit(s){var b=s.querySelector(".body"),f=Math.min(16,Math.max(7,nm(S.fsz)||11));b.style.fontSize=f+"pt";while(b.scrollHeight>b.clientHeight+1&&f>6){f-=.25;b.style.fontSize=f+"pt"}return b.scrollHeight>b.clientHeight+1}
-function render(){var P=$("pages"),bad=false,m=mainHTML(),t=termsHTML();P.innerHTML="";
- var list=S.tpos==="1"?[m+t]:S.tpos==="2"&&t?[m,t]:[m];list[list.length-1]+=sigHTML();
- list.forEach(function(h){var s=sheet(h);P.appendChild(s);if(fit(s))bad=true});
+function render(){var P=$("pages"),c=calc(),f0=Math.min(16,Math.max(7,nm(S.fsz)||11)),nt=tlist().length,min=S.tpos==="2"&&nt?2:1,bad=false;
+ function ov(x){var b=x.querySelector(".body");return b.scrollHeight>b.clientHeight+1}
+ function build(f){var s,tb;P.innerHTML="";
+  function ns(h){var x=sheet(h);x.querySelector(".body").style.fontSize=f+"pt";P.appendChild(x);return x}
+  function add(h){var d=document.createElement("div"),b=s.querySelector(".body");d.innerHTML=h;b.appendChild(d);if(ov(s)&&b.children.length>1){d.remove();s=ns("");s.querySelector(".body").appendChild(d)}}
+  s=ns(headHTML()+thHTML());tb=s.querySelector("tbody");
+  rowsHTML(c).forEach(function(r){tb.insertAdjacentHTML("beforeend",r);if(ov(s)&&tb.children.length>1){tb.lastElementChild.remove();s=ns(thHTML());tb=s.querySelector("tbody");tb.insertAdjacentHTML("beforeend",r)}});
+  var t=termsHTML(),sg=sigHTML(),tz=tailHTML(c);
+  if(S.tpos==="2"&&t){add(tz);s=ns("");add(t+sg)}else if(S.tpos==="1"&&t){add(tz);add(t+sg)}else add(tz+sg)}
+ build(f0);
+ if(P.children.length>min){for(var g=f0-.5;g>=Math.max(8.5,f0-2.5);g-=.5){build(g);if(P.children.length<=min)break}if(P.children.length>min)build(f0)}
+ var ss=P.children;for(var i=0;i<ss.length;i++){if(ov(ss[i])&&fit(ss[i]))bad=true;if(ss.length>1){var pn=document.createElement("div");pn.className="pgn";pn.textContent="Page "+(i+1)+" of "+ss.length;ss[i].appendChild(pn)}}
  $("wn").style.display=bad?"block":"none";zoom();autoStatus();save()}
 function zoom(){var w=$("pages").parentNode.clientWidth;if(w>100)$("pages").style.zoom=Math.min(1,(w-16)/794)}
 addEventListener("resize",zoom);
-var FL=["no","date","name","addr","disc","gst","notes","sgh","col","subc","font","fsz","sgn","sgt","sgl","sgns","sgls","slh","phone"];
+var FL=["no","date","name","addr","disc","gst","notes","sgh","col","subc","font","fsz","sgn","sgt","sgl","sgns","sgls","slh","phone","due","cgst","dt","gm"];
 FL.forEach(function(k){$(k).oninput=function(){S[k]=this.value;render()}});
 $("tpos").onchange=function(){S.tpos=this.value;render()};$("sgp").onchange=function(){S.sgp=this.value;render()};
-function il(){$("il").innerHTML=S.items.map(function(it,i){return'<div class="it" data-i="'+i+'"><textarea data-k="d" placeholder="Item name">'+e(it.d)+'</textarea><textarea data-k="s" placeholder="Sub lines (optional) – one per line. Leave empty to remove.">'+e(it.s)+'</textarea><div class="qr"><input data-k="q" type="number" min="0" aria-label="Qty" placeholder="Qty" value="'+e(it.q)+'"><input data-k="r" type="number" min="0" aria-label="Rate" placeholder="Rate" value="'+e(it.r)+'"><button class="x" data-del="'+i+'" aria-label="Remove item">✕</button></div></div>'}).join("")}
+function il(){$("il").innerHTML=S.items.map(function(it,i){return'<div class="it" data-i="'+i+'"><textarea data-k="d" placeholder="Item name">'+e(it.d)+'</textarea><textarea data-k="s" placeholder="Sub lines (optional) – one per line. Leave empty to remove.">'+e(it.s)+'</textarea><input data-k="h" placeholder="HSN/SAC code (optional)" value="'+e(it.h)+'"><div class="qr"><input data-k="q" type="number" min="0" aria-label="Qty" placeholder="Qty" value="'+e(it.q)+'"><input data-k="r" type="number" min="0" aria-label="Rate" placeholder="Rate" value="'+e(it.r)+'"><button class="x" data-del="'+i+'" aria-label="Remove item">✕</button></div><button class="lk" data-sv="'+i+'">★ Save to catalogue</button></div>'}).join("")}
 $("il").oninput=function(ev){var r=ev.target.closest(".it");if(!r||!ev.target.dataset.k)return;S.items[r.dataset.i][ev.target.dataset.k]=ev.target.value;render()};
-$("il").onclick=function(ev){var b=ev.target.closest("[data-del]");if(!b)return;if(S.items.length<2)S.items[0]={d:"",s:"",q:1,r:0};else S.items.splice(b.dataset.del,1);il();render()};
+$("il").onclick=function(ev){var sv=ev.target.closest("[data-sv]");if(sv){var it=S.items[sv.dataset.sv];if(!String(it.d).trim()){alert("Type the item name first.");return}var o={d:it.d,s:it.s||"",h:it.h||"",r:it.r},k=CAT.findIndex(function(x){return x.d===o.d});if(k>=0)CAT[k]=o;else CAT.push(o);saveSettings();ipick();catl();toast("Saved to catalogue");return}var b=ev.target.closest("[data-del]");if(!b)return;if(S.items.length<2)S.items[0]={d:"",s:"",q:1,r:0};else S.items.splice(b.dataset.del,1);il();render()};
 $("ia").onclick=function(){S.items.push({d:"",s:"",q:1,r:0});il();render()};
 function tl(){$("tl").innerHTML=S.terms.map(function(t,i){return'<div class="tm" data-i="'+i+'"><input type="checkbox" '+(t.on?"checked":"")+' aria-label="Include term"><textarea>'+e(t.t)+'</textarea><button class="x" data-del="'+i+'" aria-label="Delete term">✕</button></div>'}).join("")}
 $("tl").oninput=function(ev){var r=ev.target.closest(".tm");if(!r)return;var t=S.terms[r.dataset.i];if(ev.target.type==="checkbox")t.on=ev.target.checked;else t.t=ev.target.value;render()};
@@ -219,18 +261,18 @@ function store(k,v){try{v?localStorage.setItem(k,v):localStorage.removeItem(k)}c
 function setBG(u){BG=u;store(KB,u);lhs();render();saveSettings()}
 $("lhb").onclick=function(){$("lhf").click()};
 $("lhf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();
- if(/html?$/i.test(f.name)){r.onload=function(){var m=/data:image\/(?:jpeg|png);base64,[A-Za-z0-9+\/=]+/.exec(r.result);m?setBG(m[0]):alert("No letterhead image found in that file.")};r.readAsText(f)}
- else{r.onload=function(){setBG(r.result)};r.readAsDataURL(f)}this.value=""};
+ if(/html?$/i.test(f.name)){r.onload=function(){var m=/data:image\/(?:jpeg|png);base64,[A-Za-z0-9+\/=]+/.exec(r.result);m?shrink(m[0],1600,setBG,true):alert("No letterhead image found in that file.")};r.readAsText(f)}
+ else{r.onload=function(){shrink(r.result,1600,setBG,true)};r.readAsDataURL(f)}this.value=""};
 $("sgb").onclick=function(){$("sgf").click()};
-$("sgf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){SG=r.result;store(KS,SG);render();saveSettings()};r.readAsDataURL(f);this.value=""};
+$("sgf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){shrink(r.result,600,function(u){SG=u;store(KS,SG);render();saveSettings()})};r.readAsDataURL(f);this.value=""};
 $("sgd").onclick=function(){SG="";store(KS,"");render();saveSettings()};
 function sls(){$("sls").textContent=SL?"Seal loaded – it prints below the name. Upload again to replace.":"No seal yet – upload your company seal (PNG with transparent background looks best)."}
-function shrink(u,mx,cb){var im=new Image();im.onload=function(){var k=Math.min(1,mx/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(/image\/png/.test(u)?c.toDataURL("image/png"):c.toDataURL("image/jpeg",.92))};im.onerror=function(){cb(u)};im.src=u}
+function shrink(u,mx,cb,jpg){var im=new Image();im.onload=function(){var k=Math.min(1,mx/Math.max(im.width,im.height)),c=document.createElement("canvas"),j=jpg||/image\/jpe?g/.test(u),x;c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);x=c.getContext("2d");if(j){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}x.drawImage(im,0,0,c.width,c.height);cb(j?c.toDataURL("image/jpeg",.85):c.toDataURL("image/png"))};im.onerror=function(){cb(u)};im.src=u}
 function setSL(u){SL=u;store(KL,u);sls();render();saveSettings()}
 $("slb").onclick=function(){$("slf").click()};
 $("slf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){shrink(r.result,500,setSL)};r.readAsDataURL(f);this.value=""};
 $("sld").onclick=function(){setSL("")};
-function sync(){FL.forEach(function(k){$(k).value=S[k]==null?"":S[k]});$("tpos").value=S.tpos;$("sgp").value=S.sgp||"right";$("bn").checked=S.bn!==false;$("dtype").value=S.type||"quotation";fillStatus();$("sb").checked=!!S.sb;$("ba").checked=S.ba!==false;$("sgnb").checked=S.sgnb!==false;$("sglb").checked=!!S.sglb;il();tl();plist();lhs();sls();render()}
+function sync(){FL.forEach(function(k){$(k).value=S[k]==null?"":S[k]});$("tpos").value=S.tpos;$("sgp").value=S.sgp||"right";$("bn").checked=S.bn!==false;$("dtype").value=S.type||"quotation";fillStatus();$("sb").checked=!!S.sb;$("ba").checked=S.ba!==false;$("sgnb").checked=S.sgnb!==false;$("sglb").checked=!!S.sglb;il();tl();plist();lhs();sls();ipick();render()}
 /* backup */
 function dl(name,blob){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},5000)}
 $("bk").onclick=function(){dl("Saagee_Backup_"+new Date().toISOString().slice(0,10)+".json",new Blob([JSON.stringify({v:1,S:S,BG:BG,SG:SG,SL:SL})],{type:"application/json"}))};
@@ -238,7 +280,7 @@ $("rt").onclick=function(){$("rf").click()};
 $("rf").onchange=function(){var f=this.files[0];this.value="";if(!f)return;var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(!o.S||!Array.isArray(o.S.items)||!Array.isArray(o.S.terms))throw 0;
  if(!confirm("Replace the current quotation with this backup?"))return;
  S=Object.assign(fresh(),o.S);BG=/^data:image\//.test(o.BG)?o.BG:"";SG=/^data:image\//.test(o.SG)?o.SG:"";SL=/^data:image\//.test(o.SL)?o.SL:"";store(KB,BG);store(KS,SG);store(KL,SL);sync()}catch(x){alert("This is not a valid Saagee backup file.")}};r.readAsText(f)};
-$("rs").onclick=function(){if(!confirm("Clear the whole form? (Letterhead, signature and seal stay)"))return;S=fresh();sync()};
+$("rs").onclick=function(){if(!confirm("Clear the form and start a fresh document? (The saved document stays untouched. Letterhead, signature and seal stay.)"))return;S=fresh();S.no=nextNo("quotation");S.due=addDays(S.date,15);cur={id:null};clearTimeout(tm);$("ss").textContent="";sync();LAST=JSON.stringify(S)};
 /* exports */
 async function busy(id,fn){var b=$(id),t=b.textContent,P=$("pages"),z=P.style.zoom;b.disabled=true;b.textContent="Preparing…";P.style.zoom="";
  try{await fn()}catch(x){console.error(x);alert("Could not create the file: "+(x&&x.message||x))}P.style.zoom=z;b.disabled=false;b.textContent=t}
@@ -254,6 +296,7 @@ $("xj").onclick=function(){busy("xj",async function(){if(!window.html2canvas)thr
 function b64(u){var b=atob(u.split(",")[1]),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
 function imgOf(u){return new Promise(function(ok,no){var im=new Image();im.onload=function(){ok(im)};im.onerror=no;im.src=u})}
 function itype(u){return/image\/png/.test(u)?"png":"jpg"}
+async function qrPng(c){if(!ST.upi||!window.qrcode)return"";var bal=S.type==="bill"?Math.max(c.tot-paidAmt(),0):c.tot,z=qrcode(0,"M");z.addData("upi://pay?pa="+ST.upi+"&pn="+encodeURIComponent(ST.upn||"")+(bal>0?"&am="+bal.toFixed(2):"")+"&cu=INR");z.make();var im=await imgOf(z.createDataURL(6,0)),cv=document.createElement("canvas");cv.width=im.width;cv.height=im.height;cv.getContext("2d").drawImage(im,0,0);return cv.toDataURL("image/png")}
 $("xw").onclick=function(){busy("xw",async function(){var D=window.docx;if(!D)throw new Error("Word library did not load.");
  var F=S.font,RED=hx(S.col),tw=10092,c=calc(),K=[],A=D.AlignmentType,R=A.RIGHT,C=A.CENTER,L=A.LEFT;
  function T(t,o){o=o||{};return new D.TextRun({text:t,font:F,size:o.s||Math.round((nm(S.fsz)||11)*2),bold:o.b,italics:o.i,color:o.c})}
@@ -261,16 +304,17 @@ $("xw").onclick=function(){busy("xw",async function(){var D=window.docx;if(!D)th
  function cell(t,w,o){o=o||{};return new D.TableCell({width:{size:w,type:D.WidthType.DXA},borders:o.bd||NB,shading:o.f?{type:D.ShadingType.CLEAR,fill:o.f,color:"auto"}:undefined,margins:{top:60,bottom:60,left:80,right:80},children:[new D.Paragraph({alignment:o.a,children:[T(t,o)]})].concat((o.sub||[]).map(function(l){return new D.Paragraph({children:[T(l,{s:19,c:hx(S.subc)})]})}))})}
  function P(o){K.push(new D.Paragraph(o))}
  P({alignment:C,spacing:{after:200},children:[T(TT[S.type||"quotation"],{s:44,c:RED})]});
- var Ll=["To:",S.name].concat(S.addr.split("\n")),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)];
+ var Ll=["To:",S.name].concat(S.addr.split("\n")).concat(S.cgst?["GSTIN: "+S.cgst]:[]),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)].concat(S.due?[DL()+": "+fd(S.due)]:[]).concat(ST.gstin?["GSTIN: "+ST.gstin]:[]);
  for(var i=0;i<Math.max(Ll.length,Rl.length);i++)P({tabStops:[{type:D.TabStopType.RIGHT,position:tw}],children:[T(Ll[i]||"",{b:i===0||(i===1?S.bn:S.ba)}),T("\t"+(Rl[i]||""))]});
  P({children:[]});
- var cw=[700,4900,900,1800,1792],al=[C,L,R,R,R],rows=[new D.TableRow({tableHeader:true,children:["#","Item & Description","Qty","Rate","Amount"].map(function(h,i){return cell(h,cw[i],{f:RED,c:"FFFFFF",a:al[i],b:true})})})];
+ var cw=[700,4900,900,1800,1792],al=[C,L,R,R,R],rows=[new D.TableRow({tableHeader:true,children:["#","Item & Description","Qty","Rate","Amount"].map(function(h,i){return cell(h,cw[i],{f:RED,c:hx(onCol(S.col)),a:al[i],b:true})})})];
  c.rows.forEach(function(x,i){rows.push(new D.TableRow({cantSplit:true,children:[String(i+1),x.d,String(x.q),fmt(x.r),fmt(x.a)].map(function(v,j){return cell(v,cw[j],{bd:bd,a:al[j],sub:j===1?x.s.split("\n").filter(function(l){return l.trim()}):null})})}))});
  K.push(new D.Table({width:{size:tw,type:D.WidthType.DXA},columnWidths:cw,rows:rows}));P({children:[]});
- var TL=[["Sub Total",fmt(c.sum)]];if(c.d)TL.push(["Discount (₹)",fmt(c.d)]);if(c.g)TL.push(["GST "+c.g+"%",fmt(c.gs)]);TL.push(["Total","₹"+fmt(c.tot)]);
- K.push(new D.Table({alignment:R,width:{size:4600,type:D.WidthType.DXA},columnWidths:[2600,2000],rows:TL.map(function(x,i){var l=i===TL.length-1,o={a:R,b:l,c:l?RED:undefined,f:l?hx(tint(S.col)):undefined};return new D.TableRow({children:[cell(x[0],2600,o),cell(x[1],2000,o)]})})}));
+ var TL=[["Sub Total",fmt(c.sum)]];if(c.d)TL.push([discLabel(),fmt(c.d)]);taxRows(c).forEach(function(x){TL.push([x[0],fmt(x[1])])});TL.push(["Total","₹"+fmt(c.tot)]);if(S.type==="bill"&&paidAmt()>0){TL.push(["Paid",fmt(paidAmt())]);TL.push(["Balance","₹"+fmt(Math.max(c.tot-paidAmt(),0))])}
+ K.push(new D.Table({alignment:R,width:{size:4600,type:D.WidthType.DXA},columnWidths:[2600,2000],rows:TL.map(function(x,i){var l=x[0]==="Total",o={a:R,b:l,c:l?RED:undefined,f:l?hx(tint(S.col)):undefined};return new D.TableRow({children:[cell(x[0],2600,o),cell(x[1],2000,o)]})})}));
  P({alignment:R,spacing:{before:100,after:160},children:[T(words(c.tot),{s:20,b:true,i:true})]});
  if(S.notes.trim())P({spacing:{after:100},children:[T("Notes: ",{b:true}),T(S.notes)]});
+ if(S.sb&&(ST.bank||ST.upi)){P({spacing:{before:120,after:40},children:[T("Bank details",{b:true})]});(ST.bank||"").split("\n").filter(Boolean).forEach(function(l){P({spacing:{after:20},children:[T(l)]})});if(ST.upi){P({spacing:{before:60},children:[T("UPI: "+ST.upi)]});var qp=await qrPng(c);if(qp)P({children:[new D.ImageRun({data:b64(qp),type:"png",transformation:{width:100,height:100}})]})}}
  var tl=tlist();
  if(tl.length){var first=S.tpos==="2";P({pageBreakBefore:first,spacing:{before:first?0:160,after:80},children:[T("Terms & Conditions",{s:19,b:true})]});
   tl.forEach(function(t,i){var m=/^([^:]{1,45}:)(.*)$/.exec(t);P({spacing:{after:60},children:[T((i+1)+". ",{s:18})].concat(m?[T(m[1],{s:18,b:true}),T(m[2],{s:18})]:[T(t,{s:18})])})})}
@@ -284,7 +328,7 @@ $("xw").onclick=function(){busy("xw",async function(){var D=window.docx;if(!D)th
  var doc=new D.Document({sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:2948,bottom:2155,left:907,right:907,header:0,footer:0}}},headers:{default:hdr},children:K}]});
  dl(fn(".docx"),await D.Packer.toBlob(doc))})};
 $("xx").onclick=function(){busy("xx",async function(){if(!window.ExcelJS)throw new Error("Excel library did not load.");
- var c=calc(),F=S.font,red="FF"+hx(S.col),wb=new ExcelJS.Workbook(),ws=wb.addWorksheet("Quotation",{views:[{showGridLines:false}],pageSetup:{paperSize:9,orientation:"portrait",fitToPage:true,fitToWidth:1,fitToHeight:0,horizontalCentered:true,margins:{left:.5,right:.5,top:.5,bottom:.5,header:.3,footer:.3}}});
+ var c=calc(),F=S.font,red="FF"+hx(S.col),wb=new ExcelJS.Workbook(),ws=wb.addWorksheet(({quotation:"Quotation",estimate:"Estimate",bill:"Invoice"})[S.type||"quotation"],{views:[{showGridLines:false}],pageSetup:{paperSize:9,orientation:"portrait",fitToPage:true,fitToWidth:1,fitToHeight:0,horizontalCentered:true,margins:{left:.5,right:.5,top:.5,bottom:.5,header:.3,footer:.3}}});
  ws.columns=[{width:6},{width:54},{width:9},{width:15},{width:17}];
  if(BG){var im=await imgOf(BG),cv=document.createElement("canvas");cv.width=260;cv.height=235;cv.getContext("2d").drawImage(im,0,0,im.width*.33,im.height*.21,0,0,260,235);
   ws.addImage(wb.addImage({base64:cv.toDataURL("image/jpeg",.92),extension:"jpeg"}),{tl:{col:0,row:0},ext:{width:150,height:135}})}
@@ -292,19 +336,23 @@ $("xx").onclick=function(){busy("xx",async function(){if(!window.ExcelJS)throw n
  var r=9;
  function txt(row,c1,c2,v,o){o=o||{};if(c2>c1)ws.mergeCells(row,c1,row,c2);var x=ws.getCell(row,c1);x.value=v;x.font={name:F,size:o.s||10,bold:!!o.b,italic:!!o.i,color:o.c?{argb:o.c}:undefined};x.alignment={horizontal:o.h||"left",vertical:"top",wrapText:true};return x}
  txt(r,1,5,TT[S.type||"quotation"],{s:20,b:true,h:"center",c:red});ws.getRow(r).height=30;r+=2;
- var Ll=["To:",S.name].concat(S.addr.split("\n")),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)];
+ var Ll=["To:",S.name].concat(S.addr.split("\n")).concat(S.cgst?["GSTIN: "+S.cgst]:[]),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)].concat(S.due?[DL()+": "+fd(S.due)]:[]).concat(ST.gstin?["GSTIN: "+ST.gstin]:[]);
  for(var i=0;i<Math.max(Ll.length,Rl.length);i++){txt(r,1,3,Ll[i]||"",{b:i===0||(i===1?S.bn:S.ba)});txt(r,4,5,Rl[i]||"",{h:"right"});r++}r++;
- ["#","Item & Description","Qty","Rate","Amount"].forEach(function(h,i){var x=ws.getCell(r,i+1);x.value=h;x.font={name:F,size:10,bold:true,color:{argb:"FFFFFFFF"}};x.fill={type:"pattern",pattern:"solid",fgColor:{argb:red}};x.alignment={horizontal:i===1?"left":i?"right":"center"}});r++;
+ ["#","Item & Description","Qty","Rate","Amount"].forEach(function(h,i){var x=ws.getCell(r,i+1);x.value=h;x.font={name:F,size:10,bold:true,color:{argb:"FF"+hx(onCol(S.col))}};x.fill={type:"pattern",pattern:"solid",fgColor:{argb:red}};x.alignment={horizontal:i===1?"left":i?"right":"center"}});r++;
  var f=r;
  c.rows.forEach(function(x,i){ws.getCell(r,1).value=i+1;var sl=x.s.split("\n").filter(function(l){return l.trim()});ws.getCell(r,2).value=sl.length?{richText:[{text:x.d,font:{name:F,size:10}},{text:"\n"+sl.join("\n"),font:{name:F,size:9,color:{argb:"FF"+hx(S.subc)}}}]}:x.d;ws.getCell(r,3).value=x.q;ws.getCell(r,4).value=x.r;ws.getCell(r,5).value={formula:"C"+r+"*D"+r};
   ws.getCell(r,4).numFmt=ws.getCell(r,5).numFmt="#,##0.00";
   for(var j=1;j<=5;j++){var x2=ws.getCell(r,j);x2.font={name:F,size:10};x2.border={bottom:{style:"thin",color:{argb:"FFBBBBBB"}}};x2.alignment={horizontal:j===1?"center":j>2?"right":"left",vertical:"top",wrapText:j===2}}
   ws.getRow(r).height=Math.max(16,14*(x.d.split("\n").length+sl.length));r++});
  var b=r-1;r++;
- var TL=[["Sub Total",{formula:"SUM(E"+f+":E"+b+")"},"#,##0.00"],["Discount (₹)",c.d,"#,##0.00"],["GST %",c.g,"0.00"],["GST Amount",{formula:"(E"+r+"-E"+(r+1)+")*E"+(r+2)+"/100"},"#,##0.00"],["Total",{formula:"E"+r+"-E"+(r+1)+"+E"+(r+3)},'"₹"#,##0.00']];
- TL.forEach(function(x,i){var a=ws.getCell(r,4),v=ws.getCell(r,5),l=i===4;a.value=x[0];v.value=x[1];v.numFmt=x[2];a.font=v.font={name:F,size:10,bold:l,color:l?{argb:red}:undefined};a.alignment=v.alignment={horizontal:"right"};if(l)a.fill=v.fill={type:"pattern",pattern:"solid",fgColor:{argb:"FF"+hx(tint(S.col))}};r++});
+ var r0=r,tx=taxRows(c),TL=[["Sub Total",{formula:"SUM(E"+f+":E"+b+")"},"#,##0.00"],[discLabel(),c.d,"#,##0.00"]];
+ tx.forEach(function(x){TL.push([x[0],{formula:"(E"+r0+"-E"+(r0+1)+")*"+(S.gm==="cs"?c.g/2:c.g)+"/100"},"#,##0.00"])});
+ TL.push(["Total",{formula:"E"+r0+"-E"+(r0+1)+(tx.length?"+SUM(E"+(r0+2)+":E"+(r0+1+tx.length)+")":"")},'"₹"#,##0.00']);var ti=TL.length-1;
+ if(S.type==="bill"&&paidAmt()>0){TL.push(["Paid",paidAmt(),"#,##0.00"]);TL.push(["Balance",{formula:"E"+(r0+ti)+"-E"+(r0+ti+1)},'"₹"#,##0.00'])}
+ TL.forEach(function(x,i){var a=ws.getCell(r,4),v=ws.getCell(r,5),l=i===ti;a.value=x[0];v.value=x[1];v.numFmt=x[2];a.font=v.font={name:F,size:10,bold:l||x[0]==="Balance",color:l?{argb:red}:undefined};a.alignment=v.alignment={horizontal:"right"};if(l)a.fill=v.fill={type:"pattern",pattern:"solid",fgColor:{argb:"FF"+hx(tint(S.col))}};r++});
  txt(r,1,5,words(c.tot),{s:9,b:true,i:true,h:"right"});r+=2;
  if(S.notes.trim()){txt(r,1,5,"Notes: "+S.notes,{});ws.getRow(r).height=Math.max(14,14*Math.ceil(S.notes.length/100));r+=2}
+ if(S.sb&&(ST.bank||ST.upi)){txt(r,1,3,"Bank details",{b:true});r++;(ST.bank||"").split("\n").filter(Boolean).forEach(function(l){txt(r,1,3,l,{});r++});if(ST.upi){txt(r,1,3,"UPI: "+ST.upi,{});r++;var qp=await qrPng(c);if(qp){ws.getRow(r).height=80;ws.addImage(wb.addImage({base64:qp,extension:"png"}),{tl:{col:0.1,row:r-1},ext:{width:100,height:100}});r+=2}}r++}
  var tl=tlist();
  if(tl.length){if(S.tpos==="2")ws.getRow(r-1).addPageBreak();txt(r,1,5,"Terms & Conditions",{b:true});r++;
   tl.forEach(function(t,i){txt(r,1,5,(i+1)+". "+t,{s:9});ws.getRow(r).height=Math.max(13,12*Math.ceil(t.length/115)+2);r++});r++}
@@ -319,7 +367,7 @@ document.querySelectorAll(".sw").forEach(function(b){b.onclick=function(){S.col=
 ["bn","ba","sgnb","sglb"].forEach(function(k){$(k).onchange=function(){S[k]=this.checked;render()}});
 
 /* ===== app: login, home, clients, reports, payments ===== */
-var cur={id:null},tm=0,DOCS=[],CL=[],ccur=null,ST={bank:"",upi:"",upn:""},auth,db,
+var cur={id:null},tm=0,DOCS=[],CL=[],ccur=null,ST={bank:"",upi:"",upn:"",gstin:""},CAT=[],LAST="",STM=null,tt=0,auth,db,
 TT={quotation:"QUOTATION",estimate:"ESTIMATE",bill:"INVOICE"},NLB={quotation:"Quote No:",estimate:"Estimate No:",bill:"Invoice No:"},
 STAT={quotation:["Draft","Sent","Accepted","Rejected"],estimate:["Draft","Sent","Accepted","Rejected"],bill:["Unpaid","Partial","Paid"]},
 PFX={quotation:"QTN-",estimate:"EST-",bill:"INV-"},VW=["home","clients","reports","settings","ed"];
@@ -330,7 +378,7 @@ function payRows(c){var p=paidAmt();return S.type==="bill"&&p>0?"<tr><td>Paid</t
 function bankHTML(c){if(!S.sb||!(ST.bank||ST.upi))return"";var bal=S.type==="bill"?Math.max(c.tot-paidAmt(),0):c.tot,q="";
  if(ST.upi&&window.qrcode){var z=qrcode(0,"M");z.addData("upi://pay?pa="+ST.upi+"&pn="+encodeURIComponent(ST.upn||"")+(bal>0?"&am="+bal.toFixed(2):"")+"&cu=INR");z.make();q='<div style="text-align:center;font-size:.85em"><img alt="UPI QR" src="'+z.createDataURL(4,0)+'" style="width:26mm;height:26mm"><br>'+e(ST.upi)+"</div>"}
  return'<div style="display:flex;gap:1.2em;align-items:center;margin-top:.8em;font-size:.9em"><div style="flex:1">'+(ST.bank?"<b>Bank details</b><br>"+e(ST.bank).replace(/\n/g,"<br>"):"")+"</div>"+q+"</div>"}
-function fillStatus(){var o=STAT[S.type||"quotation"];$("status").innerHTML=o.map(function(x){return"<option>"+x+"</option>"}).join("");if(o.indexOf(S.status)<0)S.status=o[0];$("status").value=S.status;$("pf").hidden=S.type!=="bill"}
+function fillStatus(){var o=STAT[S.type||"quotation"];$("status").innerHTML=o.map(function(x){return"<option>"+x+"</option>"}).join("");if(o.indexOf(S.status)<0)S.status=o[0];$("status").value=S.status;$("pf").hidden=S.type!=="bill";$("duel").textContent=DL()}
 function autoStatus(){if(S.type!=="bill")return;var p=paidAmt(),t=calc().tot,st=t>0&&p>=t?"Paid":p>0?"Partial":"Unpaid";S.status=st;$("status").value=st;$("pt").textContent="Paid ₹"+fmt(p)+" · Balance ₹"+fmt(Math.max(t-p,0))}
 $("dtype").onchange=function(){S.type=this.value;S.status=STAT[S.type][0];fillStatus();render()};
 $("status").onchange=function(){S.status=this.value;save()};
@@ -339,55 +387,85 @@ function plist(){$("pl").innerHTML=(S.pay||[]).map(function(p,i){return'<div cla
 $("pl").oninput=function(ev){var r=ev.target.closest("[data-i]");if(r&&ev.target.dataset.k){S.pay[r.dataset.i][ev.target.dataset.k]=ev.target.value;render()}};
 $("pl").onclick=function(ev){var b=ev.target.closest("[data-del]");if(b){S.pay.splice(b.dataset.del,1);plist();render()}};
 $("pa").onclick=function(){S.pay=S.pay||[];S.pay.push({date:today(),amt:Math.max(calc().tot-paidAmt(),0)});plist();render()};
-function go(v){$("nav").hidden=false;VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();if(v==="home")home();if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist()}
+function go(v){$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();if(v==="home")home();if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist()}
 function out(){$("nav").hidden=true;VW.forEach(function(x){$("v-"+x).hidden=true});$("v-login").hidden=false}
-document.querySelectorAll("nav [data-v]").forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
-document.querySelectorAll("nav [data-n]").forEach(function(b){b.onclick=function(){newDoc(b.dataset.n)}});
-$("bh").onclick=function(){go("home")};
+document.querySelectorAll("nav [data-v]").forEach(function(b){b.onclick=function(){if(canLeave())go(b.dataset.v)}});
+document.querySelectorAll("nav [data-n]").forEach(function(b){b.onclick=function(){if(canLeave())newDoc(b.dataset.n)}});
+function canLeave(){if(!$("v-ed").hidden&&JSON.stringify(S)!==LAST){if(cur.id){clearTimeout(tm);saveDoc();return true}return confirm("This new document is not saved yet. Leave without saving?")}return true}
+$("bh").onclick=function(){if(canLeave())go("home")};
+addEventListener("beforeunload",function(ev){if(!$("v-ed").hidden&&JSON.stringify(S)!==LAST){ev.preventDefault();ev.returnValue=""}});
+function toast(m,undo){var t=$("toast");t.innerHTML=e(m)+(undo?' <button id="tu">Undo</button>':"");t.hidden=false;clearTimeout(tt);if(undo)$("tu").onclick=function(){undo();t.hidden=true};tt=setTimeout(function(){t.hidden=true},undo?8000:2500)}
 function nextNo(t){var m=0;DOCS.forEach(function(d){if(d.type===t){var n=parseInt(String(d.no).replace(/\D+/g,""),10);if(n>m)m=n}});return PFX[t]+String(m+1).padStart(3,"0")}
-function newDoc(t){S=fresh();S.type=t;S.no=nextNo(t);S.status=STAT[t][0];S.sb=t==="bill";cur={id:null};$("ss").textContent="";sync();go("ed")}
-function newFrom(t){S=Object.assign(fresh(),JSON.parse(JSON.stringify(S)));S.type=t;S.no=nextNo(t);S.date=today();S.pay=[];S.status=STAT[t][0];if(t==="bill")S.sb=true;cur={id:null};sync();return saveDoc().then(function(){go("ed")})}
-function openDoc(id){var d=DOCS.filter(function(x){return x.id===id})[0];if(!d)return;S=Object.assign(fresh(),d.s);cur={id:id};$("ss").textContent="";sync();go("ed")}
-function saveDoc(){var d={type:S.type,no:S.no,name:S.name,date:S.date,total:calc().tot,paid:paidAmt(),status:S.status,upd:Date.now(),s:JSON.parse(JSON.stringify(S))},r=cur.id?db.collection("docs").doc(cur.id).set(d):db.collection("docs").add(d).then(function(x){cur.id=x.id});
- return r.then(function(){$("ss").textContent="Saved ✓ "+new Date().toLocaleTimeString()}).catch(function(x){alert("Save failed: "+x.message)})}
+function newDoc(t){S=fresh();S.type=t;S.no=nextNo(t);S.status=STAT[t][0];S.sb=t==="bill";S.due=addDays(S.date,t==="bill"?7:15);cur={id:null};clearTimeout(tm);$("ss").textContent="";sync();go("ed");LAST=JSON.stringify(S)}
+function newFrom(t){S=Object.assign(fresh(),JSON.parse(JSON.stringify(S)));S.type=t;S.no=nextNo(t);S.date=today();S.due=addDays(S.date,t==="bill"?7:15);S.pay=[];S.status=STAT[t][0];if(t==="bill")S.sb=true;cur={id:null};clearTimeout(tm);sync();return saveDoc().then(function(){go("ed")})}
+function openDoc(id){var d=DOCS.filter(function(x){return x.id===id})[0];if(!d)return;S=Object.assign(fresh(),d.s);cur={id:id};clearTimeout(tm);$("ss").textContent="";sync();go("ed");LAST=JSON.stringify(S)}
+function saveDoc(){var snap=JSON.stringify(S),d={due:S.due||"",phone:S.phone||"",tax:calc().gs,del:false,type:S.type,no:S.no,name:S.name,date:S.date,total:calc().tot,paid:paidAmt(),status:S.status,upd:Date.now(),s:JSON.parse(JSON.stringify(S))},r=cur.id?db.collection("docs").doc(cur.id).set(d):db.collection("docs").add(d).then(function(x){cur.id=x.id});
+ return r.then(function(){LAST=snap;$("ss").textContent="Saved ✓ "+new Date().toLocaleTimeString()}).catch(function(x){alert("Save failed: "+x.message)})}
 $("sv").onclick=function(){clearTimeout(tm);saveDoc()};
 $("cv").onclick=function(){var t={estimate:"quotation",quotation:"bill"}[S.type];if(!t){alert("A bill cannot be converted further.");return}if(confirm("Create a new "+t+" from this one?"))newFrom(t)};
 $("wa").onclick=function(){var c=calc(),ph=(S.phone||"").replace(/\D/g,"");if(ph.length===10)ph="91"+ph;
  var m="Hello "+(S.name||"")+", please find the "+S.type+" "+S.no+" from Saagee Ads. Amount: ₹"+fmt(c.tot)+(S.type==="bill"&&paidAmt()?", balance: ₹"+fmt(Math.max(c.tot-paidAmt(),0)):"")+". Thank you!";
  window.open("https://wa.me/"+ph+"?text="+encodeURIComponent(m),"_blank");$("xp").click()};
 function card(a){return'<div class="card">'+a[0]+"<b>"+a[1]+"</b></div>"}
-function home(){var q=$("hq").value.toLowerCase(),t=$("ht").value,m=today().slice(0,7);
- function ms(ty){return DOCS.filter(function(d){return d.type===ty&&(d.date||"").slice(0,7)===m}).reduce(function(a,d){return a+d.total},0)}
- var pend=DOCS.filter(function(d){return d.type==="bill"}).reduce(function(a,d){return a+Math.max(d.total-d.paid,0)},0);
- $("hc").innerHTML=[["Quotations this month","₹"+fmt(ms("quotation"))],["Bills this month","₹"+fmt(ms("bill"))],["Pending to collect","₹"+fmt(pend)],["Accepted quotations",DOCS.filter(function(d){return d.type==="quotation"&&d.status==="Accepted"}).length]].map(card).join("");
- var L=DOCS.filter(function(d){return(!t||d.type===t)&&(!q||(d.no+" "+d.name).toLowerCase().indexOf(q)>=0)});
- $("hb").innerHTML=L.length?L.map(function(d){return'<tr data-id="'+d.id+'"><td>'+e(d.no)+"</td><td>"+d.type+"</td><td>"+e(d.name)+"</td><td>"+fd(d.date)+'</td><td class="r">₹'+fmt(d.total)+'</td><td><span class="bd">'+d.status+'</span></td><td><button data-a="dup">Copy</button> <button data-a="del" aria-label="Delete">✕</button></td></tr>'}).join(""):'<tr><td colspan="7">No documents yet. Use + Quotation, + Estimate or + Bill above.</td></tr>'}
+function LIVE(){return DOCS.filter(function(d){return!d.del})}
+function overdue(d){return d.type==="bill"&&d.due&&d.due<today()&&d.total-d.paid>0.005}
+function badge(d){var od=overdue(d),c=od?"bad":(d.status==="Paid"||d.status==="Accepted")?"ok":d.status==="Rejected"?"bad":"pk";return'<span class="bd '+c+'">'+(od?"Overdue":d.status)+"</span>"}
+function remind(d){var ph=(d.phone||"").replace(/\D/g,"");if(!ph){alert("No phone number saved for this client. Open the bill and add it.");return}if(ph.length===10)ph="91"+ph;
+ var m="Hello "+(d.name||"")+", gentle reminder: invoice "+d.no+" from Saagee Ads has a pending balance of ₹"+fmt(Math.max(d.total-d.paid,0))+(d.due?" (due "+fd(d.due)+")":"")+". Kindly arrange the payment. Thank you!";
+ window.open("https://wa.me/"+ph+"?text="+encodeURIComponent(m),"_blank")}
+function home(){var q=$("hq").value.toLowerCase(),t=$("ht").value,m=today().slice(0,7),A=LIVE();
+ function ms(ty){return A.filter(function(d){return d.type===ty&&(d.date||"").slice(0,7)===m}).reduce(function(a,d){return a+d.total},0)}
+ var B=A.filter(function(d){return d.type==="bill"}),pend=B.reduce(function(a,d){return a+Math.max(d.total-d.paid,0)},0),od=A.filter(overdue).reduce(function(a,d){return a+d.total-d.paid},0);
+ $("hc").innerHTML=[["Quotations this month","₹"+fmt(ms("quotation"))],["Bills this month","₹"+fmt(ms("bill"))],["Pending to collect","₹"+fmt(pend)],["Overdue","₹"+fmt(od)],["Accepted quotations",A.filter(function(d){return d.type==="quotation"&&d.status==="Accepted"}).length]].map(card).join("");
+ var tr=t==="trash",src=tr?DOCS.filter(function(d){return d.del}):A.filter(function(d){return!t||(t==="overdue"?overdue(d):d.type===t)});
+ var L=src.filter(function(d){return!q||(d.no+" "+d.name).toLowerCase().indexOf(q)>=0});
+ $("hb").innerHTML=L.length?L.map(function(d){var b=tr?'<button data-a="rest">Restore</button> <button data-a="purge">Delete forever</button>':'<button data-a="dup">Copy</button> '+(d.type==="bill"&&d.total-d.paid>0.005?'<button data-a="rem">Remind</button> ':"")+'<button data-a="del" aria-label="Delete">✕</button>';
+  return'<tr data-id="'+d.id+'"'+(tr?' data-trash="1"':"")+'><td>'+e(d.no)+"</td><td>"+d.type+"</td><td>"+e(d.name)+"</td><td>"+fd(d.date)+"</td><td>"+fd(d.due)+'</td><td class="r">₹'+fmt(d.total)+"</td><td>"+badge(d)+"</td><td>"+b+"</td></tr>"}).join(""):'<tr><td colspan="8">'+(tr?"Trash is empty.":"No documents here yet. Use + Quotation, + Estimate or + Bill above.")+"</td></tr>"}
 $("hq").oninput=$("ht").onchange=home;
-$("hb").onclick=function(ev){var r=ev.target.closest("[data-id]");if(!r)return;var a=ev.target.dataset.a,id=r.dataset.id;
- if(a==="del"){if(confirm("Delete this document permanently?"))db.collection("docs").doc(id).delete()}
- else if(a==="dup"){openDoc(id);newFrom(S.type)}else openDoc(id)};
+$("hb").onclick=function(ev){var r=ev.target.closest("[data-id]");if(!r)return;var a=ev.target.dataset.a,id=r.dataset.id,d=DOCS.filter(function(x){return x.id===id})[0],ref=db.collection("docs").doc(id);if(!d)return;
+ if(a==="del")ref.update({del:true,delAt:Date.now()}).then(function(){toast("Moved to Trash",function(){ref.update({del:false})})});
+ else if(a==="rest")ref.update({del:false});
+ else if(a==="purge"){if(confirm("Delete this document forever? This cannot be undone."))ref.delete()}
+ else if(a==="rem")remind(d);
+ else if(a==="dup"){openDoc(id);newFrom(S.type)}
+ else if(!r.dataset.trash)openDoc(id)};
 function pick(){$("cpick").innerHTML='<option value="">— select client —</option>'+CL.map(function(c,i){return'<option value="'+i+'">'+e(c.name)+"</option>"}).join("")}
 $("cpick").onchange=function(){var c=CL[this.value];if(!c)return;S.name=c.name;S.addr=c.addr||"";S.phone=c.phone||"";sync()};
 $("sc").onclick=function(){if(!S.name.trim()){alert("Type the client name first.");return}var o=CL.filter(function(c){return c.name===S.name})[0],d={name:S.name,addr:S.addr,phone:S.phone||""};(o?db.collection("clients").doc(o.id).set(d):db.collection("clients").add(d)).then(function(){$("ss").textContent="Client saved ✓"})};
-function clist(){$("cb").innerHTML=CL.map(function(c){return'<tr data-id="'+c.id+'"><td>'+e(c.name)+"</td><td>"+e(c.phone)+"</td><td>"+e(c.addr)+'</td><td><button data-a="del" aria-label="Delete">✕</button></td></tr>'}).join("")||'<tr><td colspan="4">No clients yet.</td></tr>'}
-$("cb").onclick=function(ev){var r=ev.target.closest("[data-id]");if(!r)return;var c=CL.filter(function(x){return x.id===r.dataset.id})[0];if(ev.target.dataset.a==="del"){if(confirm("Delete this client?"))db.collection("clients").doc(c.id).delete()}else{ccur=c.id;$("cn").value=c.name;$("cp").value=c.phone||"";$("ca").value=c.addr||""}};
+function clist(){$("cb").innerHTML=CL.map(function(c){return'<tr data-id="'+c.id+'"><td>'+e(c.name)+"</td><td>"+e(c.phone)+"</td><td>"+e(c.addr)+'</td><td><button data-a="st">Statement</button> <button data-a="del" aria-label="Delete">✕</button></td></tr>'}).join("")||'<tr><td colspan="4">No clients yet.</td></tr>'}
+function stmt(c){var L=LIVE().filter(function(d){return d.type==="bill"&&d.name===c.name}).sort(function(a,b){return(a.date||"")<(b.date||"")?-1:1}),tb=0,tp=0;L.forEach(function(d){tb+=d.total;tp+=d.paid});STM={c:c,L:L,tb:tb,tp:tp};
+ $("cst").innerHTML='<fieldset><legend>Statement – '+e(c.name)+"</legend>"+(L.length?'<div class="tw"><table class="tb"><thead><tr><th>Invoice</th><th>Date</th><th>Due</th><th class="r">Amount</th><th class="r">Paid</th><th class="r">Balance</th><th>Status</th></tr></thead><tbody>'+L.map(function(d){return"<tr><td>"+e(d.no)+"</td><td>"+fd(d.date)+"</td><td>"+fd(d.due)+'</td><td class="r">₹'+fmt(d.total)+'</td><td class="r">₹'+fmt(d.paid)+'</td><td class="r">₹'+fmt(Math.max(d.total-d.paid,0))+"</td><td>"+badge(d)+"</td></tr>"}).join("")+"</tbody></table></div>":"<p>No bills for this client yet.</p>")+'<div class="cards" style="margin:12px 0 0">'+[["Billed","₹"+fmt(tb)],["Received","₹"+fmt(tp)],["Pending","₹"+fmt(Math.max(tb-tp,0))]].map(card).join("")+'</div><div class="acts"><button class="pri" id="stp">PDF</button><button id="stc">CSV</button><button id="stw">WhatsApp</button><button id="stx">Close</button></div></fieldset>';
+ $("stx").onclick=function(){$("cst").innerHTML="";STM=null};
+ $("stc").onclick=function(){var q=function(v){return'"'+String(v==null?"":v).replace(/"/g,'""')+'"'};dl("Statement_"+c.name.replace(/[^\w-]+/g,"_")+".csv",new Blob(["\ufeff"+["Invoice,Date,Due,Amount,Paid,Balance,Status"].concat(L.map(function(d){return[d.no,d.date,d.due,d.total,d.paid,Math.max(d.total-d.paid,0),d.status].map(q).join(",")})).join("\n")],{type:"text/csv"}))};
+ $("stw").onclick=function(){var ph=(c.phone||"").replace(/\D/g,"");if(ph.length===10)ph="91"+ph;var m="Hello "+c.name+", your account summary with Saagee Ads: billed ₹"+fmt(tb)+", received ₹"+fmt(tp)+", pending ₹"+fmt(Math.max(tb-tp,0))+". Thank you!";window.open("https://wa.me/"+ph+"?text="+encodeURIComponent(m),"_blank")};
+ $("stp").onclick=function(){if(!window.jspdf){alert("PDF library did not load.");return}var p=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),y=20,X=[14,48,78,108,138,168],H=["Invoice","Date","Due","Amount","Paid","Balance"];
+  p.setFontSize(16);p.text("Saagee Ads - Statement of Account",14,y);y+=8;p.setFontSize(11);p.text("Client: "+c.name,14,y);y+=6;p.text("Date: "+fd(today()),14,y);y+=10;
+  function hd(){p.setFont(undefined,"bold");H.forEach(function(h,i){p.text(h,X[i],y)});p.setFont(undefined,"normal");y+=6}hd();
+  L.forEach(function(d){if(y>275){p.addPage();y=20;hd()}[d.no,fd(d.date),fd(d.due),"Rs. "+fmt(d.total),"Rs. "+fmt(d.paid),"Rs. "+fmt(Math.max(d.total-d.paid,0))].forEach(function(v,i){p.text(String(v),X[i],y)});y+=6});
+  y+=6;p.setFont(undefined,"bold");p.text("Billed: Rs. "+fmt(tb)+"    Received: Rs. "+fmt(tp)+"    Pending: Rs. "+fmt(Math.max(tb-tp,0)),14,y);p.save("Statement_"+c.name.replace(/[^\w-]+/g,"_")+".pdf")};
+ $("cst").scrollIntoView({behavior:"smooth"})}
+$("cb").onclick=function(ev){var r=ev.target.closest("[data-id]");if(!r)return;var c=CL.filter(function(x){return x.id===r.dataset.id})[0],a=ev.target.dataset.a;if(a==="del"){if(confirm("Delete this client?"))db.collection("clients").doc(c.id).delete()}else if(a==="st")stmt(c);else{ccur=c.id;$("cn").value=c.name;$("cp").value=c.phone||"";$("ca").value=c.addr||""}};
 $("cs").onclick=function(){if(!$("cn").value.trim())return;var d={name:$("cn").value.trim(),phone:$("cp").value.trim(),addr:$("ca").value};(ccur?db.collection("clients").doc(ccur).set(d):db.collection("clients").add(d)).then(function(){$("cc").click()})};
 $("cc").onclick=function(){ccur=null;$("cn").value=$("cp").value=$("ca").value=""};
-function rep(){var m=$("rmn").value||today().slice(0,7);$("rmn").value=m;var L=DOCS.filter(function(d){return(d.date||"").slice(0,7)===m}),B=L.filter(function(d){return d.type==="bill"});
- function sm(a,k){return a.reduce(function(x,d){return x+d[k]},0)}
+function rep(){var m=$("rmn").value||today().slice(0,7);$("rmn").value=m;var L=LIVE().filter(function(d){return(d.date||"").slice(0,7)===m}),B=L.filter(function(d){return d.type==="bill"});
+ function sm(a,k){return a.reduce(function(x,d){return x+(d[k]||0)},0)}
  var bt=sm(B,"total"),bp=sm(B,"paid");
- $("rp").innerHTML='<div class="cards">'+[["Billed",bt],["Collected",bp],["Pending",bt-bp]].map(function(a){return card([a[0],"₹"+fmt(a[1])])}).join("")+'</div><div class="tw"><table class="tb"><thead><tr><th>Type</th><th>Count</th><th class="r">Amount</th></tr></thead><tbody>'+["quotation","estimate","bill"].map(function(t){var a=L.filter(function(d){return d.type===t});return"<tr><td>"+t+"</td><td>"+a.length+'</td><td class="r">₹'+fmt(sm(a,"total"))+"</td></tr>"}).join("")+"</tbody></table></div>"}
+ $("rp").innerHTML='<div class="cards">'+[["Billed",bt],["Collected",bp],["Pending",bt-bp],["GST on bills",sm(B,"tax")]].map(function(a){return card([a[0],"₹"+fmt(a[1])])}).join("")+'</div><div class="tw"><table class="tb"><thead><tr><th>Type</th><th>Count</th><th class="r">Amount</th></tr></thead><tbody>'+["quotation","estimate","bill"].map(function(t){var a=L.filter(function(d){return d.type===t});return"<tr><td>"+t+"</td><td>"+a.length+'</td><td class="r">₹'+fmt(sm(a,"total"))+"</td></tr>"}).join("")+"</tbody></table></div>"}
 $("rmn").onchange=rep;
 $("rcsv").onclick=function(){var m=$("rmn").value,c=function(v){return'"'+String(v==null?"":v).replace(/"/g,'""')+'"'};
- var l=["No,Type,Client,Date,Total,Paid,Status"].concat(DOCS.filter(function(d){return(d.date||"").slice(0,7)===m}).map(function(d){return[d.no,d.type,d.name,d.date,d.total,d.paid,d.status].map(c).join(",")}));
+ var l=["No,Type,Client,Date,Total,Paid,Status"].concat(LIVE().filter(function(d){return(d.date||"").slice(0,7)===m}).map(function(d){return[d.no,d.type,d.name,d.date,d.total,d.paid,d.status].map(c).join(",")}));
  dl("Report_"+m+".csv",new Blob(["\ufeff"+l.join("\n")],{type:"text/csv"}))};
-function stf(){$("sbk").value=ST.bank;$("sup").value=ST.upi;$("sun").value=ST.upn}
-function saveSettings(){if(!db)return;db.collection("settings").doc("main").set({bank:ST.bank,upi:ST.upi,upn:ST.upn,bg:BG,sg:SG,sl:SL}).catch(function(x){alert("Could not save settings (letterhead may be too large): "+x.message)})}
-$("ssv").onclick=function(){ST={bank:$("sbk").value,upi:$("sup").value.trim(),upn:$("sun").value.trim()};saveSettings();alert("Saved.")};
+function ipick(){$("ipick").innerHTML='<option value="">— select saved item —</option>'+CAT.map(function(c,i){return'<option value="'+i+'">'+e(c.d)+(nm(c.r)?" – ₹"+fmt(nm(c.r)):"")+"</option>"}).join("")}
+$("ipick").onchange=function(){var c=CAT[this.value];if(!c)return;var it={d:c.d,s:c.s||"",h:c.h||"",q:1,r:c.r},l=S.items[S.items.length-1];if(l&&!String(l.d).trim()&&!nm(l.r))S.items[S.items.length-1]=it;else S.items.push(it);this.value="";il();render()};
+function catl(){$("cat").innerHTML=CAT.map(function(c,i){return"<tr><td>"+e(c.d)+'</td><td class="r">'+(nm(c.r)?"₹"+fmt(nm(c.r)):"")+'</td><td><button data-del="'+i+'" aria-label="Delete">✕</button></td></tr>'}).join("")||'<tr><td>No saved items yet. Use "★ Save to catalogue" under any item in the editor.</td></tr>'}
+$("cat").onclick=function(ev){var b=ev.target.closest("[data-del]");if(!b)return;CAT.splice(b.dataset.del,1);saveSettings();catl();ipick()};
+function stf(){$("sbk").value=ST.bank;$("sup").value=ST.upi;$("sun").value=ST.upn;$("sgs").value=ST.gstin||"";catl()}
+function saveSettings(){if(!db)return;db.collection("settings").doc("main").set({bank:ST.bank,upi:ST.upi,upn:ST.upn,gstin:ST.gstin||"",cat:CAT,bg:BG,sg:SG,sl:SL}).catch(function(x){alert("Could not save settings (letterhead may be too large): "+x.message)})}
+$("ssv").onclick=function(){ST={bank:$("sbk").value,upi:$("sup").value.trim(),upn:$("sun").value.trim(),gstin:$("sgs").value.trim()};saveSettings();alert("Saved.")};
 function start(){
  db.collection("docs").orderBy("upd","desc").onSnapshot(function(s){DOCS=s.docs.map(function(d){var o=d.data();o.id=d.id;return o});if(!$("v-home").hidden)home();if(!$("v-reports").hidden)rep()},function(x){alert(x.message)});
  db.collection("clients").orderBy("name").onSnapshot(function(s){CL=s.docs.map(function(d){var o=d.data();o.id=d.id;return o});pick();clist()});
- db.collection("settings").doc("main").get().then(function(s){if(s.exists){var d=s.data();ST={bank:d.bank||"",upi:d.upi||"",upn:d.upn||""};if(d.bg)BG=d.bg;if(d.sg)SG=d.sg;if(d.sl)SL=d.sl;lhs();sls()}}).then(function(){go("home")})}
+ db.collection("settings").doc("main").get().then(function(s){if(s.exists){var d=s.data();ST={bank:d.bank||"",upi:d.upi||"",upn:d.upn||"",gstin:d.gstin||""};CAT=d.cat||[];if("bg"in d){BG=d.bg||"";store(KB,BG)}if("sg"in d){SG=d.sg||"";store(KS,SG)}if("sl"in d){SL=d.sl||"";store(KL,SL)}lhs();sls();ipick();render();if((!("bg"in d)&&BG)||(!("sg"in d)&&SG)||(!("sl"in d)&&SL))saveSettings()}else saveSettings()}).then(function(){go("home")})}
 var okcfg=FB.apiKey.indexOf("PASTE")<0;
 function until(){return+localStorage.getItem("sa-until")||0}
 if(!okcfg){$("v-login").hidden=false;$("lerr").textContent="Firebase is not set up yet. Paste your Firebase config at the top of this file."}
