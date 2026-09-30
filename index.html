@@ -95,7 +95,7 @@ nav b{color:var(--br);margin-right:8px}.sp{flex:1}
 <div id="v-clients" class="pg" hidden><fieldset><legend>Client</legend><div class="r2"><div><label for="cn">Name</label><input id="cn"></div><div><label for="cp">Phone</label><input id="cp"></div></div><label for="ca">Address</label><textarea id="ca"></textarea><div class="acts"><button class="pri" id="cs">Save client</button><button id="cc">Clear</button></div></fieldset>
 <div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th></th></tr></thead><tbody id="cb"></tbody></table></div></div>
 <div id="v-reports" class="pg" hidden><div class="acts" style="margin:0 0 10px"><input id="rmn" type="month" style="width:auto"><button id="rcsv">Download CSV</button></div><div id="rp"></div></div>
-<div id="v-settings" class="pg" hidden><fieldset><legend>Bank &amp; UPI</legend><label for="sbk">Bank details</label><textarea id="sbk" placeholder="Account name, number, IFSC, bank"></textarea><div class="r2"><div><label for="sup">UPI ID</label><input id="sup" placeholder="name@bank"></div><div><label for="sun">UPI payee name</label><input id="sun"></div></div><div class="acts"><button class="pri" id="ssv">Save settings</button></div><small>Letterhead and signature are uploaded inside the editor and saved to your account automatically.</small></fieldset></div>
+<div id="v-settings" class="pg" hidden><fieldset><legend>Bank &amp; UPI</legend><label for="sbk">Bank details</label><textarea id="sbk" placeholder="Account name, number, IFSC, bank"></textarea><div class="r2"><div><label for="sup">UPI ID</label><input id="sup" placeholder="name@bank"></div><div><label for="sun">UPI payee name</label><input id="sun"></div></div><div class="acts"><button class="pri" id="ssv">Save settings</button></div><small>Letterhead, signature and company seal are uploaded inside the editor and saved to your account automatically.</small></fieldset></div>
 <div class="app" id="v-ed" hidden>
 <aside>
  <button id="bh">← Home</button>
@@ -148,24 +148,30 @@ nav b{color:var(--br);margin-right:8px}.sp{flex:1}
   <div class="cl" style="margin-top:8px"><label style="margin:0"><input type="checkbox" id="sgnb" style="width:auto"> Bold name</label><label style="margin:0"><input type="checkbox" id="sglb" style="width:auto"> Bold label</label></div>
   <div class="r2"><div><label for="sgp">Position</label><select id="sgp"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div><div><label for="sgh">Space height (mm)</label><input id="sgh" type="number" min="5" max="60"></div></div>
  </fieldset>
+ <fieldset><legend>Company seal</legend>
+  <small id="sls"></small>
+  <div class="acts"><button id="slb">Upload seal</button><button id="sld">Remove</button></div>
+  <input type="file" id="slf" accept="image/*" hidden>
+  <label for="slh">Seal size (height, mm)</label><input id="slh" type="number" min="10" max="60">
+ </fieldset>
  <fieldset><legend>Download</legend>
   <div class="acts"><button class="pri" id="xw">Word</button><button class="pri" id="xx">Excel</button><button class="pri" id="xj">JPEG</button><button class="pri" id="xp">PDF</button><button id="pr">Print</button></div>
  </fieldset>
  <fieldset><legend>Backup</legend>
   <div class="acts"><button id="bk">Backup</button><button id="rt">Restore</button><button id="rs">Clear form</button></div>
   <input type="file" id="rf" accept=".json,application/json" hidden>
-  <small>Backup saves everything: form, terms, letterhead and signature.</small>
+  <small>Backup saves everything: form, terms, letterhead, signature and seal.</small>
  </fieldset>
  <div class="warn" id="wn">Content is too long for one A4 page even at the smallest text size. Remove some items or terms, or move terms to the next page.</div>
 </aside>
 <main><div id="pages"></div></main>
 </div>
 <script>
-var KEY="saagee-maker-v1",KB="saagee-maker-bg",KS="saagee-maker-sig",$=function(i){return document.getElementById(i)};
+var KEY="saagee-maker-v1",KB="saagee-maker-bg",KS="saagee-maker-sig",KL="saagee-maker-seal",$=function(i){return document.getElementById(i)};
 var DT=["Minimum Commitment: A minimum commitment of 3 months is recommended to ensure consistency and build audience engagement.","Professional Shoot: Professional shooting is subject to location, availability, and production requirements.","Travel Charges: Travel expenses for professional shooting may be charged separately, depending on the shooting location.","Additional Production Requirements: Charges for actors, locations, props, equipment, or any major third-party production requirements will be quoted separately.","Monthly Deliverables: The monthly package includes up to 2 professional shooting days and the deliverables specified in this quotation. Any additional shooting days or deliverables beyond the agreed scope will be charged separately.","Paid Advertising: Paid advertising, media spend, and promotional/boosting budgets are not included in the quotation and will be borne separately by the client.","Revisions & Re-shoots: Any major revisions, additional editing requirements, or re-shoots outside the agreed scope may be charged separately.","Client Coordination: Timely delivery of required information, approvals, brand materials, and customer-generated content from the client is necessary to maintain the planned content schedule and deliverables."];
-function fresh(){return {no:"SA-001",date:new Date().toISOString().slice(0,10),name:"",addr:"",items:[{d:"",s:"",q:1,r:0}],disc:0,gst:0,notes:"Looking forward for your business.",terms:DT.map(function(t){return{t:t,on:true}}),tpos:"2",sgp:"right",sgh:20,col:"#c4003f",subc:"#777777",font:"Segoe UI",fsz:11,bn:true,ba:true,sgn:"",sgt:"",sgl:"Authorized Signature",sgns:11,sgls:10,sgnb:true,sglb:false,type:"quotation",status:"Draft",phone:"",sb:false,pay:[]}}
+function fresh(){return {no:"SA-001",date:new Date().toISOString().slice(0,10),name:"",addr:"",items:[{d:"",s:"",q:1,r:0}],disc:0,gst:0,notes:"Looking forward for your business.",terms:DT.map(function(t){return{t:t,on:true}}),tpos:"2",sgp:"right",sgh:20,slh:25,col:"#c4003f",subc:"#777777",font:"Segoe UI",fsz:11,bn:true,ba:true,sgn:"",sgt:"",sgl:"Authorized Signature",sgns:11,sgls:10,sgnb:true,sglb:false,type:"quotation",status:"Draft",phone:"",sb:false,pay:[]}}
 var S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(x){}S=Object.assign(fresh(),S||{});
-var BG="",SG="";try{BG=localStorage.getItem(KB)||"";SG=localStorage.getItem(KS)||""}catch(x){}
+var BG="",SG="",SL="";try{BG=localStorage.getItem(KB)||"";SG=localStorage.getItem(KS)||"";SL=localStorage.getItem(KL)||""}catch(x){}
 function e(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function nm(v){v=parseFloat(v);return isNaN(v)?0:v}
 function fmt(v){return v.toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2})}
@@ -183,7 +189,7 @@ function bold(t){return e(t).replace(/^([^:]{1,45}:)/,"<b>$1</b>")}
 function calc(){var sum=0,rows=S.items.map(function(it){var a=nm(it.q)*nm(it.r);sum+=a;return{d:it.d,s:it.s||"",q:nm(it.q),r:nm(it.r),a:a}}),d=nm(S.disc),g=nm(S.gst),gs=Math.max(sum-d,0)*g/100;return{rows:rows,sum:sum,d:d,g:g,gs:gs,tot:Math.max(sum-d,0)+gs}}
 function tlist(){return S.tpos==="0"?[]:S.terms.filter(function(t){return t.on&&t.t.trim()}).map(function(t){return t.t})}
 function termsHTML(){var l=tlist();return l.length?'<div class="terms"><p><b>Terms &amp; Conditions</b></p>'+l.map(function(t,i){return"<p>"+(i+1)+". "+bold(t)+"</p>"}).join("")+"</div>":""}
-function sigHTML(){return'<div style="margin-top:1.5em;text-align:'+(S.sgp||"right")+'"><div style="display:inline-block;text-align:center;min-width:14em"><div style="height:'+nm(S.sgh||20)+'mm">'+(SG?'<img alt="" src="'+SG+'" style="height:100%;max-width:60mm">':"")+'</div><div style="border-top:1px solid #222;padding-top:.2em;font-size:'+nm(S.sgls||10)+'pt;font-weight:'+(S.sglb?700:400)+'">'+e(S.sgl||"Authorized Signature")+'</div>'+(S.sgn?'<div style="font-size:'+nm(S.sgns||11)+'pt;font-weight:'+(S.sgnb!==false?700:400)+'">'+e(S.sgn)+'</div>':"")+(S.sgt?'<div style="font-size:'+nm(S.sgls||10)+'pt">'+e(S.sgt)+'</div>':"")+'</div></div>'}
+function sigHTML(){return'<div style="margin-top:1.5em;text-align:'+(S.sgp||"right")+'"><div style="display:inline-block;text-align:center;min-width:14em"><div style="height:'+nm(S.sgh||20)+'mm">'+(SG?'<img alt="" src="'+SG+'" style="height:100%;max-width:60mm">':"")+'</div><div style="border-top:1px solid #222;padding-top:.2em;font-size:'+nm(S.sgls||10)+'pt;font-weight:'+(S.sglb?700:400)+'">'+e(S.sgl||"Authorized Signature")+'</div>'+(S.sgn?'<div style="font-size:'+nm(S.sgns||11)+'pt;font-weight:'+(S.sgnb!==false?700:400)+'">'+e(S.sgn)+'</div>':"")+(S.sgt?'<div style="font-size:'+nm(S.sgls||10)+'pt">'+e(S.sgt)+'</div>':"")+(SL?'<div style="margin-top:2mm"><img alt="Company seal" src="'+SL+'" style="height:'+nm(S.slh||25)+'mm;max-width:60mm"></div>':"")+'</div></div>'}
 function mainHTML(){var c=calc(),rows=c.rows.map(function(x,i){return"<tr><td class='s'>"+(i+1)+"</td><td>"+e(x.d).replace(/\n/g,"<br>")+(x.s.trim()?"<div class='sub'>"+e(x.s.trim()).replace(/\n/g,"<br>")+"</div>":"")+"</td><td class='q'>"+x.q+"</td><td class='n'>"+fmt(x.r)+"</td><td class='n'>"+fmt(x.a)+"</td></tr>"}).join("");
  return"<h1>"+TT[S.type||"quotation"]+"</h1><div class='meta'><div><b>To:</b><br><span style='font-weight:"+(S.bn?700:400)+"'>"+e(S.name)+"</span><br><span style='font-weight:"+(S.ba?700:400)+"'>"+e(S.addr).replace(/\n/g,"<br>")+"</span></div><div style='text-align:right'><b>"+NL()+"</b> "+e(S.no)+"<br><b>Date:</b> "+fd(S.date)+"</div></div>"+
  "<table><thead><tr><th class='s'>#</th><th>Item &amp; Description</th><th class='q'>Qty</th><th class='n'>Rate</th><th class='n'>Amount</th></tr></thead><tbody>"+rows+"</tbody></table>"+
@@ -197,7 +203,7 @@ function render(){var P=$("pages"),bad=false,m=mainHTML(),t=termsHTML();P.innerH
  $("wn").style.display=bad?"block":"none";zoom();autoStatus();save()}
 function zoom(){var w=$("pages").parentNode.clientWidth;if(w>100)$("pages").style.zoom=Math.min(1,(w-16)/794)}
 addEventListener("resize",zoom);
-var FL=["no","date","name","addr","disc","gst","notes","sgh","col","subc","font","fsz","sgn","sgt","sgl","sgns","sgls","phone"];
+var FL=["no","date","name","addr","disc","gst","notes","sgh","col","subc","font","fsz","sgn","sgt","sgl","sgns","sgls","slh","phone"];
 FL.forEach(function(k){$(k).oninput=function(){S[k]=this.value;render()}});
 $("tpos").onchange=function(){S.tpos=this.value;render()};$("sgp").onchange=function(){S.sgp=this.value;render()};
 function il(){$("il").innerHTML=S.items.map(function(it,i){return'<div class="it" data-i="'+i+'"><textarea data-k="d" placeholder="Item name">'+e(it.d)+'</textarea><textarea data-k="s" placeholder="Sub lines (optional) – one per line. Leave empty to remove.">'+e(it.s)+'</textarea><div class="qr"><input data-k="q" type="number" min="0" aria-label="Qty" placeholder="Qty" value="'+e(it.q)+'"><input data-k="r" type="number" min="0" aria-label="Rate" placeholder="Rate" value="'+e(it.r)+'"><button class="x" data-del="'+i+'" aria-label="Remove item">✕</button></div></div>'}).join("")}
@@ -218,15 +224,21 @@ $("lhf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileRead
 $("sgb").onclick=function(){$("sgf").click()};
 $("sgf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){SG=r.result;store(KS,SG);render();saveSettings()};r.readAsDataURL(f);this.value=""};
 $("sgd").onclick=function(){SG="";store(KS,"");render();saveSettings()};
-function sync(){FL.forEach(function(k){$(k).value=S[k]==null?"":S[k]});$("tpos").value=S.tpos;$("sgp").value=S.sgp||"right";$("bn").checked=S.bn!==false;$("dtype").value=S.type||"quotation";fillStatus();$("sb").checked=!!S.sb;$("ba").checked=S.ba!==false;$("sgnb").checked=S.sgnb!==false;$("sglb").checked=!!S.sglb;il();tl();plist();lhs();render()}
+function sls(){$("sls").textContent=SL?"Seal loaded – it prints below the name. Upload again to replace.":"No seal yet – upload your company seal (PNG with transparent background looks best)."}
+function shrink(u,mx,cb){var im=new Image();im.onload=function(){var k=Math.min(1,mx/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(/image\/png/.test(u)?c.toDataURL("image/png"):c.toDataURL("image/jpeg",.92))};im.onerror=function(){cb(u)};im.src=u}
+function setSL(u){SL=u;store(KL,u);sls();render();saveSettings()}
+$("slb").onclick=function(){$("slf").click()};
+$("slf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){shrink(r.result,500,setSL)};r.readAsDataURL(f);this.value=""};
+$("sld").onclick=function(){setSL("")};
+function sync(){FL.forEach(function(k){$(k).value=S[k]==null?"":S[k]});$("tpos").value=S.tpos;$("sgp").value=S.sgp||"right";$("bn").checked=S.bn!==false;$("dtype").value=S.type||"quotation";fillStatus();$("sb").checked=!!S.sb;$("ba").checked=S.ba!==false;$("sgnb").checked=S.sgnb!==false;$("sglb").checked=!!S.sglb;il();tl();plist();lhs();sls();render()}
 /* backup */
 function dl(name,blob){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},5000)}
-$("bk").onclick=function(){dl("Saagee_Backup_"+new Date().toISOString().slice(0,10)+".json",new Blob([JSON.stringify({v:1,S:S,BG:BG,SG:SG})],{type:"application/json"}))};
+$("bk").onclick=function(){dl("Saagee_Backup_"+new Date().toISOString().slice(0,10)+".json",new Blob([JSON.stringify({v:1,S:S,BG:BG,SG:SG,SL:SL})],{type:"application/json"}))};
 $("rt").onclick=function(){$("rf").click()};
 $("rf").onchange=function(){var f=this.files[0];this.value="";if(!f)return;var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(!o.S||!Array.isArray(o.S.items)||!Array.isArray(o.S.terms))throw 0;
  if(!confirm("Replace the current quotation with this backup?"))return;
- S=Object.assign(fresh(),o.S);BG=/^data:image\//.test(o.BG)?o.BG:"";SG=/^data:image\//.test(o.SG)?o.SG:"";store(KB,BG);store(KS,SG);sync()}catch(x){alert("This is not a valid Saagee backup file.")}};r.readAsText(f)};
-$("rs").onclick=function(){if(!confirm("Clear the whole form? (Letterhead and signature stay)"))return;S=fresh();sync()};
+ S=Object.assign(fresh(),o.S);BG=/^data:image\//.test(o.BG)?o.BG:"";SG=/^data:image\//.test(o.SG)?o.SG:"";SL=/^data:image\//.test(o.SL)?o.SL:"";store(KB,BG);store(KS,SG);store(KL,SL);sync()}catch(x){alert("This is not a valid Saagee backup file.")}};r.readAsText(f)};
+$("rs").onclick=function(){if(!confirm("Clear the whole form? (Letterhead, signature and seal stay)"))return;S=fresh();sync()};
 /* exports */
 async function busy(id,fn){var b=$(id),t=b.textContent,P=$("pages"),z=P.style.zoom;b.disabled=true;b.textContent="Preparing…";P.style.zoom="";
  try{await fn()}catch(x){console.error(x);alert("Could not create the file: "+(x&&x.message||x))}P.style.zoom=z;b.disabled=false;b.textContent=t}
@@ -267,6 +279,7 @@ $("xw").onclick=function(){busy("xw",async function(){var D=window.docx;if(!D)th
   P({alignment:al2,spacing:{before:300},children:[new D.ImageRun({data:b64(SG),type:itype(SG),transformation:{width:wp,height:hp}})]})}
  else P({alignment:al2,spacing:{before:Math.round(sh*56.7)},children:[]});
  P({alignment:al2,border:{top:{style:D.BorderStyle.SINGLE,size:6,color:"222222",space:2}},indent:IND(),children:[T(S.sgl||"Authorized Signature",{s:Math.round(nm(S.sgls||10)*2),b:S.sglb})]});function IND(){return al2===R?{left:6800}:al2===L?{right:6800}:{left:3400,right:3400}}if(S.sgn)P({alignment:al2,indent:IND(),children:[T(S.sgn,{s:Math.round(nm(S.sgns||11)*2),b:S.sgnb!==false})]});if(S.sgt)P({alignment:al2,indent:IND(),children:[T(S.sgt,{s:Math.round(nm(S.sgls||10)*2)})]});
+ if(SL){var li=await imgOf(SL),lh=Math.round(nm(S.slh||25)*3.78),lw=Math.round(lh*li.width/li.height);if(lw>227){lw=227;lh=Math.round(lw*li.height/li.width)}P({alignment:al2,spacing:{before:120},children:[new D.ImageRun({data:b64(SL),type:itype(SL),transformation:{width:lw,height:lh}})]})}
  var hdr=BG?new D.Header({children:[new D.Paragraph({children:[new D.ImageRun({data:b64(BG),type:itype(BG),transformation:{width:794,height:1123},floating:{horizontalPosition:{relative:D.HorizontalPositionRelativeFrom.PAGE,offset:0},verticalPosition:{relative:D.VerticalPositionRelativeFrom.PAGE,offset:0},behindDocument:true,allowOverlap:true}})]})]}):new D.Header({children:[new D.Paragraph({children:[]})]});
  var doc=new D.Document({sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:2948,bottom:2155,left:907,right:907,header:0,footer:0}}},headers:{default:hdr},children:K}]});
  dl(fn(".docx"),await D.Packer.toBlob(doc))})};
@@ -300,6 +313,7 @@ $("xx").onclick=function(){busy("xx",async function(){if(!window.ExcelJS)throw n
  if(SG){var si=await imgOf(SG),hp=Math.round(sh*3.78),wp=Math.round(hp*si.width/si.height);if(wp>180){wp=180;hp=Math.round(wp*si.height/si.width)}
   var ext=itype(SG)==="png"?"png":"jpeg";ws.addImage(wb.addImage({base64:SG,extension:ext}),{tl:{col:pos==="left"?.2:pos==="center"?2.2:3.3,row:r-1},ext:{width:wp,height:hp}})}
  r++;var sx=txt(r,sc[0],sc[1],S.sgl||"Authorized Signature",{h:"center",b:S.sglb,s:nm(S.sgls||10)});for(var q=sc[0];q<=sc[1];q++)ws.getCell(r,q).border={top:{style:"thin",color:{argb:"FF222222"}}};if(S.sgn)txt(r+1,sc[0],sc[1],S.sgn,{h:"center",b:S.sgnb!==false,s:nm(S.sgns||11)});if(S.sgt)txt(r+2,sc[0],sc[1],S.sgt,{h:"center",s:nm(S.sgls||10)});
+ if(SL){var sl2=await imgOf(SL),lh=Math.round(nm(S.slh||25)*3.78),lw=Math.round(lh*sl2.width/sl2.height);if(lw>180){lw=180;lh=Math.round(lw*sl2.height/sl2.width)}var rr=r+3;ws.getRow(rr).height=lh*.75+6;ws.addImage(wb.addImage({base64:SL,extension:itype(SL)==="png"?"png":"jpeg"}),{tl:{col:pos==="left"?.2:pos==="center"?2.2:3.3,row:rr-1+.05},ext:{width:lw,height:lh}})}
  dl(fn(".xlsx"),new Blob([await wb.xlsx.writeBuffer()],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}))})};
 document.querySelectorAll(".sw").forEach(function(b){b.onclick=function(){S.col=b.dataset.c;$("col").value=S.col;render()}});
 ["bn","ba","sgnb","sglb"].forEach(function(k){$(k).onchange=function(){S[k]=this.checked;render()}});
@@ -368,12 +382,12 @@ $("rcsv").onclick=function(){var m=$("rmn").value,c=function(v){return'"'+String
  var l=["No,Type,Client,Date,Total,Paid,Status"].concat(DOCS.filter(function(d){return(d.date||"").slice(0,7)===m}).map(function(d){return[d.no,d.type,d.name,d.date,d.total,d.paid,d.status].map(c).join(",")}));
  dl("Report_"+m+".csv",new Blob(["\ufeff"+l.join("\n")],{type:"text/csv"}))};
 function stf(){$("sbk").value=ST.bank;$("sup").value=ST.upi;$("sun").value=ST.upn}
-function saveSettings(){if(!db)return;db.collection("settings").doc("main").set({bank:ST.bank,upi:ST.upi,upn:ST.upn,bg:BG,sg:SG}).catch(function(x){alert("Could not save settings (letterhead may be too large): "+x.message)})}
+function saveSettings(){if(!db)return;db.collection("settings").doc("main").set({bank:ST.bank,upi:ST.upi,upn:ST.upn,bg:BG,sg:SG,sl:SL}).catch(function(x){alert("Could not save settings (letterhead may be too large): "+x.message)})}
 $("ssv").onclick=function(){ST={bank:$("sbk").value,upi:$("sup").value.trim(),upn:$("sun").value.trim()};saveSettings();alert("Saved.")};
 function start(){
  db.collection("docs").orderBy("upd","desc").onSnapshot(function(s){DOCS=s.docs.map(function(d){var o=d.data();o.id=d.id;return o});if(!$("v-home").hidden)home();if(!$("v-reports").hidden)rep()},function(x){alert(x.message)});
  db.collection("clients").orderBy("name").onSnapshot(function(s){CL=s.docs.map(function(d){var o=d.data();o.id=d.id;return o});pick();clist()});
- db.collection("settings").doc("main").get().then(function(s){if(s.exists){var d=s.data();ST={bank:d.bank||"",upi:d.upi||"",upn:d.upn||""};if(d.bg)BG=d.bg;if(d.sg)SG=d.sg;lhs()}}).then(function(){go("home")})}
+ db.collection("settings").doc("main").get().then(function(s){if(s.exists){var d=s.data();ST={bank:d.bank||"",upi:d.upi||"",upn:d.upn||""};if(d.bg)BG=d.bg;if(d.sg)SG=d.sg;if(d.sl)SL=d.sl;lhs();sls()}}).then(function(){go("home")})}
 var okcfg=FB.apiKey.indexOf("PASTE")<0;
 function until(){return+localStorage.getItem("sa-until")||0}
 if(!okcfg){$("v-login").hidden=false;$("lerr").textContent="Firebase is not set up yet. Paste your Firebase config at the top of this file."}
