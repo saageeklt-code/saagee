@@ -113,17 +113,20 @@ nav button.ac{border-color:var(--or)}
 <script>var FB={apiKey:"AIzaSyDW4TMcBFkj_UM14AY3RIcd6rm8T5PavcM",authDomain:"saagee-ads.firebaseapp.com",projectId:"saagee-ads",appId:"1:746691295087:web:e0151dd5fe4ee6a536da9a"};</script>
 <div id="v-login" hidden><div class="lg-hero"><div class="lg-brand">Saagee <i>Ads</i></div><p>Quotations, estimates and invoices – professional, branded and ready in minutes.</p></div>
 <div class="lg-card"><h2>Welcome back</h2><small>Sign in to continue</small>
-<form id="lf"><label for="lem">Email</label><input id="lem" type="email" autocomplete="username" required><label for="lpw">Password</label><input id="lpw" type="password" autocomplete="current-password" required>
+<form id="lf"><input id="lnm" placeholder="Your name" hidden style="margin-bottom:8px"><label for="lem">Email</label><input id="lem" type="email" autocomplete="username" required><label for="lpw">Password</label><input id="lpw" type="password" autocomplete="current-password" required>
 <label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px"><input type="checkbox" id="lrm" style="width:auto"> Keep me signed in for today</label>
-<div class="acts"><button class="pri" type="submit" style="width:100%;padding:10px">Login</button></div></form><div id="lerr"></div></div></div>
-<nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients">Clients</button><button data-v="reports">Reports</button><button data-v="settings">Settings</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button><button id="lo">Logout</button></nav>
+<div class="acts"><button class="pri" id="lgb" type="submit" style="width:100%;padding:10px">Login</button></div></form><div class="acts"><button id="lsw" type="button" class="lk">New worker? Create account</button></div><div id="lerr"></div></div></div>
+<style>body.w .adm,body.w .adm-only,body.w #hc,body.w #ht,body.w #status,body.w label[for=status],body.w #dtype,body.w label[for=dtype],body.w #pf,body.w #cv,body.w #sc,body.w [data-a=del],body.w [data-a=rem],body.w [data-a=rest],body.w [data-a=purge]{display:none!important}</style>
+<div id="v-wait" hidden><div style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px"><div><h2>Waiting for admin approval</h2><p id="wm"></p><button id="wlo">Logout</button></div></div></div>
+<nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients">Clients</button><button data-v="reports">Reports</button><button data-v="settings">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button><button id="lo">Logout</button></nav>
 <div id="v-home" class="pg" hidden><div class="cards" id="hc"></div>
 <div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
-<div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th>Due</th><th class="r">Amount</th><th>Status</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
+<div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th class="adm">Due</th><th class="adm r">Amount</th><th class="adm">Status</th><th class="adm">By</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
 <div id="v-clients" class="pg" hidden><fieldset><legend>Client</legend><div class="r2"><div><label for="cn">Name</label><input id="cn"></div><div><label for="cp">Phone</label><input id="cp"></div></div><label for="ca">Address</label><textarea id="ca"></textarea><div class="acts"><button class="pri" id="cs">Save client</button><button id="cc">Clear</button></div></fieldset>
 <div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th></th></tr></thead><tbody id="cb"></tbody></table></div><div id="cst"></div></div>
 <div id="v-reports" class="pg" hidden><div class="acts" style="margin:0 0 10px"><input id="rmn" type="month" style="width:auto"><button id="rcsv">Download CSV</button></div><div id="rp"></div></div>
 <div id="v-settings" class="pg" hidden><fieldset><legend>Bank &amp; UPI</legend><label for="sbk">Bank details</label><textarea id="sbk" placeholder="Account name, number, IFSC, bank"></textarea><div class="r2"><div><label for="sup">UPI ID</label><input id="sup" placeholder="name@bank"></div><div><label for="sun">UPI payee name</label><input id="sun"></div></div><label for="sgs">Your GSTIN (optional, shown on documents)</label><input id="sgs" placeholder="e.g. 33ABCDE1234F1Z5"><div class="acts"><button class="pri" id="ssv">Save settings</button></div><small>Letterhead, signature and company seal are uploaded inside the editor and saved to your account automatically.</small></fieldset><fieldset><legend>Saved items (catalogue)</legend><div class="tw"><table class="tb"><tbody id="cat"></tbody></table></div></fieldset></div>
+<div id="v-team" class="pg" hidden><div id="tmw"></div></div>
 <div id="toast" hidden></div>
 <div class="app" id="v-ed" hidden>
 <aside>
@@ -138,8 +141,9 @@ nav button.ac{border-color:var(--or)}
   <div class="acts"><button id="lhb">Upload letterhead (image or old editor .html)</button></div>
   <input type="file" id="lhf" accept="image/*,.html,.htm" hidden>
  </fieldset>
- <fieldset><legend>Quote details</legend>
-  <div class="r2"><div><label for="no">Quote No</label><input id="no"></div><div><label for="date">Date</label><input id="date" type="date"></div></div><div class="r2"><div><label for="due" id="duel">Valid till</label><input id="due" type="date"></div><div><label for="cgst">Client GSTIN</label><input id="cgst"></div></div>
+ <fieldset><legend id="qdl">Quote details</legend>
+  <div class="r2"><div><label for="no" id="nol">Quote No</label><input id="no"></div><div><label for="date">Date</label><input id="date" type="date"></div></div><div class="r2"><div><label for="due" id="duel">Valid till</label><input id="due" type="date"></div><div><label for="cgst">Client GSTIN</label><input id="cgst"></div></div>
+  <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="vt" style="width:auto"> Show this date on the document</label>
   <label for="name">Client name</label><input id="name" placeholder="Client name">
   <label for="addr">Client address</label><textarea id="addr" placeholder="Address"></textarea>
   <label for="phone">Client phone (for WhatsApp)</label><input id="phone" placeholder="10-digit number"><div class="acts"><button id="sc">Save to clients</button></div>
@@ -224,7 +228,7 @@ function addDays(i,n){var d=new Date(i+"T00:00:00");d.setDate(d.getDate()+n);ret
 function tlist(){return S.tpos==="0"?[]:S.terms.filter(function(t){return t.on&&t.t.trim()}).map(function(t){return t.t})}
 function termsHTML(){var l=tlist();return l.length?'<div class="terms"><p><b>Terms &amp; Conditions</b></p>'+l.map(function(t,i){return"<p>"+(i+1)+". "+bold(t)+"</p>"}).join("")+"</div>":""}
 function sigHTML(){return'<div style="margin-top:1.5em;text-align:'+(S.sgp||"right")+'"><div style="display:inline-block;text-align:center;min-width:14em"><div style="height:'+nm(S.sgh||20)+'mm">'+(SG?'<img alt="" src="'+SG+'" style="height:100%;max-width:60mm">':"")+'</div><div style="border-top:1px solid #222;padding-top:.2em;font-size:'+nm(S.sgls||10)+'pt;font-weight:'+(S.sglb?700:400)+'">'+e(S.sgl||"Authorized Signature")+'</div>'+(S.sgn?'<div style="font-size:'+nm(S.sgns||11)+'pt;font-weight:'+(S.sgnb!==false?700:400)+'">'+e(S.sgn)+'</div>':"")+(S.sgt?'<div style="font-size:'+nm(S.sgls||10)+'pt">'+e(S.sgt)+'</div>':"")+(SL?'<div style="margin-top:2mm"><img alt="Company seal" src="'+SL+'" style="height:'+nm(S.slh||25)+'mm;max-width:60mm"></div>':"")+'</div></div>'}
-function headHTML(){return"<h1>"+TT[S.type||"quotation"]+"</h1><div class='meta'><div><b>To:</b><br><span style='font-weight:"+(S.bn?700:400)+"'>"+e(S.name)+"</span><br><span style='font-weight:"+(S.ba?700:400)+"'>"+e(S.addr).replace(/\n/g,"<br>")+"</span>"+(S.cgst?"<br>GSTIN: "+e(S.cgst):"")+"</div><div style='text-align:right'><b>"+NL()+"</b> "+e(S.no)+"<br><b>Date:</b> "+fd(S.date)+(S.due?"<br><b>"+DL()+":</b> "+fd(S.due):"")+(ST.gstin?"<br><b>GSTIN:</b> "+e(ST.gstin):"")+"</div></div>"}
+function headHTML(){return"<h1>"+TT[S.type||"quotation"]+"</h1><div class='meta'><div><b>To:</b><br><span style='font-weight:"+(S.bn?700:400)+"'>"+e(S.name)+"</span><br><span style='font-weight:"+(S.ba?700:400)+"'>"+e(S.addr).replace(/\n/g,"<br>")+"</span>"+(S.cgst?"<br>GSTIN: "+e(S.cgst):"")+"</div><div style='text-align:right'><b>"+NL()+"</b> "+e(S.no)+"<br><b>Date:</b> "+fd(S.date)+(S.due&&S.vt!==false?"<br><b>"+DL()+":</b> "+fd(S.due):"")+(ST.gstin?"<br><b>GSTIN:</b> "+e(ST.gstin):"")+"</div></div>"}
 function thHTML(){return"<table><thead><tr><th class='s'>#</th><th>Item &amp; Description</th><th class='q'>Qty</th><th class='n'>Rate</th><th class='n'>Amount</th></tr></thead><tbody></tbody></table>"}
 function rowsHTML(c){return c.rows.map(function(x,i){return"<tr><td class='s'>"+(i+1)+"</td><td>"+e(x.d).replace(/\n/g,"<br>")+(x.s.trim()?"<div class='sub'>"+e(x.s.trim()).replace(/\n/g,"<br>")+"</div>":"")+"</td><td class='q'>"+x.q+"</td><td class='n'>"+fmt(x.r)+"</td><td class='n'>"+fmt(x.a)+"</td></tr>"})}
 function tailHTML(c){return"<div><table class='tot'><tr><td>Sub Total</td><td class='n'>"+fmt(c.sum)+"</td></tr>"+(c.d?"<tr><td>"+discLabel()+"</td><td class='n'>"+fmt(c.d)+"</td></tr>":"")+taxRows(c).map(function(x){return"<tr><td>"+x[0]+"</td><td class='n'>"+fmt(x[1])+"</td></tr>"}).join("")+"<tr class='gt'><td>Total</td><td class='n'>₹"+fmt(c.tot)+"</td></tr>"+payRows(c)+"</table><div class='w'>"+words(c.tot)+"</div>"+(S.notes.trim()?"<p class='note'><b>Notes:</b> "+e(S.notes).replace(/\n/g,"<br>")+"</p>":"")+bankHTML(c)+"</div>"}
@@ -272,7 +276,7 @@ function setSL(u){SL=u;store(KL,u);sls();render();saveSettings()}
 $("slb").onclick=function(){$("slf").click()};
 $("slf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){shrink(r.result,500,setSL)};r.readAsDataURL(f);this.value=""};
 $("sld").onclick=function(){setSL("")};
-function sync(){FL.forEach(function(k){$(k).value=S[k]==null?"":S[k]});$("tpos").value=S.tpos;$("sgp").value=S.sgp||"right";$("bn").checked=S.bn!==false;$("dtype").value=S.type||"quotation";fillStatus();$("sb").checked=!!S.sb;$("ba").checked=S.ba!==false;$("sgnb").checked=S.sgnb!==false;$("sglb").checked=!!S.sglb;il();tl();plist();lhs();sls();ipick();render()}
+function sync(){FL.forEach(function(k){$(k).value=S[k]==null?"":S[k]});$("tpos").value=S.tpos;$("sgp").value=S.sgp||"right";$("bn").checked=S.bn!==false;$("dtype").value=S.type||"quotation";fillStatus();$("sb").checked=!!S.sb;$("vt").checked=S.vt!==false;$("ba").checked=S.ba!==false;$("sgnb").checked=S.sgnb!==false;$("sglb").checked=!!S.sglb;il();tl();plist();lhs();sls();ipick();render()}
 /* backup */
 function dl(name,blob){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},5000)}
 $("bk").onclick=function(){dl("Saagee_Backup_"+new Date().toISOString().slice(0,10)+".json",new Blob([JSON.stringify({v:1,S:S,BG:BG,SG:SG,SL:SL})],{type:"application/json"}))};
@@ -304,7 +308,7 @@ $("xw").onclick=function(){busy("xw",async function(){var D=window.docx;if(!D)th
  function cell(t,w,o){o=o||{};return new D.TableCell({width:{size:w,type:D.WidthType.DXA},borders:o.bd||NB,shading:o.f?{type:D.ShadingType.CLEAR,fill:o.f,color:"auto"}:undefined,margins:{top:60,bottom:60,left:80,right:80},children:[new D.Paragraph({alignment:o.a,children:[T(t,o)]})].concat((o.sub||[]).map(function(l){return new D.Paragraph({children:[T(l,{s:19,c:hx(S.subc)})]})}))})}
  function P(o){K.push(new D.Paragraph(o))}
  P({alignment:C,spacing:{after:200},children:[T(TT[S.type||"quotation"],{s:44,c:RED})]});
- var Ll=["To:",S.name].concat(S.addr.split("\n")).concat(S.cgst?["GSTIN: "+S.cgst]:[]),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)].concat(S.due?[DL()+": "+fd(S.due)]:[]).concat(ST.gstin?["GSTIN: "+ST.gstin]:[]);
+ var Ll=["To:",S.name].concat(S.addr.split("\n")).concat(S.cgst?["GSTIN: "+S.cgst]:[]),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)].concat(S.due&&S.vt!==false?[DL()+": "+fd(S.due)]:[]).concat(ST.gstin?["GSTIN: "+ST.gstin]:[]);
  for(var i=0;i<Math.max(Ll.length,Rl.length);i++)P({tabStops:[{type:D.TabStopType.RIGHT,position:tw}],children:[T(Ll[i]||"",{b:i===0||(i===1?S.bn:S.ba)}),T("\t"+(Rl[i]||""))]});
  P({children:[]});
  var cw=[700,4900,900,1800,1792],al=[C,L,R,R,R],rows=[new D.TableRow({tableHeader:true,children:["#","Item & Description","Qty","Rate","Amount"].map(function(h,i){return cell(h,cw[i],{f:RED,c:hx(onCol(S.col)),a:al[i],b:true})})})];
@@ -336,7 +340,7 @@ $("xx").onclick=function(){busy("xx",async function(){if(!window.ExcelJS)throw n
  var r=9;
  function txt(row,c1,c2,v,o){o=o||{};if(c2>c1)ws.mergeCells(row,c1,row,c2);var x=ws.getCell(row,c1);x.value=v;x.font={name:F,size:o.s||10,bold:!!o.b,italic:!!o.i,color:o.c?{argb:o.c}:undefined};x.alignment={horizontal:o.h||"left",vertical:"top",wrapText:true};return x}
  txt(r,1,5,TT[S.type||"quotation"],{s:20,b:true,h:"center",c:red});ws.getRow(r).height=30;r+=2;
- var Ll=["To:",S.name].concat(S.addr.split("\n")).concat(S.cgst?["GSTIN: "+S.cgst]:[]),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)].concat(S.due?[DL()+": "+fd(S.due)]:[]).concat(ST.gstin?["GSTIN: "+ST.gstin]:[]);
+ var Ll=["To:",S.name].concat(S.addr.split("\n")).concat(S.cgst?["GSTIN: "+S.cgst]:[]),Rl=[NL()+" "+S.no,"Date: "+fd(S.date)].concat(S.due&&S.vt!==false?[DL()+": "+fd(S.due)]:[]).concat(ST.gstin?["GSTIN: "+ST.gstin]:[]);
  for(var i=0;i<Math.max(Ll.length,Rl.length);i++){txt(r,1,3,Ll[i]||"",{b:i===0||(i===1?S.bn:S.ba)});txt(r,4,5,Rl[i]||"",{h:"right"});r++}r++;
  ["#","Item & Description","Qty","Rate","Amount"].forEach(function(h,i){var x=ws.getCell(r,i+1);x.value=h;x.font={name:F,size:10,bold:true,color:{argb:"FF"+hx(onCol(S.col))}};x.fill={type:"pattern",pattern:"solid",fgColor:{argb:red}};x.alignment={horizontal:i===1?"left":i?"right":"center"}});r++;
  var f=r;
@@ -370,7 +374,7 @@ document.querySelectorAll(".sw").forEach(function(b){b.onclick=function(){S.col=
 var cur={id:null},tm=0,DOCS=[],CL=[],ccur=null,ST={bank:"",upi:"",upn:"",gstin:""},CAT=[],LAST="",STM=null,tt=0,auth,db,
 TT={quotation:"QUOTATION",estimate:"ESTIMATE",bill:"INVOICE"},NLB={quotation:"Quote No:",estimate:"Estimate No:",bill:"Invoice No:"},
 STAT={quotation:["Draft","Sent","Accepted","Rejected"],estimate:["Draft","Sent","Accepted","Rejected"],bill:["Unpaid","Partial","Paid"]},
-PFX={quotation:"QTN-",estimate:"EST-",bill:"INV-"},VW=["home","clients","reports","settings","ed"];
+PFX={quotation:"QTN-",estimate:"EST-",bill:"INV-"},VW=["home","clients","reports","settings","team","ed"];
 function today(){return new Date().toISOString().slice(0,10)}
 function NL(){return NLB[S.type||"quotation"]}
 function paidAmt(){return(S.pay||[]).reduce(function(a,p){return a+nm(p.amt)},0)}
@@ -378,8 +382,9 @@ function payRows(c){var p=paidAmt();return S.type==="bill"&&p>0?"<tr><td>Paid</t
 function bankHTML(c){if(!S.sb||!(ST.bank||ST.upi))return"";var bal=S.type==="bill"?Math.max(c.tot-paidAmt(),0):c.tot,q="";
  if(ST.upi&&window.qrcode){var z=qrcode(0,"M");z.addData("upi://pay?pa="+ST.upi+"&pn="+encodeURIComponent(ST.upn||"")+(bal>0?"&am="+bal.toFixed(2):"")+"&cu=INR");z.make();q='<div style="text-align:center;font-size:.85em"><img alt="UPI QR" src="'+z.createDataURL(4,0)+'" style="width:26mm;height:26mm"><br>'+e(ST.upi)+"</div>"}
  return'<div style="display:flex;gap:1.2em;align-items:center;margin-top:.8em;font-size:.9em"><div style="flex:1">'+(ST.bank?"<b>Bank details</b><br>"+e(ST.bank).replace(/\n/g,"<br>"):"")+"</div>"+q+"</div>"}
-function fillStatus(){var o=STAT[S.type||"quotation"];$("status").innerHTML=o.map(function(x){return"<option>"+x+"</option>"}).join("");if(o.indexOf(S.status)<0)S.status=o[0];$("status").value=S.status;$("pf").hidden=S.type!=="bill";$("duel").textContent=DL()}
+function fillStatus(){var o=STAT[S.type||"quotation"];$("status").innerHTML=o.map(function(x){return"<option>"+x+"</option>"}).join("");if(o.indexOf(S.status)<0)S.status=o[0];$("status").value=S.status;$("pf").hidden=S.type!=="bill";$("duel").textContent=DL();$("nol").textContent=NL().replace(/:$/,"");$("qdl").textContent=({quotation:"Quote",estimate:"Estimate",bill:"Invoice"}[S.type||"quotation"])+" details"}
 function autoStatus(){if(S.type!=="bill")return;var p=paidAmt(),t=calc().tot,st=t>0&&p>=t?"Paid":p>0?"Partial":"Unpaid";S.status=st;$("status").value=st;$("pt").textContent="Paid ₹"+fmt(p)+" · Balance ₹"+fmt(Math.max(t-p,0))}
+$("vt").onchange=function(){S.vt=this.checked;render();save()};
 $("dtype").onchange=function(){S.type=this.value;S.status=STAT[S.type][0];fillStatus();render()};
 $("status").onchange=function(){S.status=this.value;save()};
 $("sb").onchange=function(){S.sb=this.checked;render()};
@@ -387,8 +392,8 @@ function plist(){$("pl").innerHTML=(S.pay||[]).map(function(p,i){return'<div cla
 $("pl").oninput=function(ev){var r=ev.target.closest("[data-i]");if(r&&ev.target.dataset.k){S.pay[r.dataset.i][ev.target.dataset.k]=ev.target.value;render()}};
 $("pl").onclick=function(ev){var b=ev.target.closest("[data-del]");if(b){S.pay.splice(b.dataset.del,1);plist();render()}};
 $("pa").onclick=function(){S.pay=S.pay||[];S.pay.push({date:today(),amt:Math.max(calc().tot-paidAmt(),0)});plist();render()};
-function go(v){$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();if(v==="home")home();if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist()}
-function out(){$("nav").hidden=true;VW.forEach(function(x){$("v-"+x).hidden=true});$("v-login").hidden=false}
+function go(v){if(ROLE!=="admin"&&v!=="home"&&v!=="ed")v="home";$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();if(v==="home")home();if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist();if(v==="team")team()}
+function out(){$("v-wait").hidden=true;$("nav").hidden=true;VW.forEach(function(x){$("v-"+x).hidden=true});$("v-login").hidden=false}
 document.querySelectorAll("nav [data-v]").forEach(function(b){b.onclick=function(){if(canLeave())go(b.dataset.v)}});
 document.querySelectorAll("nav [data-n]").forEach(function(b){b.onclick=function(){if(canLeave())newDoc(b.dataset.n)}});
 function canLeave(){if(!$("v-ed").hidden&&JSON.stringify(S)!==LAST){if(cur.id){clearTimeout(tm);saveDoc();return true}return confirm("This new document is not saved yet. Leave without saving?")}return true}
@@ -396,10 +401,12 @@ $("bh").onclick=function(){if(canLeave())go("home")};
 addEventListener("beforeunload",function(ev){if(!$("v-ed").hidden&&JSON.stringify(S)!==LAST){ev.preventDefault();ev.returnValue=""}});
 function toast(m,undo){var t=$("toast");t.innerHTML=e(m)+(undo?' <button id="tu">Undo</button>':"");t.hidden=false;clearTimeout(tt);if(undo)$("tu").onclick=function(){undo();t.hidden=true};tt=setTimeout(function(){t.hidden=true},undo?8000:2500)}
 function nextNo(t){var m=0;DOCS.forEach(function(d){if(d.type===t){var n=parseInt(String(d.no).replace(/\D+/g,""),10);if(n>m)m=n}});return PFX[t]+String(m+1).padStart(3,"0")}
-function newDoc(t){S=fresh();S.type=t;S.no=nextNo(t);S.status=STAT[t][0];S.sb=t==="bill";S.due=addDays(S.date,t==="bill"?7:15);cur={id:null};clearTimeout(tm);$("ss").textContent="";sync();go("ed");LAST=JSON.stringify(S)}
-function newFrom(t){S=Object.assign(fresh(),JSON.parse(JSON.stringify(S)));S.type=t;S.no=nextNo(t);S.date=today();S.due=addDays(S.date,t==="bill"?7:15);S.pay=[];S.status=STAT[t][0];if(t==="bill")S.sb=true;cur={id:null};clearTimeout(tm);sync();return saveDoc().then(function(){go("ed")})}
-function openDoc(id){var d=DOCS.filter(function(x){return x.id===id})[0];if(!d)return;S=Object.assign(fresh(),d.s);cur={id:id};clearTimeout(tm);$("ss").textContent="";sync();go("ed");LAST=JSON.stringify(S)}
-function saveDoc(){var snap=JSON.stringify(S),d={due:S.due||"",phone:S.phone||"",tax:calc().gs,del:false,type:S.type,no:S.no,name:S.name,date:S.date,total:calc().tot,paid:paidAmt(),status:S.status,upd:Date.now(),s:JSON.parse(JSON.stringify(S))},r=cur.id?db.collection("docs").doc(cur.id).set(d):db.collection("docs").add(d).then(function(x){cur.id=x.id});
+function reserveNo(t){var r=db.collection("counters").doc(t);return db.runTransaction(function(tx){return tx.get(r).then(function(x){if(!x.exists)throw new Error("counter missing");var n=(x.data().n||0)+1;tx.update(r,{n:n});return PFX[t]+String(n).padStart(3,"0")})})}
+function seedCounters(){if(ROLE!=="admin"||seeded)return;seeded=true;["quotation","estimate","bill"].forEach(function(t){var r=db.collection("counters").doc(t);r.get().then(function(x){if(!x.exists){var m=0;DOCS.forEach(function(d){if(d.type===t){var n=parseInt(String(d.no).replace(/\D+/g,""),10);if(n>m)m=n}});r.set({n:m})}})})}
+function newDoc(t){S=fresh();S.type=t;S.no="...";S.status=STAT[t][0];S.sb=t==="bill";S.due=addDays(S.date,t==="bill"?7:15);cur={id:null};clearTimeout(tm);$("ss").textContent="";sync();go("ed");LAST=JSON.stringify(S);reserveNo(t).then(function(n){S.no=n;$("no").value=n;render();LAST=JSON.stringify(S)}).catch(function(x){alert("Could not get a document number. Ask the admin to open the app once. "+x.message)})}
+function newFrom(t){return reserveNo(t).then(function(no){S=Object.assign(fresh(),JSON.parse(JSON.stringify(S)));S.type=t;S.no=no;S.date=today();S.due=addDays(S.date,t==="bill"?7:15);S.pay=[];S.status=STAT[t][0];if(t==="bill")S.sb=true;cur={id:null};clearTimeout(tm);sync();return saveDoc().then(function(){go("ed")})})}
+function openDoc(id){var d=DOCS.filter(function(x){return x.id===id})[0];if(!d)return;S=Object.assign(fresh(),d.s);cur={id:id,ed:true};clearTimeout(tm);$("ss").textContent="";go("ed");sync();LAST=JSON.stringify(S)}
+function saveDoc(){var snap=JSON.stringify(S),d={due:S.due||"",phone:S.phone||"",tax:calc().gs,del:false,type:S.type,no:S.no,name:S.name,date:S.date,total:calc().tot,paid:paidAmt(),status:S.status,upd:Date.now(),s:JSON.parse(JSON.stringify(S))};if(cur.id){if(cur.ed){d.editedAt=Date.now();d.editedBy=UNAME}}else{d.createdBy=UID;d.by=UNAME;d.created=Date.now()}var r=cur.id?db.collection("docs").doc(cur.id).update(d):db.collection("docs").add(d).then(function(x){cur.id=x.id});
  return r.then(function(){LAST=snap;$("ss").textContent="Saved ✓ "+new Date().toLocaleTimeString()}).catch(function(x){alert("Save failed: "+x.message)})}
 $("sv").onclick=function(){clearTimeout(tm);saveDoc()};
 $("cv").onclick=function(){var t={estimate:"quotation",quotation:"bill"}[S.type];if(!t){alert("A bill cannot be converted further.");return}if(confirm("Create a new "+t+" from this one?"))newFrom(t)};
@@ -413,6 +420,12 @@ function badge(d){var od=overdue(d),c=od?"bad":(d.status==="Paid"||d.status==="A
 function remind(d){var ph=(d.phone||"").replace(/\D/g,"");if(!ph){alert("No phone number saved for this client. Open the bill and add it.");return}if(ph.length===10)ph="91"+ph;
  var m="Hello "+(d.name||"")+", gentle reminder: invoice "+d.no+" from Saagee Ads has a pending balance of ₹"+fmt(Math.max(d.total-d.paid,0))+(d.due?" (due "+fd(d.due)+")":"")+". Kindly arrange the payment. Thank you!";
  window.open("https://wa.me/"+ph+"?text="+encodeURIComponent(m),"_blank")}
+function by(d){return e(d.by||"")+(d.editedAt?"<br><small>Edited "+new Date(d.editedAt).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})+(d.editedBy?" by "+e(d.editedBy):"")+"</small>":"")}
+function team(){var P=USERS.filter(function(u){return u.role==="pending"}),A=USERS.filter(function(u){return u.role!=="pending"});
+ function dt(u){return u.created?new Date(u.created).toLocaleDateString("en-IN"):""}
+ function tb(L,f,em){return'<div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Email</th><th>Since</th><th>Role</th><th></th></tr></thead><tbody>'+(L.length?L.map(function(u){return'<tr data-u="'+u.id+'"><td>'+e(u.name||"")+"</td><td>"+e(u.email||"")+"</td><td>"+dt(u)+"</td><td>"+e(u.role)+" · "+DOCS.filter(function(d){return d.createdBy===u.id}).length+" docs</td><td>"+f(u)+"</td></tr>"}).join(""):'<tr><td colspan="5">'+em+"</td></tr>")+"</tbody></table></div>"}
+ $("tmw").innerHTML='<fieldset><legend>Pending requests</legend>'+tb(P,function(){return'<button class="pri" data-r="worker">Approve</button> <button data-r="rejected">Reject</button>'},"No pending requests.")+'</fieldset><fieldset><legend>Team</legend>'+tb(A,function(u){if(u.id===UID)return"You";return u.role==="worker"?'<button data-r="disabled">Disable</button> <button data-r="admin">Make admin</button>':u.role==="admin"?'<button data-r="worker">Make worker</button>':'<button data-r="worker">Enable</button>'},"No team members yet.")+"</fieldset>"}
+$("tmw").onclick=function(ev){var b=ev.target.closest("[data-r]");if(!b)return;var id=b.closest("[data-u]").dataset.u;if(id===UID)return;if(b.dataset.r==="admin"&&!confirm("Give this person full admin access?"))return;db.collection("users").doc(id).update({role:b.dataset.r})};
 function home(){var q=$("hq").value.toLowerCase(),t=$("ht").value,m=today().slice(0,7),A=LIVE();
  function ms(ty){return A.filter(function(d){return d.type===ty&&(d.date||"").slice(0,7)===m}).reduce(function(a,d){return a+d.total},0)}
  var B=A.filter(function(d){return d.type==="bill"}),pend=B.reduce(function(a,d){return a+Math.max(d.total-d.paid,0)},0),od=A.filter(overdue).reduce(function(a,d){return a+d.total-d.paid},0);
@@ -420,7 +433,7 @@ function home(){var q=$("hq").value.toLowerCase(),t=$("ht").value,m=today().slic
  var tr=t==="trash",src=tr?DOCS.filter(function(d){return d.del}):A.filter(function(d){return!t||(t==="overdue"?overdue(d):d.type===t)});
  var L=src.filter(function(d){return!q||(d.no+" "+d.name).toLowerCase().indexOf(q)>=0});
  $("hb").innerHTML=L.length?L.map(function(d){var b=tr?'<button data-a="rest">Restore</button> <button data-a="purge">Delete forever</button>':'<button data-a="dup">Copy</button> '+(d.type==="bill"&&d.total-d.paid>0.005?'<button data-a="rem">Remind</button> ':"")+'<button data-a="del" aria-label="Delete">✕</button>';
-  return'<tr data-id="'+d.id+'"'+(tr?' data-trash="1"':"")+'><td>'+e(d.no)+"</td><td>"+d.type+"</td><td>"+e(d.name)+"</td><td>"+fd(d.date)+"</td><td>"+fd(d.due)+'</td><td class="r">₹'+fmt(d.total)+"</td><td>"+badge(d)+"</td><td>"+b+"</td></tr>"}).join(""):'<tr><td colspan="8">'+(tr?"Trash is empty.":"No documents here yet. Use + Quotation, + Estimate or + Bill above.")+"</td></tr>"}
+  return'<tr data-id="'+d.id+'"'+(tr?' data-trash="1"':"")+'><td>'+e(d.no)+"</td><td>"+d.type+"</td><td>"+e(d.name)+"</td><td>"+fd(d.date)+"</td><td class=\"adm\">"+fd(d.due)+'</td><td class="adm r">₹'+fmt(d.total)+"</td><td class=\"adm\">"+badge(d)+"</td><td class=\"adm\">"+by(d)+"</td><td>"+b+"</td></tr>"}).join(""):'<tr><td colspan="9">'+(tr?"Trash is empty.":"No documents here yet. Use + Quotation, + Estimate or + Bill above.")+"</td></tr>"}
 $("hq").oninput=$("ht").onchange=home;
 $("hb").onclick=function(ev){var r=ev.target.closest("[data-id]");if(!r)return;var a=ev.target.dataset.a,id=r.dataset.id,d=DOCS.filter(function(x){return x.id===id})[0],ref=db.collection("docs").doc(id);if(!d)return;
  if(a==="del")ref.update({del:true,delAt:Date.now()}).then(function(){toast("Moved to Trash",function(){ref.update({del:false})})});
@@ -460,21 +473,32 @@ $("ipick").onchange=function(){var c=CAT[this.value];if(!c)return;var it={d:c.d,
 function catl(){$("cat").innerHTML=CAT.map(function(c,i){return"<tr><td>"+e(c.d)+'</td><td class="r">'+(nm(c.r)?"₹"+fmt(nm(c.r)):"")+'</td><td><button data-del="'+i+'" aria-label="Delete">✕</button></td></tr>'}).join("")||'<tr><td>No saved items yet. Use "★ Save to catalogue" under any item in the editor.</td></tr>'}
 $("cat").onclick=function(ev){var b=ev.target.closest("[data-del]");if(!b)return;CAT.splice(b.dataset.del,1);saveSettings();catl();ipick()};
 function stf(){$("sbk").value=ST.bank;$("sup").value=ST.upi;$("sun").value=ST.upn;$("sgs").value=ST.gstin||"";catl()}
-function saveSettings(){if(!db)return;db.collection("settings").doc("main").set({bank:ST.bank,upi:ST.upi,upn:ST.upn,gstin:ST.gstin||"",cat:CAT,bg:BG,sg:SG,sl:SL}).catch(function(x){alert("Could not save settings (letterhead may be too large): "+x.message)})}
+function saveSettings(){if(!db||ROLE!=="admin")return;db.collection("settings").doc("main").set({bank:ST.bank,upi:ST.upi,upn:ST.upn,gstin:ST.gstin||"",cat:CAT,bg:BG,sg:SG,sl:SL}).catch(function(x){alert("Could not save settings (letterhead may be too large): "+x.message)})}
 $("ssv").onclick=function(){ST={bank:$("sbk").value,upi:$("sup").value.trim(),upn:$("sun").value.trim(),gstin:$("sgs").value.trim()};saveSettings();alert("Saved.")};
-function start(){
- db.collection("docs").orderBy("upd","desc").onSnapshot(function(s){DOCS=s.docs.map(function(d){var o=d.data();o.id=d.id;return o});if(!$("v-home").hidden)home();if(!$("v-reports").hidden)rep()},function(x){alert(x.message)});
+var ROLE="",UID="",UNAME="",STARTED=false,USERS=[],seeded=false;
+function start(){if(ROLE==="admin")db.collection("users").onSnapshot(function(q){USERS=q.docs.map(function(d){var o=d.data();o.id=d.id;return o});var p=USERS.filter(function(u){return u.role==="pending"}).length;$("tmb").textContent="Team"+(p?" ("+p+")":"");if(!$("v-team").hidden)team()});
+ (ROLE==="admin"?db.collection("docs").orderBy("upd","desc"):db.collection("docs").where("createdBy","==",UID)).onSnapshot(function(s){DOCS=s.docs.map(function(d){var o=d.data();o.id=d.id;return o}).sort(function(a,b){return(b.upd||0)-(a.upd||0)});seedCounters();if(!$("v-home").hidden)home();if(!$("v-reports").hidden)rep()},function(x){alert(x.message)});
  db.collection("clients").orderBy("name").onSnapshot(function(s){CL=s.docs.map(function(d){var o=d.data();o.id=d.id;return o});pick();clist()});
  db.collection("settings").doc("main").get().then(function(s){if(s.exists){var d=s.data();ST={bank:d.bank||"",upi:d.upi||"",upn:d.upn||"",gstin:d.gstin||""};CAT=d.cat||[];if("bg"in d){BG=d.bg||"";store(KB,BG)}if("sg"in d){SG=d.sg||"";store(KS,SG)}if("sl"in d){SL=d.sl||"";store(KL,SL)}lhs();sls();ipick();render();if((!("bg"in d)&&BG)||(!("sg"in d)&&SG)||(!("sl"in d)&&SL))saveSettings()}else saveSettings()}).then(function(){go("home")})}
 var okcfg=FB.apiKey.indexOf("PASTE")<0;
 function until(){return+localStorage.getItem("sa-until")||0}
 if(!okcfg){$("v-login").hidden=false;$("lerr").textContent="Firebase is not set up yet. Paste your Firebase config at the top of this file."}
 else{firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();
- auth.onAuthStateChanged(function(u){if(u&&until()&&Date.now()>until()){auth.signOut();return}if(u){$("v-login").hidden=true;start()}else out()});
+function route(u){UID=u.uid;var ref=db.collection("users").doc(u.uid),first=true;
+ ref.get().then(function(x){return x.exists?x:ref.set({name:window.SNAME||u.displayName||u.email,email:u.email,role:"pending",created:Date.now()})}).then(function(){
+  ref.onSnapshot(function(x){var d=x.data()||{},r=d.role||"pending";UNAME=d.name||u.email;
+   if(!first&&r!==ROLE){location.reload();return}
+   first=false;ROLE=r;
+   if(r==="admin"||r==="worker"){$("v-wait").hidden=true;$("v-login").hidden=true;document.body.classList.toggle("w",r!=="admin");if(r!=="admin")document.querySelector('nav [data-v="home"]').textContent="My documents";if(!STARTED){STARTED=true;start()}}
+   else{$("nav").hidden=true;VW.forEach(function(k){$("v-"+k).hidden=true});$("v-login").hidden=true;$("wm").textContent=r==="pending"?"Your account is created. Please wait until the admin approves it.":"This account has no access. Please contact the admin.";$("v-wait").hidden=false}})
+ }).catch(function(x){$("v-login").hidden=false;$("lerr").textContent="Could not check your account: "+x.message})}
+ auth.onAuthStateChanged(function(u){if(u&&until()&&Date.now()>until()){auth.signOut();return}if(u)route(u);else out()});
  setInterval(function(){if(auth.currentUser&&until()&&Date.now()>until())auth.signOut().then(function(){location.reload()})},60000)}
 $("lf").onsubmit=async function(ev){ev.preventDefault();if(!okcfg)return;var r=$("lrm").checked,eb=$("lerr");eb.textContent="";
- try{await auth.setPersistence(r?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION);var d=new Date();d.setHours(23,59,59,999);localStorage.setItem("sa-until",r?d.getTime():0);await auth.signInWithEmailAndPassword($("lem").value.trim(),$("lpw").value)}
- catch(x){eb.textContent="Login failed. Check email and password."}};
+ try{await auth.setPersistence(r?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION);var d=new Date();d.setHours(23,59,59,999);localStorage.setItem("sa-until",r?d.getTime():0);(SIGNUP?(window.SNAME=$("lnm").value.trim(),await auth.createUserWithEmailAndPassword($("lem").value.trim(),$("lpw").value)):await auth.signInWithEmailAndPassword($("lem").value.trim(),$("lpw").value))}
+ catch(x){eb.textContent=SIGNUP?"Could not create account: "+x.message:"Login failed. Check email and password."}};
+var SIGNUP=false;$("lsw").onclick=function(){SIGNUP=!SIGNUP;$("lnm").hidden=!SIGNUP;$("lnm").required=SIGNUP;$("lgb").textContent=SIGNUP?"Create account":"Login";this.textContent=SIGNUP?"Have an account? Login":"New worker? Create account"};
+$("wlo").onclick=function(){auth.signOut().then(function(){location.reload()})};
 $("lo").onclick=function(){auth.signOut().then(function(){location.reload()})};
 sync();
 </script>
