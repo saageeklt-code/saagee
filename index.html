@@ -125,17 +125,18 @@ nav button.ac{border-color:var(--or)}
 .sheet.gst .w{border:1.5px solid var(--th);padding:.4em .6em;margin-top:-1.5px}
 .tw{overflow-x:auto}#pvb{display:none}
 @media(max-width:900px){
- nav{padding:0 8px;gap:4px;-webkit-overflow-scrolling:touch}nav b.brand{font-size:16px;margin-right:6px}nav button{padding:6px 10px;font-size:13px;flex:0 0 auto}
- .pg{padding:10px}main{padding:10px 0 70px}.cards{grid-template-columns:1fr 1fr}aside{padding:10px}
- #pvb:not([hidden]){display:block;position:fixed;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--br,#a30f5e);color:#fff;border:0;border-radius:24px;padding:11px 18px;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+ .pg input[placeholder^="Search"]{width:100%;min-width:0}nav::-webkit-scrollbar{display:none}nav{scrollbar-width:none}nav{padding:0 8px;gap:4px;-webkit-overflow-scrolling:touch}nav b.brand{font-size:16px;margin-right:6px}nav button{padding:6px 10px;font-size:13px;flex:0 0 auto}
+ .pg{padding:10px}main{padding:10px 0 80px}aside{padding-bottom:80px}.cards{grid-template-columns:1fr 1fr}aside{padding:10px}
+ #pvb:not([hidden]){display:block;position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--br,#a30f5e);color:#fff;border:0;border-radius:24px;padding:11px 18px;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 }
 html.dark{filter:invert(1) hue-rotate(180deg)}html.dark .sheet,html.dark img{filter:invert(1) hue-rotate(180deg)}
-body.w .adm,body.w .adm-only,body.w #hc,body.w #ht,body.w #status,body.w label[for=status],body.w #dtype,body.w label[for=dtype],body.w #pf,body.w #cv,body.w #sc,body.w [data-a=del],body.w [data-a=rem],body.w [data-a=rest],body.w [data-a=purge]{display:none!important}</style>
+body.wku .adm,body.wku .adm-only,body.wku #hc,body.wku #ht,body.wku #status,body.wku label[for=status],body.wku #dtype,body.wku label[for=dtype],body.wku #pf,body.wku #cv,body.wku #sc,body.wku [data-a=del],body.wku [data-a=rem],body.wku [data-a=rest],body.wku [data-a=purge]{display:none!important}</style>
 <div id="v-wait" hidden><div style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px"><div><h2>Waiting for admin approval</h2><p id="wm"></p><button id="wlo">Logout</button></div></div></div>
 <button id="pvb" hidden>Preview ↓</button>
-<nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><button data-v="tasks">Tasks</button><button data-v="sal" class="adm-only">Salary</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button><button id="dk" title="Dark mode">🌙</button><button id="lo">Logout</button></nav>
+<nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><button data-v="tasks">Tasks</button><button data-v="sal" class="adm-only">Salary</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button>
+<button class="ac" data-n="gst">+ GST Invoice</button><button id="dk" title="Dark mode">🌙</button><button id="lo">Logout</button></nav>
 <div id="v-home" class="pg" hidden><div id="att"></div><div id="dlb"></div><div class="cards" id="hc"></div>
-<div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
+<div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="gst">GST Invoices</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
 <div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th class="adm">Due</th><th class="adm r">Amount</th><th class="adm">Status</th><th class="adm">By</th><th>Work / Delivery</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
 <div id="v-clients" class="pg" hidden><fieldset><legend>Client</legend><div class="r2"><div><label for="cn">Name</label><input id="cn"></div><div><label for="cp">Phone</label><input id="cp"></div></div><label for="ca">Address</label><textarea id="ca"></textarea><div class="acts"><button class="pri" id="cs">Save client</button><button id="cc">Clear</button></div></fieldset>
 <div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th></th></tr></thead><tbody id="cb"></tbody></table></div><div id="cst"></div></div>
@@ -151,8 +152,7 @@ body.w .adm,body.w .adm-only,body.w #hc,body.w #ht,body.w #status,body.w label[f
 <aside>
  <button id="bh">← Home</button>
  <fieldset><legend>Document</legend>
-  <div class="r2"><div><label for="dtype">Type</label><select id="dtype"><option value="quotation">Quotation</option><option value="estimate">Estimate</option><option value="bill">Bill</option></select></div><div><label for="status">Status</label><select id="status"></select></div></div>
-  <div class="r2"><div><label for="tpl">Template</label><select id="tpl"><option value="">Default</option><option value="gst">GST Invoice (lines)</option></select></div><div></div></div>
+  <div class="r2"><div><label for="dtype">Type</label><select id="dtype"><option value="quotation">Quotation</option><option value="estimate">Estimate</option><option value="bill">Bill</option><option value="gst">GST Invoice</option></select></div><div><label for="status">Status</label><select id="status"></select></div></div>
   <label for="cpick">Saved clients</label><select id="cpick"></select>
   <div class="acts"><button class="pri" id="sv">Save</button><button id="cv">Convert</button><button id="wa">WhatsApp</button></div><small id="ss"></small>
  </fieldset>
@@ -240,10 +240,10 @@ function tint(h){var n=parseInt(h.slice(1),16);return"#"+[n>>16,n>>8&255,n&255].
 function hx(h){return h.slice(1).toUpperCase()}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(x){}if(cur.id&&JSON.stringify(S)!==LAST){clearTimeout(tm);tm=setTimeout(saveDoc,1500)}}
 function bold(t){return e(t).replace(/^([^:]{1,45}:)/,"<b>$1</b>")}
-function calc(){var sum=0,rows=S.items.map(function(it){var a=nm(it.q)*nm(it.r);sum+=a;var hs=String(it.h||"").trim();return{d:it.d,s:((it.s||"")+(hs?"\nHSN/SAC: "+hs:"")).replace(/^\n/,""),q:nm(it.q),r:nm(it.r),a:a}}),d=S.dt==="pct"?sum*Math.min(nm(S.disc),100)/100:nm(S.disc),g=nm(S.gst),gs=Math.max(sum-d,0)*g/100;return{rows:rows,sum:sum,d:d,g:g,gs:gs,tot:S.tpl==="gst"?Math.round(Math.max(sum-d,0)+gs):Math.max(sum-d,0)+gs,raw:Math.max(sum-d,0)+gs}}
+function calc(){var sum=0,rows=S.items.map(function(it){var a=nm(it.am)>0?nm(it.am):nm(it.q)*nm(it.r);sum+=a;var hs=String(it.h||"").trim();return{d:it.d,s:((it.s||"")+(hs?"\nHSN/SAC: "+hs:"")).replace(/^\n/,""),q:nm(it.q),r:nm(it.r),a:a}}),d=S.dt==="pct"?sum*Math.min(nm(S.disc),100)/100:nm(S.disc),g=nm(S.gst),gs=Math.max(sum-d,0)*g/100;return{rows:rows,sum:sum,d:d,g:g,gs:gs,tot:S.type==="gst"?Math.round(Math.max(sum-d,0)+gs):Math.max(sum-d,0)+gs,raw:Math.max(sum-d,0)+gs}}
 function taxRows(c){var g=c.g;if(!g)return[];if(S.gm==="cs")return[["CGST "+g/2+"%",c.gs/2],["SGST "+g/2+"%",c.gs/2]];if(S.gm==="ig")return[["IGST "+g+"%",c.gs]];return[["GST "+g+"%",c.gs]]}
 function discLabel(){return"Discount"+(S.dt==="pct"?" ("+nm(S.disc)+"%)":" (₹)")}
-function DL(){return S.type==="bill"?"Due date":"Valid till"}
+function DL(){return isInv(S.type)?"Due date":"Valid till"}
 function onCol(h){var n=parseInt(h.slice(1),16),l=(0.299*(n>>16)+0.587*(n>>8&255)+0.114*(n&255))/255;return l>0.62?"#222222":"#ffffff"}
 function addDays(i,n){var d=new Date(i+"T00:00:00");d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function tlist(){return S.tpos==="0"?[]:S.terms.filter(function(t){return t.on&&t.t.trim()}).map(function(t){return t.t})}
@@ -256,6 +256,7 @@ function tailHTML(c){return"<div><table class='tot'><tr><td>Sub Total</td><td cl
 function sheet(h){var s=document.createElement("div");s.className="sheet"+(S.tpl==="gst"?" gst":"");s.style.cssText="--th:"+S.col+";--tt:"+onCol(S.col)+";--tl:"+tint(S.col)+";--sc:"+S.subc+";--ff:'"+S.font+"','Nirmala UI','Noto Sans Tamil',Arial,sans-serif;";s.innerHTML=(BG?'<img alt="" src="'+BG+'">':"")+'<div class="body">'+h+"</div>";return s}
 function fit(s){var b=s.querySelector(".body"),f=Math.min(16,Math.max(7,nm(S.fsz)||11));b.style.fontSize=f+"pt";while(b.scrollHeight>b.clientHeight+1&&f>6){f-=.25;b.style.fontSize=f+"pt"}return b.scrollHeight>b.clientHeight+1}
 function render(){var P=$("pages"),c=calc(),f0=Math.min(16,Math.max(7,nm(S.fsz)||11)),nt=tlist().length,min=S.tpos==="2"&&nt?2:1,bad=false;
+ if(S.type==="gst"){P.innerHTML="";var gs=sheet(gstHTML(c));P.appendChild(gs);$("wn").style.display=ov(gs)?"block":"none";zoom();autoStatus();save();return}
  function ov(x){var b=x.querySelector(".body");return b.scrollHeight>b.clientHeight+1}
  function build(f){var s,tb;P.innerHTML="";
   function ns(h){var x=sheet(h);x.querySelector(".body").style.fontSize=f+"pt";P.appendChild(x);return x}
@@ -270,10 +271,10 @@ function render(){var P=$("pages"),c=calc(),f0=Math.min(16,Math.max(7,nm(S.fsz)|
  $("wn").style.display=bad?"block":"none";zoom();autoStatus();save()}
 function zoom(){var w=$("pages").parentNode.clientWidth;if(w>100)$("pages").style.zoom=Math.min(1,(w-16)/794)}
 addEventListener("resize",zoom);
-var FL=["no","date","name","addr","disc","gst","notes","sgh","col","subc","font","fsz","sgn","sgt","sgl","sgns","sgls","slh","phone","due","cgst","dt","gm","wk","dlv","tpl"];
+var FL=["no","date","name","addr","disc","gst","notes","sgh","col","subc","font","fsz","sgn","sgt","sgl","sgns","sgls","slh","phone","due","cgst","dt","gm","wk","dlv"];
 FL.forEach(function(k){$(k).oninput=function(){S[k]=this.value;render()}});
 $("tpos").onchange=function(){S.tpos=this.value;render()};$("sgp").onchange=function(){S.sgp=this.value;render()};
-function il(){$("il").innerHTML=S.items.map(function(it,i){return'<div class="it" data-i="'+i+'"><textarea data-k="d" placeholder="Item name">'+e(it.d)+'</textarea><textarea data-k="s" placeholder="Sub lines (optional) – one per line. Leave empty to remove.">'+e(it.s)+'</textarea><input data-k="h" placeholder="HSN/SAC code (optional)" value="'+e(it.h)+'"><div class="qr"><input data-k="q" type="number" min="0" aria-label="Qty" placeholder="Qty" value="'+e(it.q)+'"><input data-k="r" type="number" min="0" aria-label="Rate" placeholder="Rate" value="'+e(it.r)+'"><button class="x" data-del="'+i+'" aria-label="Remove item">✕</button></div><button class="lk" data-sv="'+i+'">★ Save to catalogue</button></div>'}).join("")}
+function il(){$("il").innerHTML=S.items.map(function(it,i){return'<div class="it" data-i="'+i+'"><textarea data-k="d" placeholder="Item name">'+e(it.d)+'</textarea><textarea data-k="s" placeholder="Sub lines (optional) – one per line. Leave empty to remove.">'+e(it.s)+'</textarea><input data-k="h" placeholder="HSN/SAC code (optional)" value="'+e(it.h)+'"><div class="qr"><input data-k="q" type="number" min="0" aria-label="Qty" placeholder="Qty" value="'+e(it.q)+'"><input data-k="r" type="number" min="0" aria-label="Rate" placeholder="Rate" value="'+e(it.r)+'"><button class="x" data-del="'+i+'" aria-label="Remove item">✕</button></div><input data-k="am" type="number" min="0" placeholder="Amount (optional – use when there is no rate)" value="'+e(it.am||"")+'"><button class="lk" data-sv="'+i+'">★ Save to catalogue</button></div>'}).join("")}
 $("il").oninput=function(ev){var r=ev.target.closest(".it");if(!r||!ev.target.dataset.k)return;S.items[r.dataset.i][ev.target.dataset.k]=ev.target.value;render()};
 $("il").onclick=function(ev){var sv=ev.target.closest("[data-sv]");if(sv){var it=S.items[sv.dataset.sv];if(!String(it.d).trim()){alert("Type the item name first.");return}var o={d:it.d,s:it.s||"",h:it.h||"",r:it.r},k=CAT.findIndex(function(x){return x.d===o.d});if(k>=0)CAT[k]=o;else CAT.push(o);saveSettings();ipick();catl();toast("Saved to catalogue");return}var b=ev.target.closest("[data-del]");if(!b)return;if(S.items.length<2)S.items[0]={d:"",s:"",q:1,r:0};else S.items.splice(b.dataset.del,1);il();render()};
 $("ia").onclick=function(){S.items.push({d:"",s:"",q:1,r:0});il();render()};
@@ -321,7 +322,7 @@ $("xj").onclick=function(){busy("xj",async function(){if(!window.html2canvas)thr
 function b64(u){var b=atob(u.split(",")[1]),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
 function imgOf(u){return new Promise(function(ok,no){var im=new Image();im.onload=function(){ok(im)};im.onerror=no;im.src=u})}
 function itype(u){return/image\/png/.test(u)?"png":"jpg"}
-async function qrPng(c){if(!ST.upi||!window.qrcode)return"";var bal=S.type==="bill"?Math.max(c.tot-paidAmt(),0):c.tot,z=qrcode(0,"M");z.addData("upi://pay?pa="+ST.upi+"&pn="+encodeURIComponent(ST.upn||"")+(bal>0?"&am="+bal.toFixed(2):"")+"&cu=INR");z.make();var im=await imgOf(z.createDataURL(6,0)),cv=document.createElement("canvas");cv.width=im.width;cv.height=im.height;cv.getContext("2d").drawImage(im,0,0);return cv.toDataURL("image/png")}
+async function qrPng(c){if(!ST.upi||!window.qrcode)return"";var bal=isInv(S.type)?Math.max(c.tot-paidAmt(),0):c.tot,z=qrcode(0,"M");z.addData("upi://pay?pa="+ST.upi+"&pn="+encodeURIComponent(ST.upn||"")+(bal>0?"&am="+bal.toFixed(2):"")+"&cu=INR");z.make();var im=await imgOf(z.createDataURL(6,0)),cv=document.createElement("canvas");cv.width=im.width;cv.height=im.height;cv.getContext("2d").drawImage(im,0,0);return cv.toDataURL("image/png")}
 $("xw").onclick=function(){busy("xw",async function(){var D=window.docx;if(!D)throw new Error("Word library did not load.");
  var F=S.font,RED=hx(S.col),tw=10092,c=calc(),K=[],A=D.AlignmentType,R=A.RIGHT,C=A.CENTER,L=A.LEFT;
  function T(t,o){o=o||{};return new D.TextRun({text:t,font:F,size:o.s||Math.round((nm(S.fsz)||11)*2),bold:o.b,italics:o.i,color:o.c})}
@@ -335,7 +336,7 @@ $("xw").onclick=function(){busy("xw",async function(){var D=window.docx;if(!D)th
  var cw=[700,4900,900,1800,1792],al=[C,L,R,R,R],rows=[new D.TableRow({tableHeader:true,children:["#","Item & Description","Qty","Rate","Amount"].map(function(h,i){return cell(h,cw[i],{f:RED,c:hx(onCol(S.col)),a:al[i],b:true})})})];
  c.rows.forEach(function(x,i){rows.push(new D.TableRow({cantSplit:true,children:[String(i+1),x.d,String(x.q),fmt(x.r),fmt(x.a)].map(function(v,j){return cell(v,cw[j],{bd:bd,a:al[j],sub:j===1?x.s.split("\n").filter(function(l){return l.trim()}):null})})}))});
  K.push(new D.Table({width:{size:tw,type:D.WidthType.DXA},columnWidths:cw,rows:rows}));P({children:[]});
- var TL=[["Sub Total",fmt(c.sum)]];if(c.d)TL.push([discLabel(),fmt(c.d)]);taxRows(c).forEach(function(x){TL.push([x[0],fmt(x[1])])});TL.push(["Total","₹"+fmt(c.tot)]);if(S.type==="bill"&&paidAmt()>0){TL.push(["Paid",fmt(paidAmt())]);TL.push(["Balance","₹"+fmt(Math.max(c.tot-paidAmt(),0))])}
+ var TL=[["Sub Total",fmt(c.sum)]];if(c.d)TL.push([discLabel(),fmt(c.d)]);taxRows(c).forEach(function(x){TL.push([x[0],fmt(x[1])])});TL.push(["Total","₹"+fmt(c.tot)]);if(isInv(S.type)&&paidAmt()>0){TL.push(["Paid",fmt(paidAmt())]);TL.push(["Balance","₹"+fmt(Math.max(c.tot-paidAmt(),0))])}
  K.push(new D.Table({alignment:R,width:{size:4600,type:D.WidthType.DXA},columnWidths:[2600,2000],rows:TL.map(function(x,i){var l=x[0]==="Total",o={a:R,b:l,c:l?RED:undefined,f:l?hx(tint(S.col)):undefined};return new D.TableRow({children:[cell(x[0],2600,o),cell(x[1],2000,o)]})})}));
  P({alignment:R,spacing:{before:100,after:160},children:[T(words(c.tot),{s:20,b:true,i:true})]});
  if(S.notes.trim())P({spacing:{after:100},children:[T("Notes: ",{b:true}),T(S.notes)]});
@@ -373,7 +374,7 @@ $("xx").onclick=function(){busy("xx",async function(){if(!window.ExcelJS)throw n
  var r0=r,tx=taxRows(c),TL=[["Sub Total",{formula:"SUM(E"+f+":E"+b+")"},"#,##0.00"],[discLabel(),c.d,"#,##0.00"]];
  tx.forEach(function(x){TL.push([x[0],{formula:"(E"+r0+"-E"+(r0+1)+")*"+(S.gm==="cs"?c.g/2:c.g)+"/100"},"#,##0.00"])});
  TL.push(["Total",{formula:"E"+r0+"-E"+(r0+1)+(tx.length?"+SUM(E"+(r0+2)+":E"+(r0+1+tx.length)+")":"")},'"₹"#,##0.00']);var ti=TL.length-1;
- if(S.type==="bill"&&paidAmt()>0){TL.push(["Paid",paidAmt(),"#,##0.00"]);TL.push(["Balance",{formula:"E"+(r0+ti)+"-E"+(r0+ti+1)},'"₹"#,##0.00'])}
+ if(isInv(S.type)&&paidAmt()>0){TL.push(["Paid",paidAmt(),"#,##0.00"]);TL.push(["Balance",{formula:"E"+(r0+ti)+"-E"+(r0+ti+1)},'"₹"#,##0.00'])}
  TL.forEach(function(x,i){var a=ws.getCell(r,4),v=ws.getCell(r,5),l=i===ti;a.value=x[0];v.value=x[1];v.numFmt=x[2];a.font=v.font={name:F,size:10,bold:l||x[0]==="Balance",color:l?{argb:red}:undefined};a.alignment=v.alignment={horizontal:"right"};if(l)a.fill=v.fill={type:"pattern",pattern:"solid",fgColor:{argb:"FF"+hx(tint(S.col))}};r++});
  txt(r,1,5,words(c.tot),{s:9,b:true,i:true,h:"right"});r+=2;
  if(S.notes.trim()){txt(r,1,5,"Notes: "+S.notes,{});ws.getRow(r).height=Math.max(14,14*Math.ceil(S.notes.length/100));r+=2}
@@ -393,18 +394,18 @@ document.querySelectorAll(".sw").forEach(function(b){b.onclick=function(){S.col=
 
 /* ===== app: login, home, clients, reports, payments ===== */
 var cur={id:null},tm=0,DOCS=[],CL=[],ccur=null,ST={bank:"",upi:"",upn:"",gstin:""},CAT=[],LAST="",STM=null,tt=0,auth,db,
-TT={quotation:"QUOTATION",estimate:"ESTIMATE",bill:"INVOICE"},NLB={quotation:"Quote No:",estimate:"Estimate No:",bill:"Invoice No:"},
-STAT={quotation:["Draft","Sent","Accepted","Rejected"],estimate:["Draft","Sent","Accepted","Rejected"],bill:["Unpaid","Partial","Paid"]},
-PFX={quotation:"QTN-",estimate:"EST-",bill:"INV-"},VW=["home","clients","reports","settings","team","att","money","tasks","sal","ed"];
+TT={quotation:"QUOTATION",estimate:"ESTIMATE",bill:"INVOICE",gst:"TAX INVOICE"},NLB={quotation:"Quote No:",estimate:"Estimate No:",bill:"Invoice No:",gst:"Invoice No:"},
+STAT={quotation:["Draft","Sent","Accepted","Rejected","Billed"],estimate:["Draft","Sent","Accepted","Rejected"],bill:["Unpaid","Partial","Paid"],gst:["Unpaid","Partial","Paid"]},
+PFX={quotation:"QTN-",estimate:"EST-",bill:"INV-",gst:""},VW=["home","clients","reports","settings","team","att","money","tasks","sal","ed"];
 function today(){return new Date().toISOString().slice(0,10)}
 function NL(){return NLB[S.type||"quotation"]}
 function paidAmt(){return(S.pay||[]).reduce(function(a,p){return a+nm(p.amt)},0)}
-function payRows(c){var p=paidAmt();return S.type==="bill"&&p>0?"<tr><td>Paid</td><td class='n'>"+fmt(p)+"</td></tr><tr><td>Balance</td><td class='n'>₹"+fmt(Math.max(c.tot-p,0))+"</td></tr>":""}
-function bankHTML(c){if(!S.sb||!(ST.bank||ST.upi))return"";var bal=S.type==="bill"?Math.max(c.tot-paidAmt(),0):c.tot,q="";
+function payRows(c){var p=paidAmt();return isInv(S.type)&&p>0?"<tr><td>Paid</td><td class='n'>"+fmt(p)+"</td></tr><tr><td>Balance</td><td class='n'>₹"+fmt(Math.max(c.tot-p,0))+"</td></tr>":""}
+function bankHTML(c){if(!S.sb||!(ST.bank||ST.upi))return"";var bal=isInv(S.type)?Math.max(c.tot-paidAmt(),0):c.tot,q="";
  if(ST.upi&&window.qrcode){var z=qrcode(0,"M");z.addData("upi://pay?pa="+ST.upi+"&pn="+encodeURIComponent(ST.upn||"")+(bal>0?"&am="+bal.toFixed(2):"")+"&cu=INR");z.make();q='<div style="text-align:center;font-size:.85em"><img alt="UPI QR" src="'+z.createDataURL(4,0)+'" style="width:26mm;height:26mm"><br>'+e(ST.upi)+"</div>"}
  return'<div style="display:flex;gap:1.2em;align-items:center;margin-top:.8em;font-size:.9em"><div style="flex:1">'+(ST.bank?"<b>Bank details</b><br>"+e(ST.bank).replace(/\n/g,"<br>"):"")+"</div>"+q+"</div>"}
-function fillStatus(){var o=STAT[S.type||"quotation"];$("status").innerHTML=o.map(function(x){return"<option>"+x+"</option>"}).join("");if(o.indexOf(S.status)<0)S.status=o[0];$("status").value=S.status;$("pf").hidden=S.type!=="bill";$("duel").textContent=DL();$("nol").textContent=NL().replace(/:$/,"");$("qdl").textContent=({quotation:"Quote",estimate:"Estimate",bill:"Invoice"}[S.type||"quotation"])+" details"}
-function autoStatus(){if(S.type!=="bill")return;var p=paidAmt(),t=calc().tot,st=t>0&&p>=t?"Paid":p>0?"Partial":"Unpaid";S.status=st;$("status").value=st;$("pt").textContent="Paid ₹"+fmt(p)+" · Balance ₹"+fmt(Math.max(t-p,0))}
+function fillStatus(){var o=STAT[S.type||"quotation"];$("status").innerHTML=o.map(function(x){return"<option>"+x+"</option>"}).join("");if(o.indexOf(S.status)<0)S.status=o[0];$("status").value=S.status;$("pf").hidden=!isInv(S.type);$("duel").textContent=DL();$("nol").textContent=NL().replace(/:$/,"");$("qdl").textContent=({quotation:"Quote",estimate:"Estimate",bill:"Invoice"}[S.type||"quotation"])+" details"}
+function autoStatus(){if(!isInv(S.type))return;var p=paidAmt(),t=calc().tot,st=t>0&&p>=t?"Paid":p>0?"Partial":"Unpaid";S.status=st;$("status").value=st;$("pt").textContent="Paid ₹"+fmt(p)+" · Balance ₹"+fmt(Math.max(t-p,0))}
 $("vt").onchange=function(){S.vt=this.checked;render();save()};
 $("dtype").onchange=function(){S.type=this.value;S.status=STAT[S.type][0];fillStatus();render()};
 $("status").onchange=function(){S.status=this.value;save()};
@@ -422,21 +423,21 @@ $("bh").onclick=function(){if(canLeave())go("home")};
 addEventListener("beforeunload",function(ev){if(!$("v-ed").hidden&&JSON.stringify(S)!==LAST){ev.preventDefault();ev.returnValue=""}});
 function toast(m,undo){var t=$("toast");t.innerHTML=e(m)+(undo?' <button id="tu">Undo</button>':"");t.hidden=false;clearTimeout(tt);if(undo)$("tu").onclick=function(){undo();t.hidden=true};tt=setTimeout(function(){t.hidden=true},undo?8000:2500)}
 function nextNo(t){var m=0;DOCS.forEach(function(d){if(d.type===t){var n=parseInt(String(d.no).replace(/\D+/g,""),10);if(n>m)m=n}});return PFX[t]+String(m+1).padStart(3,"0")}
-function reserveNo(t){var r=db.collection("counters").doc(t);return db.runTransaction(function(tx){return tx.get(r).then(function(x){if(!x.exists)throw new Error("counter missing");var n=(x.data().n||0)+1;tx.update(r,{n:n});return PFX[t]+String(n).padStart(3,"0")})})}
-function seedCounters(){if(ROLE!=="admin"||seeded)return;seeded=true;["quotation","estimate","bill"].forEach(function(t){var r=db.collection("counters").doc(t);r.get().then(function(x){if(!x.exists){var m=0;DOCS.forEach(function(d){if(d.type===t){var n=parseInt(String(d.no).replace(/\D+/g,""),10);if(n>m)m=n}});r.set({n:m})}})})}
-function newDoc(t){S=fresh();S.type=t;S.no="...";S.status=STAT[t][0];S.sb=t==="bill";S.due=addDays(S.date,t==="bill"?7:15);cur={id:null};clearTimeout(tm);$("ss").textContent="";sync();go("ed");LAST=JSON.stringify(S);reserveNo(t).then(function(n){S.no=n;$("no").value=n;render();LAST=JSON.stringify(S)}).catch(function(x){alert("Could not get a document number. Ask the admin to open the app once. "+x.message)})}
-function newFrom(t){return reserveNo(t).then(function(no){S=Object.assign(fresh(),JSON.parse(JSON.stringify(S)));S.type=t;S.no=no;S.date=today();S.due=addDays(S.date,t==="bill"?7:15);S.pay=[];S.status=STAT[t][0];if(t==="bill")S.sb=true;cur={id:null};clearTimeout(tm);sync();return saveDoc().then(function(){go("ed")})})}
+function reserveNo(t){var r=db.collection("counters").doc(t);return db.runTransaction(function(tx){return tx.get(r).then(function(x){if(!x.exists)throw new Error("counter missing");var n=(x.data().n||0)+1;tx.update(r,{n:n});return PFX[t]+(t==="gst"?n:String(n).padStart(3,"0"))})})}
+function seedCounters(){if(ROLE!=="admin"||seeded)return;seeded=true;["quotation","estimate","bill","gst"].forEach(function(t){var r=db.collection("counters").doc(t);r.get().then(function(x){if(!x.exists){var m=0;DOCS.forEach(function(d){if(d.type===t){var n=parseInt(String(d.no).replace(/\D+/g,""),10);if(n>m)m=n}});if(t==="gst"&&m<23)m=23;r.set({n:m})}})})}
+function newDoc(t){S=fresh();S.type=t;S.no="...";S.status=STAT[t][0];S.sb=isInv(t);if(t==="gst"){S.gst=18;S.gm="cs";S.sgl="Authorised Signatory"}S.due=addDays(S.date,isInv(t)?7:15);cur={id:null};clearTimeout(tm);$("ss").textContent="";sync();go("ed");LAST=JSON.stringify(S);reserveNo(t).then(function(n){S.no=n;$("no").value=n;render();LAST=JSON.stringify(S)}).catch(function(x){alert("Could not get a document number. Ask the admin to open the app once. "+x.message)})}
+function newFrom(t){var oid=cur&&cur.id,ot=S.type;return reserveNo(t).then(function(no){if(oid&&ot==="quotation"&&t!==ot)db.collection("docs").doc(oid).update({status:"Billed"});S=Object.assign(fresh(),JSON.parse(JSON.stringify(S)));S.type=t;S.no=no;S.date=today();S.due=addDays(S.date,isInv(t)?7:15);S.pay=[];S.status=STAT[t][0];if(isInv(t))S.sb=true;cur={id:null};clearTimeout(tm);sync();return saveDoc().then(function(){go("ed")})})}
 function openDoc(id){var d=DOCS.filter(function(x){return x.id===id})[0];if(!d)return;S=Object.assign(fresh(),d.s);cur={id:id,ed:true};clearTimeout(tm);$("ss").textContent="";go("ed");sync();LAST=JSON.stringify(S)}
 function saveDoc(){var snap=JSON.stringify(S),d={due:S.due||"",phone:S.phone||"",tax:calc().gs,del:false,type:S.type,no:S.no,name:S.name,date:S.date,total:calc().tot,paid:paidAmt(),status:S.status,wk:S.wk||"",dlv:S.dlv||"",upd:Date.now(),s:JSON.parse(JSON.stringify(S))};if(cur.id){if(cur.ed){d.editedAt=Date.now();d.editedBy=UNAME}}else{d.createdBy=UID;d.by=UNAME;d.created=Date.now()}var r=cur.id?db.collection("docs").doc(cur.id).update(d):db.collection("docs").add(d).then(function(x){cur.id=x.id;logAct("Created "+S.type+" "+S.no)});
  return r.then(function(){LAST=snap;$("ss").textContent="Saved ✓ "+new Date().toLocaleTimeString()}).catch(function(x){alert("Save failed: "+x.message)})}
 $("sv").onclick=function(){clearTimeout(tm);saveDoc()};
 $("cv").onclick=function(){var t={estimate:"quotation",quotation:"bill"}[S.type];if(!t){alert("A bill cannot be converted further.");return}if(confirm("Create a new "+t+" from this one?"))newFrom(t)};
 $("wa").onclick=function(){var c=calc(),ph=(S.phone||"").replace(/\D/g,"");if(ph.length===10)ph="91"+ph;
- var m="Hello "+(S.name||"")+", please find the "+S.type+" "+S.no+" from Saagee Ads. Amount: ₹"+fmt(c.tot)+(S.type==="bill"&&paidAmt()?", balance: ₹"+fmt(Math.max(c.tot-paidAmt(),0)):"")+". Thank you!";
+ var m="Hello "+(S.name||"")+", please find the "+S.type+" "+S.no+" from Saagee Ads. Amount: ₹"+fmt(c.tot)+(isInv(S.type)&&paidAmt()?", balance: ₹"+fmt(Math.max(c.tot-paidAmt(),0)):"")+". Thank you!";
  window.open("https://wa.me/"+ph+"?text="+encodeURIComponent(m),"_blank");$("xp").click()};
 function card(a){return'<div class="card">'+a[0]+"<b>"+a[1]+"</b></div>"}
 function LIVE(){return DOCS.filter(function(d){return!d.del})}
-function overdue(d){return d.type==="bill"&&d.due&&d.due<today()&&d.total-d.paid>0.005}
+function overdue(d){return isInv(d.type)&&d.due&&d.due<today()&&d.total-d.paid>0.005}
 function badge(d){var od=overdue(d),c=od?"bad":(d.status==="Paid"||d.status==="Accepted")?"ok":d.status==="Rejected"?"bad":"pk";return'<span class="bd '+c+'">'+(od?"Overdue":d.status)+"</span>"}
 function remind(d){var ph=(d.phone||"").replace(/\D/g,"");if(!ph){alert("No phone number saved for this client. Open the bill and add it.");return}if(ph.length===10)ph="91"+ph;
  var m="Hello "+(d.name||"")+", gentle reminder: invoice "+d.no+" from Saagee Ads has a pending balance of ₹"+fmt(Math.max(d.total-d.paid,0))+(d.due?" (due "+fd(d.due)+")":"")+". Kindly arrange the payment. Thank you!";
@@ -449,11 +450,11 @@ function team(){var P=USERS.filter(function(u){return u.role==="pending"}),A=USE
 $("tmw").onclick=function(ev){var b=ev.target.closest("[data-r]");if(!b)return;var id=b.closest("[data-u]").dataset.u;if(id===UID)return;if(b.dataset.r==="admin"&&!confirm("Give this person full admin access?"))return;var uu=USERS.filter(function(z){return z.id===id})[0];logAct((uu?uu.name:id)+" set to "+b.dataset.r);db.collection("users").doc(id).update({role:b.dataset.r})};
 function home(){var q=$("hq").value.toLowerCase(),t=$("ht").value,m=today().slice(0,7),A=LIVE();
  function ms(ty){return A.filter(function(d){return d.type===ty&&(d.date||"").slice(0,7)===m}).reduce(function(a,d){return a+d.total},0)}
- var B=A.filter(function(d){return d.type==="bill"}),pend=B.reduce(function(a,d){return a+Math.max(d.total-d.paid,0)},0),od=A.filter(overdue).reduce(function(a,d){return a+d.total-d.paid},0);
+ var B=A.filter(function(d){return isInv(d.type)}),pend=B.reduce(function(a,d){return a+Math.max(d.total-d.paid,0)},0),od=A.filter(overdue).reduce(function(a,d){return a+d.total-d.paid},0);
  $("hc").innerHTML=[["Quotations this month","₹"+fmt(ms("quotation"))],["Bills this month","₹"+fmt(ms("bill"))],["Pending to collect","₹"+fmt(pend)],["Overdue","₹"+fmt(od)],["Accepted quotations",A.filter(function(d){return d.type==="quotation"&&d.status==="Accepted"}).length]].map(card).join("");
  var tr=t==="trash",src=tr?DOCS.filter(function(d){return d.del}):A.filter(function(d){return!t||(t==="overdue"?overdue(d):d.type===t)});
  var L=src.filter(function(d){return!q||(d.no+" "+d.name).toLowerCase().indexOf(q)>=0});
- $("hb").innerHTML=L.length?L.map(function(d){var b=tr?'<button data-a="rest">Restore</button> <button data-a="purge">Delete forever</button>':'<button data-a="dup">Copy</button> '+(d.type==="bill"&&d.total-d.paid>0.005?'<button data-a="rem">Remind</button> ':"")+'<button data-a="del" aria-label="Delete">✕</button>';
+ $("hb").innerHTML=L.length?L.map(function(d){var b=tr?'<button data-a="rest">Restore</button> <button data-a="purge">Delete forever</button>':'<button data-a="dup">Copy</button> '+(isInv(d.type)&&d.total-d.paid>0.005?'<button data-a="rem">Remind</button> ':"")+'<button data-a="del" aria-label="Delete">✕</button>';
   return'<tr data-id="'+d.id+'"'+(tr?' data-trash="1"':"")+'><td>'+e(d.no)+"</td><td>"+d.type+"</td><td>"+e(d.name)+"</td><td>"+fd(d.date)+"</td><td class=\"adm\">"+fd(d.due)+'</td><td class="adm r">₹'+fmt(d.total)+"</td><td class=\"adm\">"+badge(d)+"</td><td class=\"adm\">"+by(d)+"</td><td>"+wkb(d)+"</td><td>"+b+"</td></tr>"}).join(""):'<tr><td colspan="10">'+(tr?"Trash is empty.":"No documents here yet. Use + Quotation, + Estimate or + Bill above.")+"</td></tr>"}
 $("hq").oninput=$("ht").onchange=home;
 $("hb").onclick=function(ev){var r=ev.target.closest("[data-id]");if(!r)return;var a=ev.target.dataset.a,id=r.dataset.id,d=DOCS.filter(function(x){return x.id===id})[0],ref=db.collection("docs").doc(id);if(!d)return;
@@ -467,7 +468,7 @@ function pick(){$("cpick").innerHTML='<option value="">— select client —</op
 $("cpick").onchange=function(){var c=CL[this.value];if(!c)return;S.name=c.name;S.addr=c.addr||"";S.phone=c.phone||"";sync()};
 $("sc").onclick=function(){if(!S.name.trim()){alert("Type the client name first.");return}var o=CL.filter(function(c){return c.name===S.name})[0],d={name:S.name,addr:S.addr,phone:S.phone||""};(o?db.collection("clients").doc(o.id).set(d):db.collection("clients").add(d)).then(function(){$("ss").textContent="Client saved ✓"})};
 function clist(){$("cb").innerHTML=CL.map(function(c){return'<tr data-id="'+c.id+'"><td>'+e(c.name)+"</td><td>"+e(c.phone)+"</td><td>"+e(c.addr)+'</td><td><button data-a="st">Statement</button> <button data-a="del" aria-label="Delete">✕</button></td></tr>'}).join("")||'<tr><td colspan="4">No clients yet.</td></tr>'}
-function stmt(c){var L=LIVE().filter(function(d){return d.type==="bill"&&d.name===c.name}).sort(function(a,b){return(a.date||"")<(b.date||"")?-1:1}),tb=0,tp=0;L.forEach(function(d){tb+=d.total;tp+=d.paid});STM={c:c,L:L,tb:tb,tp:tp};
+function stmt(c){var L=LIVE().filter(function(d){return isInv(d.type)&&d.name===c.name}).sort(function(a,b){return(a.date||"")<(b.date||"")?-1:1}),tb=0,tp=0;L.forEach(function(d){tb+=d.total;tp+=d.paid});STM={c:c,L:L,tb:tb,tp:tp};
  $("cst").innerHTML='<fieldset><legend>Statement – '+e(c.name)+"</legend>"+(L.length?'<div class="tw"><table class="tb"><thead><tr><th>Invoice</th><th>Date</th><th>Due</th><th class="r">Amount</th><th class="r">Paid</th><th class="r">Balance</th><th>Status</th></tr></thead><tbody>'+L.map(function(d){return"<tr><td>"+e(d.no)+"</td><td>"+fd(d.date)+"</td><td>"+fd(d.due)+'</td><td class="r">₹'+fmt(d.total)+'</td><td class="r">₹'+fmt(d.paid)+'</td><td class="r">₹'+fmt(Math.max(d.total-d.paid,0))+"</td><td>"+badge(d)+"</td></tr>"}).join("")+"</tbody></table></div>":"<p>No bills for this client yet.</p>")+'<div class="cards" style="margin:12px 0 0">'+[["Billed","₹"+fmt(tb)],["Received","₹"+fmt(tp)],["Pending","₹"+fmt(Math.max(tb-tp,0))]].map(card).join("")+'</div><div class="acts"><button class="pri" id="stp">PDF</button><button id="stc">CSV</button><button id="stw">WhatsApp</button><button id="stx">Close</button></div></fieldset>';
  $("stx").onclick=function(){$("cst").innerHTML="";STM=null};
  $("stc").onclick=function(){var q=function(v){return'"'+String(v==null?"":v).replace(/"/g,'""')+'"'};dl("Statement_"+c.name.replace(/[^\w-]+/g,"_")+".csv",new Blob(["\ufeff"+["Invoice,Date,Due,Amount,Paid,Balance,Status"].concat(L.map(function(d){return[d.no,d.date,d.due,d.total,d.paid,Math.max(d.total-d.paid,0),d.status].map(q).join(",")})).join("\n")],{type:"text/csv"}))};
@@ -481,7 +482,7 @@ function stmt(c){var L=LIVE().filter(function(d){return d.type==="bill"&&d.name=
 $("cb").onclick=function(ev){var r=ev.target.closest("[data-id]");if(!r)return;var c=CL.filter(function(x){return x.id===r.dataset.id})[0],a=ev.target.dataset.a;if(a==="del"){if(confirm("Delete this client?"))db.collection("clients").doc(c.id).delete()}else if(a==="st")stmt(c);else{ccur=c.id;$("cn").value=c.name;$("cp").value=c.phone||"";$("ca").value=c.addr||""}};
 $("cs").onclick=function(){if(!$("cn").value.trim())return;var d={name:$("cn").value.trim(),phone:$("cp").value.trim(),addr:$("ca").value};(ccur?db.collection("clients").doc(ccur).set(d):db.collection("clients").add(d)).then(function(){$("cc").click()})};
 $("cc").onclick=function(){ccur=null;$("cn").value=$("cp").value=$("ca").value=""};
-function rep(){var m=$("rmn").value||today().slice(0,7);$("rmn").value=m;var L=LIVE().filter(function(d){return(d.date||"").slice(0,7)===m}),B=L.filter(function(d){return d.type==="bill"});
+function rep(){var m=$("rmn").value||today().slice(0,7);$("rmn").value=m;var L=LIVE().filter(function(d){return(d.date||"").slice(0,7)===m}),B=L.filter(function(d){return isInv(d.type)});
  function sm(a,k){return a.reduce(function(x,d){return x+(d[k]||0)},0)}
  var bt=sm(B,"total"),bp=sm(B,"paid");
  $("rp").innerHTML='<div class="cards">'+[["Billed",bt],["Collected",bp],["Pending",bt-bp],["GST on bills",sm(B,"tax")]].map(function(a){return card([a[0],"₹"+fmt(a[1])])}).join("")+'</div><div class="tw"><table class="tb"><thead><tr><th>Type</th><th>Count</th><th class="r">Amount</th></tr></thead><tbody>'+["quotation","estimate","bill"].map(function(t){var a=L.filter(function(d){return d.type===t});return"<tr><td>"+t+"</td><td>"+a.length+'</td><td class="r">₹'+fmt(sm(a,"total"))+"</td></tr>"}).join("")+"</tbody></table></div>"}
@@ -510,7 +511,7 @@ function route(u){UID=u.uid;var ref=db.collection("users").doc(u.uid),first=true
   ref.onSnapshot(function(x){var d=x.data()||{},r=d.role||"pending";UNAME=d.name||u.email;
    if(!first&&r!==ROLE){location.reload();return}
    first=false;ROLE=r;
-   if(r==="admin"||r==="worker"){$("v-wait").hidden=true;$("v-login").hidden=true;document.body.classList.toggle("w",r!=="admin");if(r!=="admin")document.querySelector('nav [data-v="home"]').textContent="My documents";if(!STARTED){STARTED=true;start()}}
+   if(r==="admin"||r==="worker"){$("v-wait").hidden=true;$("v-login").hidden=true;document.body.classList.toggle("wku",r!=="admin");if(r!=="admin")[].forEach.call(document.querySelectorAll("legend"),function(l){if(l.textContent==="Backup")l.parentNode.hidden=true});if(r!=="admin")document.querySelector('nav [data-v="home"]').textContent="My documents";if(!STARTED){STARTED=true;start()}}
    else{$("nav").hidden=true;VW.forEach(function(k){$("v-"+k).hidden=true});$("v-login").hidden=true;$("wm").textContent=r==="pending"?"Your account is created. Please wait until the admin approves it.":"This account has no access. Please contact the admin.";$("v-wait").hidden=false}})
  }).catch(function(x){$("v-login").hidden=false;$("lerr").textContent="Could not check your account: "+x.message})}
  auth.onAuthStateChanged(function(u){if(u&&until()&&Date.now()>until()){auth.signOut();return}if(u)route(u);else out()});
@@ -556,9 +557,9 @@ function money(){if(!$("mdt").value)$("mdt").value=today();if(ROLE!=="admin")$("
 function ms(L,t){return L.filter(function(x){return x.type===t}).reduce(function(a,x){return a+nm(x.amt)},0)}
 function mbox(t,L){return"<fieldset><legend>"+t+"</legend>Income ₹"+fmt(ms(L,"income"))+" · Expense ₹"+fmt(ms(L,"expense"))+" · <b>Profit ₹"+fmt(ms(L,"income")-ms(L,"expense"))+"</b></fieldset>"}
 function mrender(){var T=today();
- if(ROLE==="admin"){var bl=DOCS.filter(function(d){return d.type==="bill"&&!d.del&&d.total-d.paid>0.005}),pm=MON.filter(function(x){return x.type==="pending"}),tot=bl.reduce(function(a,d){return a+d.total-d.paid},0)+ms(pm,"pending"),
+ if(ROLE==="admin"){var bl=DOCS.filter(function(d){return isInv(d.type)&&!d.del&&d.total-d.paid>0.005}),pm=MON.filter(function(x){return x.type==="pending"}),tot=bl.reduce(function(a,d){return a+d.total-d.paid},0)+ms(pm,"pending"),
   md=["Cash","UPI","Bank"].map(function(k){var L=MON.filter(function(x){return x.mode===k});return k+" ₹"+fmt(ms(L,"income")-ms(L,"expense"))}).join(" · ");
-  $("mst").innerHTML=mbox("Today",MON.filter(function(x){return x.date===T}))+mbox("This month",MON.filter(function(x){return(x.date||"").slice(0,7)===T.slice(0,7)}))+"<fieldset><legend>Balance by mode</legend>"+md+"</fieldset><fieldset><legend>Pending to receive – ₹"+fmt(tot)+'</legend><table class="tb"><tbody>'+bl.map(function(d){return"<tr><td>"+e(d.name)+"</td><td>"+e(d.no)+"</td><td>₹"+fmt(d.total-d.paid)+"</td><td>"+(d.due?fd(d.due):"")+(overdue(d)?" · Overdue":"")+"</td><td></td></tr>"}).join("")+pm.map(function(x){return'<tr data-id="'+x.id+'"><td>'+e(x.client||x.desc)+"</td><td>Manual</td><td>₹"+fmt(nm(x.amt))+"</td><td>"+fd(x.date)+'</td><td><button data-a="mr">Received</button></td></tr>'}).join("")+(bl.length||pm.length?"":"<tr><td>Nothing pending.</td></tr>")+"</tbody></table></fieldset>"}
+  $("mst").innerHTML=mbox("Today",MON.filter(function(x){return x.date===T}))+mbox("This month",MON.filter(function(x){return(x.date||"").slice(0,7)===T.slice(0,7)}))+"<fieldset><legend>Balance by mode</legend>"+md+"</fieldset><fieldset><legend>Pending to receive – ₹"+fmt(tot)+'</legend><table class="tb"><tbody>'+bl.map(function(d){return'<tr data-id="'+d.id+'"><td>'+e(d.name)+"</td><td>"+e(d.no)+"</td><td>₹"+fmt(d.total-d.paid)+"</td><td>"+(d.due?fd(d.due):"")+(overdue(d)?" · Overdue":"")+'</td><td><button data-a="wa">WhatsApp</button></td></tr>'}).join("")+pm.map(function(x){return'<tr data-id="'+x.id+'"><td>'+e(x.client||x.desc)+"</td><td>Manual</td><td>₹"+fmt(nm(x.amt))+"</td><td>"+fd(x.date)+'</td><td><button data-a="mr">Received</button></td></tr>'}).join("")+(bl.length||pm.length?"":"<tr><td>Nothing pending.</td></tr>")+"</tbody></table></fieldset>"}
  else $("mst").innerHTML="";
  $("mtb").innerHTML=MON.length?MON.map(function(x){return'<tr data-id="'+x.id+'"><td>'+fd(x.date)+"</td><td>"+e(x.type)+"</td><td>"+e(x.desc||"")+(x.client?" · "+e(x.client):"")+(x.editedAt?"<br><small>Edited "+fdt(x.editedAt)+"</small>":"")+'</td><td class="r">₹'+fmt(nm(x.amt))+"</td><td>"+e(x.mode||"")+'</td><td class="adm">'+e(x.by||"")+'</td><td class="adm"><button data-a="me">Edit</button> <button data-a="md">✕</button></td></tr>'}).join(""):'<tr><td colspan="7">No entries yet.</td></tr>'}
 function mclear(){mcur=null;["mam","mds","mcl"].forEach(function(k){$(k).value=""});$("mdt").value=today();$("msv").textContent="Save entry"}
@@ -568,6 +569,7 @@ $("msv").onclick=function(){var a=nm($("mam").value);if(!(a>0)){alert("Enter the
  var r=mcur?db.collection("money").doc(mcur).update(Object.assign(d,{editedAt:Date.now(),editedBy:UNAME})):db.collection("money").add(Object.assign(d,{createdBy:UID,by:UNAME,created:Date.now()}));
  r.then(function(){mclear();money()}).catch(function(x){alert(x.message)})};
 function mact(ev){var b=ev.target.closest("[data-a]");if(!b)return;var id=b.closest("[data-id]").dataset.id,x=MON.filter(function(m){return m.id===id})[0],a=b.dataset.a;
+ if(a==="wa"){var dd=DOCS.filter(function(z){return z.id===id})[0],ph=String((dd.s&&dd.s.phone)||"").replace(/\D/g,"").slice(-10);window.open("https://wa.me/91"+ph+"?text="+encodeURIComponent("Hello "+dd.name+", payment reminder for "+dd.no+" from Saagee Ads. Balance: ₹"+fmt(dd.total-dd.paid)),"_blank");return}
  if(a==="md"){if(confirm("Delete this entry?")){logAct("Deleted money entry ₹"+x.amt+" "+(x.desc||""));db.collection("money").doc(id).delete().then(money)}}
  else if(a==="mr")db.collection("money").doc(id).update({type:"income",editedAt:Date.now(),editedBy:UNAME}).then(money)
  else if(a==="me"){mcur=id;$("mty").value=x.type;$("mam").value=x.amt;$("mds").value=x.desc||"";$("mcl").value=x.client||"";$("mct").value=x.cat||"Other";$("mmd").value=x.mode||"Cash";$("mdt").value=x.date;$("msv").textContent="Update entry";scrollTo(0,document.body.scrollHeight/3)}}
@@ -605,6 +607,23 @@ function fullBackup(){var C=["docs","clients","settings","money","tasks","attend
 (function(){var h=document.documentElement;try{if(localStorage.getItem("sa-dark")==="1")h.classList.add("dark")}catch(x){}
  $("dk").onclick=function(){h.classList.toggle("dark");try{localStorage.setItem("sa-dark",h.classList.contains("dark")?"1":"0")}catch(x){}}})();
 $("pvb").onclick=function(){var up=this.dataset.up==="1";if(up){scrollTo({top:0,behavior:"smooth"});this.dataset.up="";this.textContent="Preview ↓"}else{document.querySelector("main").scrollIntoView({behavior:"smooth"});this.dataset.up="1";this.textContent="Edit ↑"}};
+function isInv(t){return t==="bill"||t==="gst"}
+function dmy(d){return String(d||"").split("-").reverse().join(".")}
+function gstHTML(c){var B="1.5px solid var(--th)",F="font-family:'Palatino Linotype','Book Antiqua','Times New Roman',serif;font-weight:700;font-size:12.5pt;line-height:1.35;",
+ full=function(x,st,cs){return"<td"+(cs?" colspan="+cs:"")+" style=\""+F+"border:"+B+";padding:1.2mm 2mm;vertical-align:top;"+(st||"")+"\">"+x+"</td>"},
+ side=function(x,st){return"<td style=\""+F+"border:"+B+";border-top:0;border-bottom:0;padding:1.2mm 2mm;vertical-align:top;"+(st||"")+"\">"+x+"</td>"},
+ R="text-align:right;",Z="text-align:center;",tx=taxRows(c),ln=(c.d?[["Discount","-"+fmt(c.d)]]:[]).concat(tx.map(function(t){return[t[0],fmt(t[1])]})),
+ df=c.tot-c.raw,H=Math.max(6,80-c.rows.length*14),
+ it=c.rows.map(function(x,i){var o=S.items[i]||{};return"<tr>"+side(e(o.d||"").replace(/\n/g,"<br>")+(o.s?"<br>"+e(o.s).replace(/\n/g,"<br>"):""))+side(e(o.h||""),Z)+side(x.q?e(x.q):"")+side(nm(o.r)>0?fmt(x.r):"",R)+side(fmt(x.a),R)+"</tr>"}).join("");
+ return'<table style="width:100%;border-collapse:collapse;table-layout:fixed;margin-top:18mm"><colgroup><col style="width:30%"><col style="width:15%"><col style="width:8%"><col style="width:20%"><col style="width:27%"></colgroup>'+
+ "<tr>"+full("GSTIN:"+e(ST.gstin||"")+"<br>INVOICE NO. "+e(S.no)+"<br>DATE : "+dmy(S.date),"",3)+full("Bill To : "+e(S.name)+"<br>"+e(S.addr).replace(/\n/g,"<br>")+(S.cgst?"<br>GSTIN:"+e(S.cgst):""),"",2)+"</tr>"+
+ "<tr>"+full("Particulars")+full("HSN<br>Code",Z)+full("Qty")+full("Rate",Z)+full("Amount",Z)+"</tr>"+it+
+ '<tr style="height:'+H+'mm">'+side("")+side("")+side("")+side("")+side("")+"</tr>"+
+ (ln.length?"<tr>"+full(ln.map(function(l){return e(l[0])}).join("<br><br>"))+full("")+full("")+full("")+full(ln.map(function(l){return l[1]}).join("<br><br>"),R)+"</tr>":"")+
+ "<tr>"+full("Total")+full("")+full("")+full("")+full(fmt(c.raw),R)+"</tr>"+
+ "<tr>"+full("Round off")+full("")+full("")+full("")+full((df<0?"-":"+")+fmt(Math.abs(df)),R)+"</tr>"+
+ "<tr>"+full("&nbsp;")+full("")+full("")+full("Total",Z)+full(fmt(c.tot),R+"font-size:14pt;")+"</tr>"+
+ "<tr>"+full("In words :<br>"+words(c.tot).replace(/^Indian Rupee\s*/i,"").replace(/\s*Only\s*$/i,"")+" Rupees Only/-","",3)+full(e(S.forn||"For Saagee Ads")+'<div style="height:'+nm(S.sgh||20)+'mm;display:flex;justify-content:center;align-items:center;gap:4mm">'+(SG?'<img alt="" src="'+SG+'" style="height:100%;max-width:45mm">':"")+(SL?'<img alt="" src="'+SL+'" style="height:'+nm(S.slh||25)+'mm;max-width:30mm">':"")+"</div>"+e(S.sgl||"Authorised Signatory"),Z,2)+"</tr></table>"}
 sync();
 </script>
 </body>
