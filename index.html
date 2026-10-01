@@ -218,6 +218,7 @@ nav #pfb.on{background:var(--bd);color:#fff;border-color:var(--or)}
   <div id="tl"></div><button id="ta">+ Add term</button>
  </fieldset>
  <fieldset><legend>Signature</legend>
+  <label class="shl"><input type="checkbox" id="sgshow"> Show signature on document (untick to hide)</label>
   <div class="acts"><button id="sgb">Upload signature</button><button id="sgd">Remove</button></div>
   <input type="file" id="sgf" accept="image/*" hidden>
   <label for="sgn">Name (shown below signature)</label><input id="sgn" placeholder="Your name">
@@ -228,6 +229,7 @@ nav #pfb.on{background:var(--bd);color:#fff;border-color:var(--or)}
   <div class="r2"><div><label for="sgp">Position</label><select id="sgp"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div><div><label for="sgh">Space height (mm)</label><input id="sgh" type="number" min="5" max="60"></div></div>
  </fieldset>
  <fieldset><legend>Company seal</legend>
+  <label class="shl"><input type="checkbox" id="slshow"> Show company seal on document (untick to hide)</label>
   <small id="sls"></small>
   <div class="acts"><button id="slb">Upload seal</button><button id="sld">Remove</button></div>
   <input type="file" id="slf" accept="image/*" hidden>
@@ -241,6 +243,7 @@ nav #pfb.on{background:var(--bd);color:#fff;border-color:var(--or)}
   <input type="file" id="rf" accept=".json,application/json" hidden>
   <small>Backup saves everything: form, terms, letterhead, signature and seal.</small>
  </fieldset>
+ <fieldset id="svf"><legend>Save</legend><button class="pri" id="sv2" type="button" style="width:100%;padding:12px;font-size:16px">💾 Save</button><small id="ss2" style="display:block;margin-top:6px"></small><small>Saved documents can be opened again from Home and edited any time.</small></fieldset>
  <div class="warn" id="wn">Content is too long for one A4 page even at the smallest text size. Remove some items or terms, or move terms to the next page.</div>
 </aside>
 <main><div id="zb"><button type="button" id="zo" aria-label="Zoom out">−</button><b id="zv">100%</b><button type="button" id="zi" aria-label="Zoom in">+</button><button type="button" id="zf">Fit</button></div><div id="pages"></div></main>
@@ -1190,6 +1193,17 @@ g("bka").onclick=function(){var b=bk(),on=!K.every(function(k){return b.on[k]});
 var _r=render;render=function(){_r.apply(this,arguments);gxSync()};
 var _nd=newDoc;newDoc=function(t){_nd.apply(this,arguments);if(t==="gst"&&S.type==="gst"&&!S.bk){try{var d=JSON.parse(localStorage.getItem("sa-bk")||"null");if(d&&d.bk){S.bk=d.bk;if(d.ogst)S.ogst=d.ogst;if(d.bkbox)S.bkbox=1;if(d.lc)S.lc=d.lc;sync();LAST=JSON.stringify(S)}}catch(x){}}};
 gxSync();
+})();
+</script>
+<script>
+(function(){var g=function(i){return document.getElementById(i)};
+function st2(){if(!window.S||g("v-ed").hidden)return;g("ss2").textContent=JSON.stringify(S)!==LAST?"● Not saved yet. Click Save.":g("ss").textContent}
+g("sv2").onclick=function(){var b=this;b.disabled=true;clearTimeout(tm);Promise.resolve(saveDoc()).then(function(){st2();toast("Saved ✓")}).then(function(){b.disabled=false},function(){b.disabled=false})};
+g("sgshow").onchange=function(){S.ssg=this.checked;render();save()};
+g("slshow").onchange=function(){S.ssl=this.checked;render();save()};
+function sh(){if(!window.S)return;g("sgshow").checked=S.ssg!==false;g("slshow").checked=S.ssl!==false;st2()}
+var _r=render;render=function(){_r.apply(this,arguments);sh()};
+setInterval(st2,1000);sh();
 })();
 </script>
 </body>
