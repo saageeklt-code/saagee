@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#d81b7a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saagee Ads">
 <title>Saagee Ads – Quotation Maker</title>
 <style>
 :root{--bg:#fff8fb;--pn:#fff;--ink:#2a1a24;--mu:#7a6872;--ln:#f0dde7;--br:#d81b7a;--bd:#b5135f;--bt:#fde7f2;--or:#ffb300;--ot:#fff4d6;--sh:0 6px 22px rgba(216,27,122,.10)}
@@ -134,7 +140,7 @@ body.wku .adm,body.wku .adm-only,body.wku #hc,body.wku #ht,body.wku #status,body
 <div id="v-wait" hidden><div style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px"><div><h2>Waiting for admin approval</h2><p id="wm"></p><button id="wlo">Logout</button></div></div></div>
 <button id="pvb" hidden>Preview ↓</button>
 <nav id="nav" hidden><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="es" class="adm-only">eSevai</button><button data-v="ord">Order Profit</button><button data-v="shp" class="adm-only">Shop Payments</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><button data-v="tasks">Tasks</button><button data-v="sal" class="adm-only">Salary</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button>
-<button class="ac" data-n="gst">+ GST Invoice</button><button id="dk" title="Dark mode">🌙</button><button id="lo">Logout</button></nav>
+<button class="ac" data-n="gst">+ GST Invoice</button><button id="ins" hidden>⬇ Install app</button><button id="dk" title="Dark mode">🌙</button><button id="lo">Logout</button></nav>
 <div id="v-home" class="pg" hidden><div id="att"></div><div id="dlb"></div><div class="cards" id="hc"></div>
 <div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="gst">GST Invoices</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
 <div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th class="adm">Due</th><th class="adm r">Amount</th><th class="adm">Status</th><th class="adm">By</th><th>Work / Delivery</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
@@ -505,7 +511,7 @@ function start(){if(ROLE==="admin")db.collection("users").onSnapshot(function(q)
 var okcfg=FB.apiKey.indexOf("PASTE")<0;
 function until(){return+localStorage.getItem("sa-until")||0}
 if(!okcfg){$("v-login").hidden=false;$("lerr").textContent="Firebase is not set up yet. Paste your Firebase config at the top of this file."}
-else{firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();
+else{firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();try{db.enablePersistence({synchronizeTabs:true}).catch(function(){})}catch(x){}
 function route(u){UID=u.uid;var ref=db.collection("users").doc(u.uid),first=true;
  ref.get().then(function(x){return x.exists?x:ref.set(Object.assign({name:window.SNAME||u.displayName||u.email,email:u.email,role:"pending",created:Date.now()},window.SDATA||{}))}).then(function(){
   ref.onSnapshot(function(x){var d=x.data()||{},r=d.role||"pending";UNAME=d.name||u.email;
@@ -528,8 +534,9 @@ $("lf").onsubmit=async function(ev){ev.preventDefault();if(!okcfg)return;var r=$
  try{await auth.setPersistence(r?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION);var d=new Date();d.setHours(23,59,59,999);localStorage.setItem("sa-until",r?d.getTime():0);await doAuth()}
  catch(x){eb.textContent=SIGNUP?"Could not create account: "+x.message:"Login failed. Check email and password."}};
 var SIGNUP=false;$("lsw").onclick=function(){SIGNUP=!SIGNUP;$("lsu").hidden=!SIGNUP;["lnm","lun","lph"].forEach(function(k){$(k).required=SIGNUP});$("lel").textContent=SIGNUP?"Email *":"Username / Email / Phone";$("lgb").textContent=SIGNUP?"Create account":"Login";this.textContent=SIGNUP?"Have an account? Login":"New worker? Create account"};
-$("wlo").onclick=function(){auth.signOut().then(function(){location.reload()})};
-$("lo").onclick=function(){auth.signOut().then(function(){location.reload()})};
+function wipeCache(){try{return db.terminate().then(function(){return db.clearPersistence()}).catch(function(){})}catch(x){return Promise.resolve()}}
+$("wlo").onclick=function(){auth.signOut().then(wipeCache).then(function(){location.reload()})};
+$("lo").onclick=function(){auth.signOut().then(wipeCache).then(function(){location.reload()})};
 function fdt(t){return t?new Date(t).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}):""}
 function attRender(){if(ROLE!=="worker"){$("att").innerHTML="";return}var d=today(),r=db.collection("attendance").doc(UID+"_"+d);
  r.get().then(function(x){var o=x.exists?x.data():null,n=new Date(),hm=String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");
@@ -821,6 +828,17 @@ var CAM=[];g("escm").onchange=function(){[].forEach.call(this.files,function(f){
 g("esfd").onclick=async function(){if(!window.showDirectoryPicker){alert("Use Chrome or Edge on a computer for scan folder.");return}try{var h=await showDirectoryPicker(),F=[];for await(var v of h.values()){if(v.kind==="file"&&/\.(jpe?g|png|webp)$/i.test(v.name))F.push(await v.getFile())}F.sort(function(a,b){return b.lastModified-a.lastModified});F=F.slice(0,12);var sel=[];
  g("esfl").innerHTML="";F.forEach(function(f){var im=new Image();im.src=URL.createObjectURL(f);im.title=f.name;im.style.cssText="height:90px;margin:3px;border:3px solid transparent;cursor:pointer";im.onclick=function(){var i=sel.indexOf(f);if(i>-1){sel.splice(i,1);im.style.borderColor="transparent"}else{sel.push(f);im.style.borderColor="#d81b7a"}setF(sel)};g("esfl").appendChild(im)});if(!F.length)g("esfl").textContent="No images found in that folder."}catch(x){}};
 })()
+</script>
+<script>
+(function(){
+ if("serviceWorker"in navigator&&(location.protocol==="https:"||location.hostname==="localhost")){
+  window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
+ }
+ var dp=null,b=document.getElementById("ins");
+ window.addEventListener("beforeinstallprompt",function(ev){ev.preventDefault();dp=ev;if(b)b.hidden=false});
+ if(b)b.onclick=function(){if(!dp)return;dp.prompt();dp.userChoice.then(function(){dp=null;b.hidden=true})};
+ window.addEventListener("appinstalled",function(){if(b)b.hidden=true});
+})();
 </script>
 </body>
 </html>
