@@ -119,7 +119,7 @@ nav button.ac{border-color:var(--or)}
 <script>var FB={apiKey:"AIzaSyDW4TMcBFkj_UM14AY3RIcd6rm8T5PavcM",authDomain:"saagee-ads.firebaseapp.com",projectId:"saagee-ads",appId:"1:746691295087:web:e0151dd5fe4ee6a536da9a"};</script>
 <div id="v-login" hidden><div class="lg-hero"><div class="lg-brand">Saagee <i>Ads</i></div><p>Quotations, estimates and invoices – professional, branded and ready in minutes.</p></div>
 <div class="lg-card"><h2>Welcome back</h2><small>Sign in to continue</small>
-<form id="lf"><div id="lsu" hidden><label for="lnm">Name *</label><input id="lnm"><label for="lun">Username *</label><input id="lun" placeholder="small letters/numbers"><label for="lph">Phone *</label><input id="lph" type="tel" placeholder="10 digit"><label for="lad">Address</label><textarea id="lad"></textarea><div class="r2"><div><label for="ldob">Date of birth</label><input id="ldob" type="date"></div><div><label for="ldoj">Date of joining</label><input id="ldoj" type="date"></div></div></div><label for="lem" id="lel">Username / Email / Phone / Worker ID</label><input id="lem" type="text" autocomplete="username" required><label for="lpw">Password</label><input id="lpw" type="password" autocomplete="current-password" required>
+<form id="lf"><div id="lsu" hidden><label for="lnm">Name *</label><input id="lnm"><label for="lun">Username *</label><input id="lun" placeholder="small letters/numbers"><label for="lph">Phone *</label><input id="lph" type="tel" placeholder="10 digit"><label for="lad">Address</label><textarea id="lad"></textarea><div class="r2"><div><label for="ldob">Date of birth</label><input id="ldob" type="date"></div><div><label for="ldoj">Date of joining</label><input id="ldoj" type="date"></div></div></div><label for="lem" id="lel">Username / Email / Phone / Worker ID</label><input id="lem" type="text" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" required><label for="lpw">Password</label><div class="pw"><input id="lpw" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" required><button type="button" id="lpe" aria-label="Show password" title="Show / hide password">👁</button></div>
 <label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px"><input type="checkbox" id="lrm" style="width:auto"> Keep me signed in for today</label>
 <div class="acts"><button class="pri" id="lgb" type="submit" style="width:100%;padding:10px">Login</button></div></form><div class="acts"><button id="lsw" type="button" class="lk">New worker? Create account</button></div><div id="lerr"></div></div></div>
 <style>
@@ -143,7 +143,7 @@ nav #pfb.on{background:var(--bd);color:#fff;border-color:var(--or)}
 <button id="pvb" hidden>Preview ↓</button>
 <nav id="nav" hidden><button id="hbg" aria-label="Menu">☰</button><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="es" class="adm-only">eSevai</button><button data-v="ord">Order Profit</button><button data-v="shp" class="adm-only">Shop Payments</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><button data-v="tasks">Tasks</button><button data-v="sal" class="adm-only">Salary</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button>
 <button class="ac" data-n="gst">+ GST Invoice</button><button id="ins" hidden>⬇ Install app</button><button id="dk" title="Dark mode">🌙</button><button id="lo">Logout</button><button id="pfb" data-v="prof" title="My profile" aria-label="My profile"><span id="pfi">?</span></button></nav>
-<div id="v-home" class="pg" hidden><div id="att"></div><div id="dlb"></div><div class="cards" id="hc"></div>
+<div id="v-home" class="pg" hidden><div id="wkg"></div><div id="att"></div><div id="dlb"></div><div id="wkt"></div><div class="cards" id="hc"></div>
 <div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="gst">GST Invoices</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
 <div class="tw"><table class="tb"><thead><tr><th>No</th><th>Type</th><th>Client</th><th>Date</th><th class="adm">Due</th><th class="adm r">Amount</th><th class="adm">Status</th><th class="adm">By</th><th>Work / Delivery</th><th></th></tr></thead><tbody id="hb"></tbody></table></div></div>
 <div id="v-clients" class="pg" hidden><fieldset><legend>Client</legend><div class="r2"><div><label for="cn">Name</label><input id="cn"></div><div><label for="cp">Phone</label><input id="cp"></div></div><label for="ca">Address</label><textarea id="ca"></textarea><div class="acts"><button class="pri" id="cs">Save client</button><button id="cc">Clear</button></div></fieldset>
@@ -423,7 +423,7 @@ function plist(){$("pl").innerHTML=(S.pay||[]).map(function(p,i){return'<div cla
 $("pl").oninput=function(ev){var r=ev.target.closest("[data-i]");if(r&&ev.target.dataset.k){S.pay[r.dataset.i][ev.target.dataset.k]=ev.target.value;render()}};
 $("pl").onclick=function(ev){var b=ev.target.closest("[data-del]");if(b){S.pay.splice(b.dataset.del,1);plist();render()}};
 $("pa").onclick=function(){S.pay=S.pay||[];S.pay.push({date:today(),amt:Math.max(calc().tot-paidAmt(),0)});plist();render()};
-function go(v){if(ROLE!=="admin"&&v!=="home"&&v!=="ed"&&v!=="money"&&v!=="tasks"&&v!=="ord"&&v!=="prof")v="home";$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();$("pvb").hidden=v!=="ed";if(v==="home"){home();attRender();dlvBanner()}if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist();if(v==="team"){team();teamLog()}if(v==="att")attView();if(v==="money")money();if(v==="tasks")tasks();if(v==="sal")salView();if(v==="ord")ordLoad();if(v==="shp")shpView();if(v==="prof")profView()}
+function go(v){if(ROLE!=="admin"&&v!=="home"&&v!=="ed"&&v!=="money"&&v!=="tasks"&&v!=="ord"&&v!=="prof")v="home";$("nav").hidden=false;document.querySelectorAll("nav [data-v]").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});VW.forEach(function(x){$("v-"+x).hidden=x!==v});if(v==="ed")render();$("pvb").hidden=v!=="ed";if(v==="home"){home();attRender();dlvBanner();window.wkHome&&wkHome()}if(v==="reports")rep();if(v==="settings")stf();if(v==="clients")clist();if(v==="team"){team();teamLog()}if(v==="att")attView();if(v==="money")money();if(v==="tasks")tasks();if(v==="sal")salView();if(v==="ord")ordLoad();if(v==="shp")shpView();if(v==="prof")profView()}
 function out(){$("v-wait").hidden=true;$("nav").hidden=true;VW.forEach(function(x){$("v-"+x).hidden=true});$("v-login").hidden=false}
 document.querySelectorAll("nav [data-v]").forEach(function(b){b.onclick=function(){if(canLeave())go(b.dataset.v)}});
 document.querySelectorAll("nav [data-n]").forEach(function(b){b.onclick=function(){if(canLeave())newDoc(b.dataset.n)}});
@@ -513,11 +513,13 @@ function start(){window.lvInit&&lvInit();if(ROLE==="admin")db.collection("users"
  db.collection("settings").doc("main").get().then(function(s){if(s.exists){var d=s.data();ST={bank:d.bank||"",upi:d.upi||"",upn:d.upn||"",gstin:d.gstin||"",shops:d.shops||{}};CAT=d.cat||[];if("bg"in d){BG=d.bg||"";store(KB,BG)}if("sg"in d){SG=d.sg||"";store(KS,SG)}if("sl"in d){SL=d.sl||"";store(KL,SL)}lhs();sls();ipick();render();if((!("bg"in d)&&BG)||(!("sg"in d)&&SG)||(!("sl"in d)&&SL))saveSettings()}else saveSettings()}).then(function(){go("home")})}
 var okcfg=FB.apiKey.indexOf("PASTE")<0;
 function until(){return+localStorage.getItem("sa-until")||0}
+async function healIdx(d,u){try{if(!d||!u.email)return;var ks=[],un=String(d.username||"").toLowerCase(),ph=String(d.phone||"").replace(/\D/g,"").slice(-10);if(/^[a-z0-9_]{3,20}$/.test(un))ks.push("u_"+un);if(ph.length===10)ks.push("p_"+ph);for(var i=0;i<ks.length;i++){var r=db.collection("loginIndex").doc(ks[i]),x=await r.get();if(!x.exists)await r.set({email:u.email,uid:u.uid})}}catch(x){}}
 if(!okcfg){$("v-login").hidden=false;$("lerr").textContent="Firebase is not set up yet. Paste your Firebase config at the top of this file."}
 else{firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();try{db.enablePersistence({synchronizeTabs:true}).catch(function(){})}catch(x){}
 function route(u){UID=u.uid;var ref=db.collection("users").doc(u.uid),first=true;
  ref.get().then(function(x){return x.exists?x:ref.set(Object.assign({name:window.SNAME||u.displayName||u.email,email:u.email,role:"pending",created:Date.now()},window.SDATA||{}))}).then(function(){
   ref.onSnapshot(function(x){var d=x.data()||{},r=d.role||"pending";UNAME=d.name||u.email;window.MEP=Object.assign({},d,{email:d.email||u.email});var pi=document.getElementById("pfi");if(pi)pi.textContent=String(UNAME).trim().charAt(0).toUpperCase()||"?";window.avUpd&&avUpd();
+   if(!window.__heal){window.__heal=1;healIdx(d,u)}
    if(!first&&r!==ROLE){location.reload();return}
    first=false;ROLE=r;
    if(r==="admin"||r==="worker"){$("v-wait").hidden=true;$("v-login").hidden=true;document.body.classList.toggle("wku",r!=="admin");if(r!=="admin")[].forEach.call(document.querySelectorAll("legend"),function(l){if(l.textContent==="Backup")l.parentNode.hidden=true});if(r!=="admin")document.querySelector('nav [data-v="home"]').textContent="My documents";if(!STARTED){STARTED=true;start()}}
@@ -530,12 +532,27 @@ async function doAuth(){var id=$("lem").value.trim(),pw=$("lpw").value,L=functio
   if(id.indexOf("@")<0)throw new Error("Enter a valid email");if(!/^[a-z0-9_]{3,20}$/.test(un))throw new Error("Username: 3-20 small letters/numbers");if(ph.length!==10)throw new Error("Enter 10 digit phone");
   if((await L("u_"+un).get()).exists)throw new Error("Username already used");if((await L("p_"+ph).get()).exists)throw new Error("Phone already used");
   window.SDATA={name:$("lnm").value.trim(),username:un,phone:ph,address:$("lad").value.trim(),dob:$("ldob").value,doj:$("ldoj").value};window.SNAME=SDATA.name;
-  var c=await auth.createUserWithEmailAndPassword(id,pw);await L("u_"+un).set({email:id,uid:c.user.uid});await L("p_"+ph).set({email:id,uid:c.user.uid});return}
- var em=id;if(id.indexOf("@")<0){var dg=id.replace(/\D/g,"").slice(-10),k=/^[\d\s+-]+$/.test(id)&&dg.length===10?"p_"+dg:"u_"+id.toLowerCase(),wm=/^saw[\s-]*(\d{1,6})$/i.exec(id),x=wm?await L("w_saw"+String(+wm[1]).padStart(3,"0")).get():await L(k).get();if(wm&&!x.exists)x=await L(k).get();if(!x.exists)throw new Error("none");em=x.data().email}
- await auth.signInWithEmailAndPassword(em,pw)}
+  var c=await auth.createUserWithEmailAndPassword(id,pw);try{await L("u_"+un).set({email:id,uid:c.user.uid});await L("p_"+ph).set({email:id,uid:c.user.uid})}catch(_){}return}
+ var em=id;if(id.indexOf("@")<0){var raw=id.trim(),dg=raw.replace(/\D/g,"").slice(-10),isPh=/^[\d\s+-]+$/.test(raw)&&dg.length===10,wm=/^saw[\s-]*(\d{1,6})$/i.exec(raw),ks=[],x=null;
+  if(wm)ks.push("w_saw"+String(+wm[1]).padStart(3,"0"));ks.push(isPh?"p_"+dg:"u_"+raw.toLowerCase().replace(/\s+/g,""));
+  for(var i=0;i<ks.length&&!x;i++){var sn=await L(ks[i]).get();if(sn.exists)x=sn}
+  if(!x){var er=new Error("Username / phone / Worker ID not found");er.code="app/not-found";throw er}em=x.data().email}
+ await auth.signInWithEmailAndPassword(em.trim(),pw)}
 $("lf").onsubmit=async function(ev){ev.preventDefault();if(!okcfg)return;var r=$("lrm").checked,eb=$("lerr");eb.textContent="";
  try{await auth.setPersistence(r?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION);var d=new Date();d.setHours(23,59,59,999);localStorage.setItem("sa-until",r?d.getTime():0);await doAuth()}
- catch(x){eb.textContent=SIGNUP?"Could not create account: "+x.message:"Login failed. Check email and password."}};
+ catch(x){var c=(x&&x.code)||"",ms=(x&&x.message)||"",t;
+  if(SIGNUP)t="Could not create account: "+ms;
+  else if(c==="app/not-found")t=ms+". Try your email address, or ask admin to fix your login.";
+  else if(/wrong-password|invalid-credential|invalid-login/.test(c))t="Password is wrong. Tap 👁 to check what you typed.";
+  else if(c==="auth/user-not-found")t="This email is not registered.";
+  else if(c==="auth/invalid-email")t="Email format is wrong.";
+  else if(c==="auth/too-many-requests")t="Too many wrong attempts. Wait a few minutes, or ask admin to send a reset link.";
+  else if(c==="auth/network-request-failed")t="No internet. Check connection and try again.";
+  else if(c==="auth/user-disabled")t="This account is disabled. Contact admin.";
+  else if(/permission/i.test(c+ms))t="Username lookup is blocked by server rules. Login with your email, and tell admin to publish the latest firestore.rules.";
+  else t="Login failed: "+(ms||c);
+  eb.textContent=t}};
+$("lpe").onclick=function(){var p=$("lpw"),sh=p.type==="password";p.type=sh?"text":"password";this.textContent=sh?"🙈":"👁";this.setAttribute("aria-label",sh?"Hide password":"Show password")};
 var SIGNUP=false;$("lsw").onclick=function(){SIGNUP=!SIGNUP;$("lsu").hidden=!SIGNUP;["lnm","lun","lph"].forEach(function(k){$(k).required=SIGNUP});$("lel").textContent=SIGNUP?"Email *":"Username / Email / Phone / Worker ID";$("lgb").textContent=SIGNUP?"Create account":"Login";this.textContent=SIGNUP?"Have an account? Login":"New worker? Create account"};
 function wipeCache(){try{return db.terminate().then(function(){return db.clearPersistence()}).catch(function(){})}catch(x){return Promise.resolve()}}
 $("wlo").onclick=function(){auth.signOut().then(wipeCache).then(function(){location.reload()})};
@@ -856,7 +873,45 @@ g("esfd").onclick=async function(){if(!window.showDirectoryPicker){alert("Use Ch
 .cal i.td{border-color:var(--br)}.cal i.lt:after{content:"";position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:#ffe066;box-shadow:0 0 0 1px #0003}
 .lg2{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;margin:8px 0}.lg2 s{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:4px;vertical-align:-1px;text-decoration:none}
 .jb{display:inline-block;background:var(--ot);color:#7a5200;border-radius:999px;padding:1px 9px;font-size:12px;margin:2px 3px 0 0}
-html.dark #crc,html.dark #idc{filter:invert(1) hue-rotate(180deg)}html.dark #idc img{filter:none}
+.pw{position:relative}.pw input{padding-right:48px}.pw button{position:absolute;right:4px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:19px;padding:4px 10px;line-height:1}
+html.dark #crc,html.dark #idc,html.dark .calc,html.dark .wkg{filter:invert(1) hue-rotate(180deg)}html.dark #idc img,html.dark .wkg img{filter:none}
+#idz{perspective:900px;max-width:400px;margin:0 auto 14px}
+.idc{position:relative;overflow:hidden;color:#fff;padding:14px 16px 12px;border-radius:20px;background:radial-gradient(120% 90% at 90% 0%,rgba(230,35,138,.50),transparent 55%),radial-gradient(90% 80% at 0% 100%,rgba(255,179,0,.30),transparent 55%),linear-gradient(145deg,#1b0b18,#0b0610 60%,#1a0a12);border:1.5px solid rgba(255,196,60,.65);box-shadow:0 0 0 1px rgba(255,63,164,.35),0 16px 38px rgba(216,27,122,.38),0 0 30px rgba(255,179,0,.20);transition:transform .15s ease-out;transform-style:preserve-3d;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.idc .sh{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.22),transparent 42%)}
+.idc:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,220,130,.22),transparent);transform:skewX(-20deg);animation:idsw 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes idsw{0%,60%{left:-60%}100%{left:130%}}
+.idc.cap:after,.idc.cap .sh{display:none}.idc.cap{box-shadow:none}
+.idt{display:flex;justify-content:space-between;align-items:center;position:relative}
+.idb{font-size:20px;font-weight:800;letter-spacing:.3px}.idb i{font-style:normal;background:linear-gradient(135deg,#ffc83d,#ff9f00);color:#3b2600;padding:0 8px;border-radius:6px;margin-left:3px}
+.idk{font-size:10px;letter-spacing:2.5px;color:#ffd166;font-weight:700;border:1px solid rgba(255,209,102,.55);padding:2px 9px;border-radius:999px}
+.idm{display:flex;gap:12px;align-items:center;margin:12px 0;position:relative}
+.idm .av{box-shadow:0 0 0 2px #ffb300,0 0 14px rgba(255,179,0,.65);border:2px solid #1b0b18}
+.idnm{font-size:20px;font-weight:800;line-height:1.15;word-break:break-word;text-shadow:0 0 12px rgba(255,63,164,.6)}
+.idj .jb{background:rgba(255,179,0,.18);color:#ffd166;border:1px solid rgba(255,179,0,.45)}
+.idf{display:flex;align-items:center;gap:12px;position:relative}
+.chip{width:42px;height:32px;border-radius:7px;background:linear-gradient(135deg,#ffe29a,#d4a017 50%,#fff0b8);border:1px solid #8a6a10;position:relative;flex:0 0 auto}
+.chip:before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#8a6a10}
+.chip:after{content:"";position:absolute;top:0;bottom:0;left:33%;width:1px;background:#8a6a10;box-shadow:12px 0 0 #8a6a10}
+.idv{flex:1;min-width:0;font:700 22px/1 "Courier New",monospace;letter-spacing:3px;color:#f6d77c;text-shadow:0 1px 0 #fff4c9,0 -1px 0 #6b4a05,0 3px 6px rgba(0,0,0,.7),0 0 14px rgba(255,179,0,.45);white-space:nowrap}
+.idq{width:64px;height:64px;background:#fff;padding:3px;border-radius:8px;flex:0 0 auto}
+.idx{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#e6cfda;margin-top:10px;padding-top:8px;border-top:1px dashed rgba(255,209,102,.4);position:relative}
+#wkg,#wkt{display:none}body.wku #wkg,body.wku #wkt{display:block}
+.wkg{border-radius:18px;padding:14px 16px;color:#fff;background:linear-gradient(120deg,#e6238a,#c4126b 55%,#ff9f00);display:flex;gap:12px;align-items:center;margin-bottom:12px;box-shadow:var(--sh)}
+.wkg .av{width:56px;height:56px;border:3px solid rgba(255,255,255,.75)}.wkg b{font-size:19px;display:block;line-height:1.2}.wkg small{color:rgba(255,255,255,.92)}
+.wkt{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 14px}
+.wkt button.t{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 4px;border-radius:16px;font-weight:600;font-size:13px;background:#fff;border:1px solid var(--ln);box-shadow:var(--sh);color:var(--ink);min-height:84px}
+.wkt button.t span{font-size:27px;line-height:1}.wkt button.t.n{background:linear-gradient(135deg,#fff1f8,#fff4d6);border-color:#ffd9ec}
+.wkt button.t:active{transform:scale(.96)}
+.calc{background:linear-gradient(160deg,#2a1020,#150a12);border-radius:20px;padding:14px;color:#fff;box-shadow:var(--sh);margin:0 0 14px;max-width:420px}
+.calc h4{margin:0 0 8px;font-size:13px;letter-spacing:1px;color:#ffd166}
+.calc .ds{background:rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;text-align:right;min-height:78px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.calc .ex{font-size:13px;opacity:.7;min-height:18px;word-break:break-all}.calc .rs{font-size:32px;font-weight:700;color:#ffd166;word-break:break-all}
+.calc .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.calc .kp button{padding:14px 0;font-size:19px;border-radius:14px;background:rgba(255,255,255,.1);border:0;color:#fff}
+.calc .kp button:hover{color:#fff;filter:brightness(1.2)}.calc .kp button:active{transform:scale(.94)}
+.calc .kp button.o{background:rgba(255,179,0,.25);color:#ffd166}.calc .kp button.z{grid-column:span 2}
+.calc .kp button.eq{background:linear-gradient(135deg,#e6238a,#c4126b);color:#fff}
+.wkh3{margin:6px 0 8px;font-size:15px}
 @media(max-width:900px){#hbg{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;font-size:22px;flex:0 0 auto;border-color:transparent}
 nav>*:not(#hbg):not(.brand):not(.sp):not(#pfb){display:none!important}nav #pfb{box-shadow:none;margin-left:0}}
 </style>
@@ -868,7 +923,7 @@ window.nt=function(t){t=String(t||"").trim().replace(/[.\-]/g,":");var m=/^(\d{1
 function avh(u,s){return'<div class="av" style="width:'+s+'px;height:'+s+'px;font-size:'+Math.round(s*.42)+'px">'+(u.photo?'<img alt="" src="'+u.photo+'">':e(String(u.name||"?").trim().charAt(0).toUpperCase()))+"</div>"}
 function jbs(u){return(u.jobs||[]).map(function(j){return'<span class="jb">'+e(j)+"</span>"}).join("")}
 function md(h){var m=document.createElement("div");m.className="mdl";m.innerHTML="<div>"+h+"</div>";document.body.appendChild(m);m.onclick=function(ev){if(ev.target===m)m.remove()};return m}
-window.avUpd=function(){var m=window.MEP||{};g("pfb").innerHTML=m.photo?'<img alt="" src="'+m.photo+'">':'<span id="pfi">'+e(String(m.name||"?").trim().charAt(0).toUpperCase())+"</span>";if(!g("v-prof").hidden&&!window.PVU)profView()};
+window.avUpd=function(){var m=window.MEP||{};g("pfb").innerHTML=m.photo?'<img alt="" src="'+m.photo+'">':'<span id="pfi">'+e(String(m.name||"?").trim().charAt(0).toUpperCase())+"</span>";if(!g("v-prof").hidden&&!window.PVU)profView();if(window.wkHome&&!g("v-home").hidden)wkHome()};
 document.addEventListener("click",function(ev){if(ev.target.closest&&ev.target.closest("#pfb"))window.PVU=null},true);
 /* ---- mobile drawer ---- */
 g("hbg").onclick=function(){var d=document.createElement("div"),it=[],m=window.MEP||{},bs=[].slice.call(document.querySelectorAll("#nav>button")),pf=g("pfb");d.id="drw";bs.unshift(bs.splice(bs.indexOf(pf),1)[0]);
@@ -891,11 +946,14 @@ function rolesDlg(u){var cur=u.jobs||[],cu=cur.filter(function(j){return JOBS.in
 window.team=function(){var P=USERS.filter(function(u){return u.role==="pending"}),A=USERS.filter(function(u){return u.role!=="pending"}),nw=A.filter(function(u){return u.role==="worker"&&!u.wid}).length;
  function dt(u){return u.created?new Date(u.created).toLocaleDateString("en-IN"):""}
  function tb(L,f,em){return'<div class="tw"><table class="tb"><thead><tr><th>Name</th><th>Email</th><th>Since</th><th>Role</th><th></th></tr></thead><tbody>'+(L.length?L.map(function(u){return'<tr data-u="'+u.id+'"><td><div style="display:flex;gap:8px;align-items:center">'+avh(u,34)+"<div><b>"+e(u.name||"")+"</b>"+(u.wid?' <span class="bd pk">'+e(u.wid)+"</span>":"")+(u.phone?"<br><small>"+e(u.phone)+" · @"+e(u.username||"")+"</small>":"")+"</div></div></td><td>"+e(u.email||"")+(u.address?"<br><small>"+e(u.address)+"</small>":"")+"</td><td>"+dt(u)+(u.doj?"<br><small>Joined "+e(u.doj)+"</small>":"")+(u.dob?"<br><small>DOB "+e(u.dob)+"</small>":"")+"</td><td>"+e(u.role)+" · "+DOCS.filter(function(d){return d.createdBy===u.id}).length+" docs<br>"+jbs(u)+"</td><td>"+f(u)+"</td></tr>"}).join(""):'<tr><td colspan="5">'+em+"</td></tr>")+"</tbody></table></div>"}
- g("tmw").innerHTML='<fieldset><legend>Pending requests</legend>'+tb(P,function(){return'<button class="pri" data-r="worker">Approve</button> <button data-r="rejected">Reject</button>'},"No pending requests.")+"</fieldset><fieldset><legend>Team</legend>"+(nw?'<div class="acts" style="margin:0 0 10px"><button class="ac" id="gwa">Give Worker ID to all ('+nw+")</button></div>":"")+tb(A,function(u){if(u.id===UID)return"You";var x=u.role==="worker"?' <button data-x="roles">Job roles</button> <button data-x="view">Profile</button>'+(u.wid?"":' <button data-x="wid">Give ID</button>'):"";return(u.role==="worker"?'<button data-r="disabled">Disable</button> <button data-r="admin">Make admin</button>':u.role==="admin"?'<button data-r="worker">Make worker</button>':'<button data-r="worker">Enable</button>')+x},"No team members yet.")+"</fieldset>"};
-g("tmw").onclick=async function(ev){var b=ev.target.closest("[data-r],[data-x],#gwa");if(!b)return;
+ g("tmw").innerHTML='<fieldset><legend>Pending requests</legend>'+tb(P,function(){return'<button class="pri" data-r="worker">Approve</button> <button data-r="rejected">Reject</button>'},"No pending requests.")+"</fieldset><fieldset><legend>Team</legend>"+'<div class="acts" style="margin:0 0 10px"><button id="rli">🔧 Fix login for all (repair index)</button></div>'+(nw?'<div class="acts" style="margin:0 0 10px"><button class="ac" id="gwa">Give Worker ID to all ('+nw+")</button></div>":"")+tb(A,function(u){if(u.id===UID)return"You";var x=u.role==="worker"?' <button data-x="edit">✎ Edit</button> <button data-x="view">Profile</button>'+(u.wid?"":' <button data-x="wid">Give ID</button>'):"";return(u.role==="worker"?'<button data-r="disabled">Disable</button> <button data-r="admin">Make admin</button>':u.role==="admin"?'<button data-r="worker">Make worker</button>':'<button data-r="worker">Enable</button>')+x+(u.email?' <button data-x="reset">Send reset link</button>':"")},"No team members yet.")+"</fieldset>"};
+g("tmw").onclick=async function(ev){var b=ev.target.closest("[data-r],[data-x],#gwa,#rli");if(!b)return;
  if(b.id==="gwa"){b.disabled=true;var W=USERS.filter(function(u){return u.role==="worker"&&!u.wid}).sort(function(a,c){return(a.doj||"9").localeCompare(c.doj||"9")||(a.created||0)-(c.created||0)});try{for(var i=0;i<W.length;i++)await assignWid(W[i]);toast("Worker IDs given")}catch(x){alert(x.message)}return}
+ if(b.id==="rli"){repairIdx(b);return}
  var id=b.closest("[data-u]").dataset.u,u=USERS.filter(function(z){return z.id===id})[0];if(!u||id===UID)return;
- if(b.dataset.x==="roles")return rolesDlg(u);if(b.dataset.x==="view"){window.PVU=u;go("prof");return}
+ if(b.dataset.x==="roles")return rolesDlg(u);if(b.dataset.x==="edit")return editDlg(u);
+ if(b.dataset.x==="reset"){if(!u.email){alert("No email on this account");return}if(!confirm("Send a password reset link to "+u.email+"?\nThe worker will set a new password. You will not see it."))return;try{await auth.sendPasswordResetEmail(u.email);logAct("Reset link sent to "+(u.name||u.email));toast("Reset link sent to "+u.email)}catch(x){alert(x.message)}return}
+ if(b.dataset.x==="view"){window.PVU=u;go("prof");return}
  if(b.dataset.x==="wid"){try{await assignWid(u);toast("Worker ID: "+u.wid)}catch(x){alert(x.message)}return}
  var r=b.dataset.r;if(r==="admin"&&!confirm("Give this person full admin access?"))return;logAct((u.name||id)+" set to "+r);
  try{await db.collection("users").doc(id).update({role:r});if(r==="worker")await assignWid(u)}catch(x){alert(x.message)}};
@@ -951,14 +1009,17 @@ function cal(){var y=+CM.slice(0,4),mo=+CM.slice(5,7),dim=new Date(y,mo,0).getDa
 function lvl(self){g("lvl").innerHTML=LV.length?'<div class="tw"><table class="tb"><tbody>'+LV.map(function(l){return"<tr><td>"+(l.type==="paid"?"Paid leave":"Absent (no pay)")+"</td><td>"+fd(l.from)+(l.to!==l.from?" – "+fd(l.to):"")+"</td><td>"+e(l.reason||"")+'</td><td><span class="bd '+(l.status==="approved"?"ok":l.status==="rejected"?"bad":"")+'">'+l.status+"</span></td><td>"+(self&&l.status==="pending"?'<button data-c="'+l.id+'">Cancel</button>':"")+"</td></tr>"}).join("")+"</tbody></table></div>":"<small>No leave requests yet.</small>"}
 window.profView=function(){var self=!(window.PVU&&ROLE==="admin"),u=self?(window.MEP||{}):window.PVU,id=self?UID:u.id,wk=u.role==="worker"||(self&&ROLE==="worker"),w=g("v-prof");
  var rows=[["Worker ID",u.wid],["Username",u.username],["Phone",u.phone],["Email",u.email],["Address",u.address],["Date of birth",u.dob?fd(u.dob):""],["Date of joining",u.doj?fd(u.doj):""]];
- var card='<div id="idc" style="max-width:420px;margin:0 auto 14px;border-radius:16px;overflow:hidden;background:#fff;color:#2a1a24;border:1px solid var(--ln);box-shadow:var(--sh)"><div style="background:linear-gradient(120deg,#e6238a,#c4126b 50%,#ffb300);color:#fff;padding:12px 16px;font-size:21px;font-weight:800">Saagee <i style="font-style:normal;background:#ffb300;color:#3b2600;padding:0 9px;border-radius:7px">Ads</i><span style="float:right;font-size:10px;font-weight:700;letter-spacing:1px;margin-top:9px;opacity:.95">ID CARD</span></div>'
- +'<div style="display:flex;gap:14px;align-items:center;padding:16px">'+avh(u,92)+'<div style="min-width:0"><div style="font-size:21px;font-weight:800;line-height:1.2;word-break:break-word">'+e(u.name||UNAME||"")+'</div><div style="font-weight:700;color:#d81b7a;margin:4px 0;font-size:16px">'+(wk?(u.wid?e(u.wid):"ID pending"):"ADMIN")+"</div><div>"+(jbs(u)||(wk?'<span style="color:#7a6872;font-size:13px">No job role yet</span>':""))+"</div></div></div>"
- +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 16px 14px;border-top:1px dashed #f0dde7;font-size:13px"><div><small style="color:#7a6872">Phone</small><br><b>'+(u.phone?e(u.phone):"—")+'</b></div><div><small style="color:#7a6872">Joined</small><br><b>'+(u.doj?fd(u.doj):"—")+'</b></div></div><div style="height:6px;background:linear-gradient(90deg,#e6238a,#ffb300)"></div></div>';
- w.innerHTML=(self?"":'<div class="acts" style="margin:0 0 8px"><button id="pbk">← Back to Team</button></div>')+card+(self?'<div class="acts" style="justify-content:center;margin:-4px 0 14px"><button id="pph">✎ Change photo</button>'+(u.photo?'<button id="prm">Remove photo</button>':"")+"</div>":"")
+ var wid=wk?(u.wid||""):"",qr="";if(wid){try{var qq=qrcode(0,"M");qq.addData("SAAGEE-ADS:"+wid);qq.make();qr=qq.createDataURL(4,2)}catch(_){}}
+ var card='<div id="idz"><div id="idc" class="idc" data-w="'+e(wid||"card")+'"><div class="sh"></div><div class="idt"><div class="idb">Saagee <i>Ads</i></div><div class="idk">'+(wk?"WORKER ID":"ADMIN")+'</div></div>'
+ +'<div class="idm">'+avh(u,74)+'<div style="min-width:0"><div class="idnm">'+e(u.name||UNAME||"")+'</div><div class="idj">'+(jbs(u)||'<span class="jb">'+(wk?"No job role yet":"Admin")+"</span>")+"</div></div></div>"
+ +'<div class="idf"><div class="chip"></div><div class="idv">'+(wk?(wid?e(wid):"ID PENDING"):"ADMIN")+"</div>"+(qr?'<img class="idq" alt="QR" src="'+qr+'">':"")+"</div>"
+ +'<div class="idx"><span>📞 '+(u.phone?e(u.phone):"—")+"</span><span>Joined "+(u.doj?fd(u.doj):"—")+"</span></div></div></div>";
+ w.innerHTML=(self?"":'<div class="acts" style="margin:0 0 8px"><button id="pbk">← Back to Team</button></div>')+card+'<div class="acts" style="justify-content:center;margin:-4px 0 14px">'+(self?'<button id="pph">✎ Change photo</button>'+(u.photo?'<button id="prm">Remove photo</button>':""):"")+'<button class="ac" id="idd">⬇ Download ID card</button></div>'
  +(wk?'<fieldset><legend>Attendance</legend><div class="acts" style="margin:0 0 10px;align-items:center"><button id="cpv">◀</button><b id="cml" style="min-width:130px;text-align:center"></b><button id="cnx">▶</button>'+(self?'<button id="pat">Mark today\'s attendance</button>':"")+'</div><div class="cards" id="pcd"></div><div class="cal" id="cgr"></div><div class="lg2"><span><s style="background:#2fb86a"></s>Present</span><span><s style="background:#e5484d"></s>Paid leave</span><span><s style="background:#8e4ec6"></s>Absent (no pay)</span><span><s style="background:#f59f00"></s>Half day</span><span><s style="background:#e3e3e3"></s>Sunday / Holiday</span><span><s style="background:#ffe066"></s>Late</span></div><div id="cdt" style="font-size:13px"></div></fieldset><fieldset><legend>Leave requests</legend>'+(self?'<div class="r2"><div><label for="lvt">Type</label><select id="lvt"><option value="paid">Paid leave</option><option value="personal">Absent (no pay)</option></select></div><div><label for="lvr">Reason</label><input id="lvr"></div></div><div class="r2"><div><label for="lvf">From</label><input id="lvf" type="date"></div><div><label for="lvo">To</label><input id="lvo" type="date"></div></div><div class="acts"><button class="pri" id="lvs">Send request</button></div>':"")+'<div id="lvl"></div></fieldset>':"")
  +'<fieldset><legend>Details</legend><div class="tw"><table class="tb"><tbody>'+rows.map(function(r){return'<tr><th style="width:130px">'+r[0]+"</th><td>"+(r[1]?e(r[1]):"—")+"</td></tr>"}).join("")+"</tbody></table></div></fieldset>";
  if(!self)g("pbk").onclick=function(){window.PVU=null;go("team")};
  if(self){g("pph").onclick=photoDlg;if(g("prm"))g("prm").onclick=function(){db.collection("users").doc(UID).update({photo:""})}}
+ tilt(g("idc"));g("idd").onclick=dlCard;
  if(!wk)return;
  CM=CM||today().slice(0,7);g("cpv").onclick=function(){CM=addMo(-1);cal()};g("cnx").onclick=function(){CM=addMo(1);cal()};if(self)g("pat").onclick=function(){go("home")};
  function addMo(n){var d=new Date(+CM.slice(0,4),+CM.slice(5,7)-1+n,1);return d.getFullYear()+"-"+pad(d.getMonth()+1)}
@@ -986,6 +1047,62 @@ g("atb").onclick=function(ev){var b=ev.target.closest("[data-s]");if(!b)return;v
  if(o){y.editedAt=Date.now();y.editedBy=UNAME+" (admin)";y.first=o.first||{status:o.status,time:o.time}}
  (st==="paid"?chkPaid(w,[d]):Promise.resolve("")).then(function(er){if(er){alert(er);return}return db.collection("attendance").doc(w+"_"+d).set(y).then(attView)}).catch(function(x){alert(x.message)})};
 var _av=window.attView;window.attView=function(){_av();lvq();holLoad().then(holView)};
+/* ===== v2: ID card, worker edit, reset link, repair index, worker home ===== */
+function tilt(c){if(!c)return;function mv(ev){var r=c.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width,y=(ev.clientY-r.top)/r.height;c.style.transform="rotateY("+((x-.5)*22).toFixed(1)+"deg) rotateX("+((.5-y)*22).toFixed(1)+"deg)";c.style.setProperty("--mx",(x*100).toFixed(0)+"%");c.style.setProperty("--my",(y*100).toFixed(0)+"%")}
+ function rs(){c.style.transform="";c.style.setProperty("--mx","30%");c.style.setProperty("--my","0%")}
+ c.addEventListener("pointermove",mv);c.addEventListener("pointerdown",mv);c.addEventListener("pointerup",rs);c.addEventListener("pointerleave",rs);c.addEventListener("pointercancel",rs)}
+function dlCard(){var c=g("idc");if(!c)return;if(!window.html2canvas){alert("Download is not ready. Check internet and try again.");return}
+ var t=c.style.transform;c.style.transform="none";c.classList.add("cap");
+ function done(){c.style.transform=t;c.classList.remove("cap")}
+ html2canvas(c,{scale:3,backgroundColor:null,useCORS:true}).then(function(cv){done();var a=document.createElement("a");a.download="Saagee_ID_"+(c.dataset.w||"card")+".png";a.href=cv.toDataURL("image/png");document.body.appendChild(a);a.click();a.remove()}).catch(function(x){done();alert("Could not make the image: "+x.message)})}
+function permHint(x){return x.message+(/permission/i.test(x.message||"")?"\n\nLatest firestore.rules is not published yet. Publish it in Firebase Console > Firestore > Rules.":"")}
+function editDlg(u){var cur=u.jobs||[],cu=cur.filter(function(j){return JOBS.indexOf(j)<0}).join(", ");
+ var m=md('<h3 style="margin:0 0 6px">Edit worker</h3><label>Name</label><input id="edn" value="'+e(u.name||"")+'"><div class="r2"><div><label>Username</label><input id="edu" autocapitalize="off" value="'+e(u.username||"")+'"></div><div><label>Phone</label><input id="edp" type="tel" value="'+e(u.phone||"")+'"></div></div><label>Email (cannot be changed)</label><input value="'+e(u.email||"")+'" disabled><label>Address</label><textarea id="eda">'+e(u.address||"")+'</textarea><div class="r2"><div><label>Date of birth</label><input id="edb" type="date" value="'+e(u.dob||"")+'"></div><div><label>Date of joining</label><input id="edj" type="date" value="'+e(u.doj||"")+'"></div></div><label>Job roles</label>'
+  +JOBS.map(function(j){return'<label style="display:flex;gap:8px;align-items:center;margin:3px 0;font-size:14px;color:inherit"><input type="checkbox" style="width:auto" value="'+j+'" '+(cur.indexOf(j)>-1?"checked":"")+"> "+j+"</label>"}).join("")
+  +'<label>Other roles (comma separated)</label><input id="edo" value="'+e(cu)+'"><div class="acts"><button class="pri" id="eds">Save</button><button id="edc">Cancel</button></div>');
+ var v=function(i){return m.querySelector("#"+i).value.trim()};
+ m.querySelector("#edc").onclick=function(){m.remove()};
+ m.querySelector("#eds").onclick=async function(){var b=this,nm=v("edn"),un=v("edu").toLowerCase().replace(/\s+/g,""),ph=v("edp").replace(/\D/g,"").slice(-10);
+  if(!nm){alert("Name is required");return}if(!/^[a-z0-9_]{3,20}$/.test(un)){alert("Username: 3-20 small letters, numbers or _");return}if(ph.length!==10){alert("Enter a 10 digit phone number");return}
+  b.disabled=true;
+  try{var L=function(k){return db.collection("loginIndex").doc(k)},ou=String(u.username||"").toLowerCase(),op=String(u.phone||"").replace(/\D/g,"").slice(-10);
+   async function claim(k,label){var s=await L(k).get();if(s.exists&&s.data().uid!==u.id)throw new Error(label+" is already used by another person");if(!s.exists)await L(k).set({email:u.email,uid:u.id})}
+   await claim("u_"+un,"This username");await claim("p_"+ph,"This phone number");
+   var jobs=[].map.call(m.querySelectorAll("input[type=checkbox]:checked"),function(c){return c.value});v("edo").split(",").forEach(function(x){x=x.trim();if(x&&jobs.indexOf(x)<0)jobs.push(x)});
+   await db.collection("users").doc(u.id).update({name:nm,username:un,phone:ph,address:v("eda"),dob:v("edb"),doj:v("edj"),jobs:jobs});
+   async function drop(k){try{var o=await L(k).get();if(o.exists&&o.data().uid===u.id)await L(k).delete()}catch(_){}}
+   if(ou&&ou!==un)await drop("u_"+ou);if(op&&op!==ph)await drop("p_"+op);
+   logAct("Edited details of "+nm);m.remove();toast("Details saved")}
+  catch(x){alert(permHint(x));b.disabled=false}}}
+async function repairIdx(btn){btn.disabled=true;var n=0,bad=0,i,j;
+ for(i=0;i<USERS.length;i++){var u=USERS[i];if(!u.email||u.role==="pending")continue;var ks=[],un=String(u.username||"").toLowerCase(),ph=String(u.phone||"").replace(/\D/g,"").slice(-10);
+  if(/^[a-z0-9_]{3,20}$/.test(un))ks.push("u_"+un);if(ph.length===10)ks.push("p_"+ph);if(u.wid)ks.push(wkey(u.wid));
+  for(j=0;j<ks.length;j++){try{var r=db.collection("loginIndex").doc(ks[j]),s=await r.get();if(!s.exists){await r.set({email:u.email,uid:u.id});n++}else if(s.data().uid!==u.id)bad++}catch(x){bad++}}}
+ btn.disabled=false;toast("Login index fixed: "+n+" added"+(bad?", "+bad+" problem(s) (check rules / duplicates)":""))}
+window.wkHome=function(){if(ROLE!=="worker")return;var m=window.MEP||{};
+ g("wkg").innerHTML='<div class="wkg">'+avh(m,56)+'<div style="min-width:0"><small>Vanakkam 🙏</small><b>'+e(m.name||UNAME||"")+'</b><small>'+e(m.wid||"Worker ID pending")+"</small></div></div>";
+ var T=g("wkt");if(T.dataset.ok)return;T.dataset.ok="1";
+ var X=[["n","quotation","📝","Quotation"],["n","estimate","📋","Estimate"],["n","bill","🧾","Bill"],["n","gst","💼","GST Invoice"],["v","ord","📊","Order Profit"],["v","money","💰","Money"],["v","tasks","✅","Tasks"],["v","prof","🪪","ID Card"],["c","","🧮","Calculator"]];
+ var K=[["C","o"],["B","o","⌫"],["%","o"],["/","o","÷"],["7"],["8"],["9"],["*","o","×"],["4"],["5"],["6"],["-","o","−"],["1"],["2"],["3"],["+","o"],["0","z"],["."],["=","eq"]];
+ T.innerHTML='<div class="wkt">'+X.map(function(t,i){return'<button class="t'+(t[0]==="n"?" n":"")+'" data-i="'+i+'"><span>'+t[2]+"</span>"+t[3]+"</button>"}).join("")+"</div>"
+  +'<div class="calc" id="wkc"><h4>🧮 CALCULATOR</h4><div class="ds"><div class="ex" id="wkce"></div><div class="rs" id="wkcr">0</div></div><div class="kp">'+K.map(function(k){return'<button data-k="'+k[0]+'" class="'+(k[1]||"")+'">'+(k[2]||k[0])+"</button>"}).join("")+"</div></div>"
+  +'<h3 class="wkh3">📄 My documents</h3>';
+ T.firstChild.onclick=function(ev){var b=ev.target.closest("[data-i]");if(!b)return;var t=X[b.dataset.i];
+  if(t[0]==="n"){if(canLeave())newDoc(t[1])}else if(t[0]==="v"){window.PVU=null;go(t[1])}else g("wkc").scrollIntoView({behavior:"smooth",block:"center"})};
+ calcInit()};
+function calcInit(){var ex="",done=false,raw="0",R=g("wkcr"),XD=g("wkce");
+ function ev(s){s=s.replace(/[+\-*\/.]+$/,"");if(!s||!/^[0-9+\-*\/.]+$/.test(s))return"";try{var v=Function('"use strict";return ('+s+")")();return isFinite(v)?String(+v.toFixed(8)):"Error"}catch(x){return""}}
+ function paint(){var p=ev(ex);if(p!=="")raw=p;else if(!ex)raw="0";XD.textContent=ex.replace(/\*/g,"×").replace(/\//g,"÷").replace(/-/g,"−");R.textContent=isNaN(+raw)?raw:(+raw).toLocaleString("en-IN",{maximumFractionDigits:8})}
+ g("wkc").onclick=function(ev0){var b=ev0.target.closest("button[data-k]");if(!b)return;var k=b.dataset.k,isOp=/^[+\-*\/]$/.test(k);
+  if(k==="C"){ex="";done=false;raw="0"}
+  else if(k==="B"){ex=ex.slice(0,-1)}
+  else if(k==="="){var p=ev(ex);if(p==="Error")raw="Error";else if(p!==""){ex=p;done=true}}
+  else if(k==="%"){var mm=/(\d*\.?\d+)$/.exec(ex);if(mm){var lf=ex.slice(0,mm.index),pc=+mm[1],bs=/[+\-]$/.test(lf)?ev(lf.slice(0,-1)):"";ex=lf+String(+((bs!==""&&bs!=="Error"?+bs*pc:pc)/100).toFixed(8))}}
+  else if(isOp){if(!ex){if(k==="-")ex="-"}else if(/[+\-*\/]$/.test(ex))ex=ex.slice(0,-1)+k;else ex+=k;done=false}
+  else{if(done){ex="";done=false}var n=/(\d*\.?\d*)$/.exec(ex)[1];if(k==="."){if(n.indexOf(".")>-1)return;if(!n)ex+="0"}else if(n==="0")ex=ex.slice(0,-1);ex+=k}
+  paint()};
+ paint()}
+
 })();
 </script>
 </body>
