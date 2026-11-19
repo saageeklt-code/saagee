@@ -154,7 +154,7 @@ nav #pfb.on{background:var(--bd);color:#fff;border-color:var(--or)}
 </style>
 <div id="v-wait" hidden><div style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px"><div><h2>Waiting for admin approval</h2><p id="wm"></p><button id="wlo">Logout</button></div></div></div>
 <button id="pvb" hidden>Preview ↓</button>
-<nav id="nav" hidden><button id="hbg" aria-label="Menu">☰</button><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="es" class="adm-only">eSevai</button><button data-v="area" class="adm-only">Areas</button><button data-v="ord">Order Profit</button><button data-v="shp" class="adm-only">Shop Payments</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><button data-v="tasks">Tasks</button><button data-v="sal" class="adm-only">Salary</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button>
+<nav id="nav" hidden><button id="hbg" aria-label="Menu">☰</button><b class="brand">Saagee <i>Ads</i></b><button data-v="home">Home</button><button data-v="es" class="adm-only">eSevai</button><button data-v="area" class="adm-only">Areas</button><button data-v="fes" class="adm-only">Festivals</button><button data-v="ord">Order Profit</button><button data-v="shp" class="adm-only">Shop Payments</button><button data-v="clients" class="adm-only">Clients</button><button data-v="reports" class="adm-only">Reports</button><button data-v="settings" class="adm-only">Settings</button><button data-v="team" class="adm-only" id="tmb">Team</button><button data-v="att" class="adm-only">Attendance</button><button data-v="money">Money</button><button data-v="tasks">Tasks</button><button data-v="sal" class="adm-only">Salary</button><span class="sp"></span><button class="ac" data-n="quotation">+ Quotation</button><button class="ac" data-n="estimate">+ Estimate</button><button class="ac" data-n="bill">+ Bill</button>
 <button class="ac" data-n="gst">+ GST Invoice</button><button id="ins" hidden>⬇ Install app</button><button id="dk" title="Dark mode">🌙</button><button id="lo">Logout</button><button id="pfb" data-v="prof" title="My profile" aria-label="My profile"><span id="pfi">?</span></button></nav>
 <div id="v-home" class="pg" hidden><div id="wkg"></div><div id="att"></div><div id="dlb"></div><div id="wkt"></div><div class="cards" id="hc"></div>
 <div class="r2" style="grid-template-columns:1fr 200px;margin-bottom:10px"><input id="hq" placeholder="Search number or client"><select id="ht"><option value="">All types</option><option value="quotation">Quotations</option><option value="estimate">Estimates</option><option value="bill">Bills</option><option value="gst">GST Invoices</option><option value="overdue">Overdue bills</option><option value="trash">Trash</option></select></div>
@@ -1251,6 +1251,144 @@ A("ap").onclick=async function(){var G=[];[].forEach.call(document.querySelector
  var P=A("areaPrint");if(!P){P=document.createElement("div");P.id="areaPrint";document.body.appendChild(P)}
  P.innerHTML=G.map(function(g){var b=BL[g.bc];return'<div class="blk"><h2>'+e(b.t)+" / "+e(b.e)+" – "+e(b.d.t)+" / "+e(b.d.e)+"</h2>"+tbl(g,false)+"</div>"}).join("");
  try{await document.fonts.ready}catch(x){}document.body.classList.add("pa");var done=function(){document.body.classList.remove("pa");window.removeEventListener("afterprint",done)};window.addEventListener("afterprint",done);setTimeout(function(){window.print()},300)};
+})();
+</script>
+<style id="fes-css">
+#fesPrint{display:none}
+@page fesp{size:A4 portrait;margin:8mm 9mm}
+@media print{
+body.pf>*:not(#fesPrint){display:none!important}
+body.pf #fesPrint{display:block!important;page:fesp;background:#fff;color:#1a1a1a;font:9pt/1.15 "Noto Sans Tamil","Nirmala UI",Latha,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#fesPrint *{box-sizing:border-box}
+#fesPrint .ftt{display:flex;justify-content:space-between;align-items:baseline;border-bottom:.5mm solid #1f3a5f;padding-bottom:.8mm;margin-bottom:1.6mm;color:#1f3a5f;font-weight:700;font-size:12.5pt}
+#fesPrint .ftt span:last-child{font-size:9.5pt;font-weight:400;color:#444}
+#fesPrint .fsec{margin-bottom:1.5mm}
+#fesPrint .fmh{background:#1f3a5f;color:#fff;font-weight:700;font-size:10.5pt;padding:.5mm 2mm;display:flex;justify-content:space-between;line-height:5.5mm;break-after:avoid}
+#fesPrint .fmh .en{font-weight:400;font-size:9.5pt}
+#fesPrint .fr{display:grid;grid-template-columns:4mm 8mm 22mm 1fr 1fr;align-items:center;min-height:4.95mm;border-bottom:.12mm solid #cfcfcf;padding:0 1mm;break-inside:avoid}
+#fesPrint .fl-ta .fr,#fesPrint .fl-en .fr{grid-template-columns:4mm 8mm 22mm 1fr}
+#fesPrint .fr .mk{color:#8a1c1c;font-size:8pt}
+#fesPrint .fr .dn{font-weight:700;text-align:right;padding-right:2mm;font-size:10pt}
+#fesPrint .fr .wd{color:#444;font-size:8.6pt;white-space:nowrap}
+#fesPrint .fr .wd i{font-style:normal;color:#777}
+#fesPrint .fr .ta{padding-right:2mm}
+#fesPrint .fr.h .ta,#fesPrint .fr.h .en{font-weight:700}
+#fesPrint .fr.h .dn{color:#8a1c1c}
+#fesPrint .fft{margin-top:3mm;border-top:.3mm solid #999;padding-top:1mm;font-size:8pt;color:#444;line-height:1.35}
+#fesPrint .fft b{color:#8a1c1c}
+#fesPrint .fpg{break-after:page}
+#fesPrint .fpg:last-child{break-after:auto}
+#fesPrint .fgh{display:flex;justify-content:space-between;align-items:baseline;background:#1f3a5f;color:#fff;padding:2mm 4mm;font-weight:700;font-size:18pt;margin-bottom:2mm}
+#fesPrint .fgh .en{font-size:12pt;font-weight:400}
+#fesPrint .fcal{width:100%;border-collapse:collapse;table-layout:fixed}
+#fesPrint .fcal th{background:#eef1f6;border:.2mm solid #999;padding:1mm;font-size:9pt;text-align:center}
+#fesPrint .fcal th i{display:block;font-style:normal;font-size:7pt;color:#666;font-weight:400}
+#fesPrint .fcal th.su{color:#8a1c1c}
+#fesPrint .fcal td{border:.2mm solid #999;vertical-align:top;padding:.8mm 1.2mm;overflow-wrap:anywhere}
+#fesPrint .fcal td.o{background:#f6f6f6}
+#fesPrint .fcal td.ho{background:#fdf0f0}
+#fesPrint .fcal .cd{font-weight:700;font-size:10.5pt}
+#fesPrint .fcal td.su .cd,#fesPrint .fcal td.ho .cd{color:#8a1c1c}
+#fesPrint .ce{margin-top:.6mm;line-height:1.15;font-size:7pt}
+#fesPrint .ce b{display:block;font-weight:600}
+#fesPrint .ce i{display:block;font-style:normal;color:#555;font-size:6pt}
+#fesPrint .ce.h b{color:#8a1c1c;font-weight:700}
+#fesPrint .fc .fbig{margin-top:4mm}
+#fesPrint .fc .fbig .fr{min-height:7.2mm;font-size:11.5pt}
+#fesPrint .fc .fbig .fr .dn{font-size:13pt}
+#fesPrint .fc .fbig .fr .wd{font-size:10pt}
+#fesPrint .fpt{background:#1f3a5f;color:#fff;padding:5mm 6mm;margin-bottom:3mm}
+#fesPrint .fpt .a{font-size:24pt;font-weight:700;line-height:1.2}
+#fesPrint .fpt .b{font-size:14pt;opacity:.95}
+#fesPrint .fpt .c{font-size:10pt;margin-top:1mm;opacity:.85}
+#fesPrint .fpr{display:grid;grid-template-columns:20mm 30mm 1fr;align-items:center;border-bottom:.2mm solid #bbb;min-height:10.5mm;padding:1mm 2mm;break-inside:avoid}
+#fesPrint .fpd{text-align:center;line-height:1}
+#fesPrint .fpd b{display:block;font-size:20pt;color:#8a1c1c}
+#fesPrint .fpd span{font-size:8pt;color:#555;text-transform:uppercase}
+#fesPrint .fpw{font-size:10pt;color:#333}
+#fesPrint .fpw i{display:block;font-style:normal;font-size:8pt;color:#777}
+#fesPrint .fpn b{display:block;font-size:14pt}
+#fesPrint .fpn i{display:block;font-style:normal;font-size:10pt;color:#444}
+}
+</style>
+<script>
+(function(){var g=function(i){return document.getElementById(i)};
+var DEF=[["2026-11-24","கார்த்திகை தீபம்","Karthigai Deepam",""],["2026-11-26","அரசியலமைப்பு தினம்","Constitution Day",""],["2026-12-01","உலக எய்ட்ஸ் தினம்","World AIDS Day",""],["2026-12-03","உலக மாற்றுத்திறனாளிகள் தினம்","Intl. Day of Persons with Disabilities",""],["2026-12-10","மனித உரிமைகள் தினம்","Human Rights Day",""],["2026-12-11","மகாகவி பாரதியார் பிறந்தநாள்","Bharathiyar Birthday",""],["2026-12-16","மார்கழி மாதப் பிறப்பு","Margazhi Month Begins",""],["2026-12-20","வைகுண்ட ஏகாதசி","Vaikunta Ekadasi",""],["2026-12-24","ஆருத்ரா தரிசனம் (திருவாதிரை)","Arudra Darshan (Thiruvathirai)",""],["2026-12-24","கிறிஸ்துமஸ் ஈவ்","Christmas Eve",""],["2026-12-25","கிறிஸ்துமஸ் பண்டிகை","Christmas","H"],["2026-12-31","புத்தாண்டு ஈவ்","New Year's Eve",""],["2027-01-01","ஆங்கிலப் புத்தாண்டு","New Year's Day","H"],["2027-01-12","தேசிய இளைஞர் தினம் (விவேகானந்தர் ஜெயந்தி)","National Youth Day (Vivekananda Jayanthi)",""],["2027-01-14","போகிப் பண்டிகை","Bhogi",""],["2027-01-15","தைப் பொங்கல்","Thai Pongal","H"],["2027-01-16","மாட்டுப் பொங்கல் / திருவள்ளுவர் தினம்","Mattu Pongal / Thiruvalluvar Day","H"],["2027-01-17","காணும் பொங்கல் / உழவர் திருநாள்","Kaanum Pongal / Uzhavar Thirunal","H"],["2027-01-17","எம்.ஜி.ஆர். பிறந்தநாள்","MGR Birthday",""],["2027-01-22","தைப்பூசம்","Thai Poosam","H"],["2027-01-26","குடியரசு தினம்","Republic Day","H"],["2027-02-10","திருநீற்றுப் புதன்","Ash Wednesday",""],["2027-02-14","காதலர் தினம்","Valentine's Day",""],["2027-02-20","மாசி மகம்","Masi Magam","T"],["2027-02-24","ஜெயலலிதா பிறந்தநாள்","Jayalalithaa Birthday",""],["2027-02-28","தேசிய அறிவியல் தினம்","National Science Day",""],["2027-03-06","மகா சிவராத்திரி","Maha Shivaratri",""],["2027-03-08","உலக மகளிர் தினம்","International Women's Day",""],["2027-03-10","ரம்ஜான் (ஈகைத் திருநாள்)","Ramzan (Eid ul-Fitr)","H"],["2027-03-21","குருத்தோலை ஞாயிறு","Palm Sunday",""],["2027-03-22","பங்குனி உத்திரம்","Panguni Uthiram",""],["2027-03-26","புனித வெள்ளி","Good Friday","H"],["2027-03-28","ஈஸ்டர் (உயிர்த்தெழுதல் ஞாயிறு)","Easter Sunday",""],["2027-04-01","வங்கிகள் ஆண்டு கணக்கு முடிப்பு","Banks' Annual Closing (banks only)",""],["2027-04-07","தெலுங்கு புத்தாண்டு (உகாதி)","Ugadi / Telugu New Year","H"],["2027-04-14","தமிழ்ப் புத்தாண்டு (சித்திரை 1)","Tamil New Year (Puthandu)","H"],["2027-04-14","டாக்டர் அம்பேத்கர் பிறந்தநாள்","Dr. Ambedkar Jayanthi",""],["2027-04-15","ஸ்ரீ ராம நவமி","Sri Rama Navami","T"],["2027-04-19","மகாவீர் ஜெயந்தி","Mahavir Jayanthi","H"],["2027-04-20","சித்ரா பௌர்ணமி","Chitra Pournami",""],["2027-05-01","மே தினம் (உழைப்பாளர் தினம்)","May Day (Workers' Day)","H"],["2027-05-09","அன்னையர் தினம்","Mother's Day",""],["2027-05-17","பக்ரீத் (தியாகத் திருநாள்)","Bakrid (Eid al-Adha)","H"],["2027-05-20","வைகாசி விசாகம்","Vaikasi Visakam","T"],["2027-06-03","கலைஞர் கருணாநிதி பிறந்தநாள்","Kalaignar Karunanidhi Birthday",""],["2027-06-05","உலக சுற்றுச்சூழல் தினம்","World Environment Day",""],["2027-06-15","முஹர்ரம்","Muharram","H"],["2027-06-20","தந்தையர் தினம்","Father's Day",""],["2027-06-21","சர்வதேச யோகா தினம்","Intl. Yoga Day",""],["2027-07-01","மருத்துவர்கள் தினம்","Doctors' Day",""],["2027-07-15","காமராஜர் பிறந்தநாள் (கல்வி வளர்ச்சி நாள்)","Kamarajar Birthday (Education Development Day)",""],["2027-07-17","ஆடி மாதப் பிறப்பு","Aadi Month Begins",""],["2027-07-18","தமிழ்நாடு நாள்","Tamil Nadu Day",""],["2027-08-01","நண்பர்கள் தினம்","Friendship Day",""],["2027-08-02","ஆடி அமாவாசை","Aadi Amavasai",""],["2027-08-03","ஆடிப்பெருக்கு","Aadi Perukku",""],["2027-08-13","வரலட்சுமி விரதம்","Varalakshmi Viratham",""],["2027-08-15","சுதந்திர தினம்","Independence Day","H"],["2027-08-15","மிலாது நபி","Milad-un-Nabi","T"],["2027-08-25","கிருஷ்ண ஜெயந்தி","Krishna Jayanthi","H"],["2027-09-04","விநாயகர் சதுர்த்தி","Vinayagar Chathurthi","H"],["2027-09-05","ஆசிரியர் தினம்","Teachers' Day",""],["2027-09-12","ஓணம் (திருவோணம்)","Onam (Thiruvonam)","T"],["2027-09-15","அண்ணா பிறந்தநாள் / பொறியாளர் தினம்","Anna Birthday / Engineers' Day",""],["2027-09-17","புரட்டாசி மாதப் பிறப்பு","Purattasi Month Begins",""],["2027-09-17","தந்தை பெரியார் பிறந்தநாள்","Periyar Birthday",""],["2027-09-30","நவராத்திரி ஆரம்பம்","Navaratri Begins",""],["2027-10-02","காந்தி ஜெயந்தி","Gandhi Jayanthi","H"],["2027-10-08","சரஸ்வதி பூஜை / ஆயுத பூஜை","Saraswathi Pooja / Ayudha Pooja","H"],["2027-10-09","விஜயதசமி","Vijayadasami","H"],["2027-10-15","ஏ.பி.ஜே. அப்துல் கலாம் பிறந்தநாள்","A.P.J. Abdul Kalam Birthday",""],["2027-10-28","தீபாவளி","Deepavali","H"],["2027-10-30","கந்த சஷ்டி ஆரம்பம்","Kanda Sashti Begins",""],["2027-11-04","சூரசம்ஹாரம்","Soorasamharam",""],["2027-11-14","குழந்தைகள் தினம்","Children's Day",""],["2027-11-17","கார்த்திகை மாதப் பிறப்பு (ஐயப்ப மாலை)","Karthigai Month Begins (Ayyappa Mala)",""],["2027-11-26","அரசியலமைப்பு தினம்","Constitution Day",""],["2027-12-01","உலக எய்ட்ஸ் தினம்","World AIDS Day",""],["2027-12-03","உலக மாற்றுத்திறனாளிகள் தினம்","Intl. Day of Persons with Disabilities",""],["2027-12-10","மனித உரிமைகள் தினம்","Human Rights Day",""],["2027-12-11","மகாகவி பாரதியார் பிறந்தநாள்","Bharathiyar Birthday",""],["2027-12-12","கார்த்திகை தீபம்","Karthigai Deepam",""],["2027-12-16","மார்கழி மாதப் பிறப்பு","Margazhi Month Begins",""],["2027-12-24","கிறிஸ்துமஸ் ஈவ்","Christmas Eve",""],["2027-12-25","கிறிஸ்துமஸ் பண்டிகை","Christmas","H"],["2027-12-31","புத்தாண்டு ஈவ்","New Year's Eve",""]];
+var TM=["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"],
+EM=["January","February","March","April","May","June","July","August","September","October","November","December"],
+TD=["ஞாயிறு","திங்கள்","செவ்வாய்","புதன்","வியாழன்","வெள்ளி","சனி"],ED=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var FES=[],SRC="db",ERR="";
+function mkd(a,i){return{id:"def"+i,d:a[0],ta:a[1],en:a[2],t:a[3]||""}}
+function pd(d){var p=d.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function srt(a,b){return a.d<b.d?-1:a.d>b.d?1:((a.t==="H"?0:1)-(b.t==="H"?0:1))||String(a.en).localeCompare(String(b.en))}
+function mon(d){return d.slice(0,7)}
+function mlab(k){var p=k.split("-");return{ta:TM[+p[1]-1]+" "+p[0],en:EM[+p[1]-1]+" "+p[0]}}
+function sh(d){return EM[+d.slice(5,7)-1].slice(0,3)+" "+d.slice(0,4)}
+function allMonths(){if(!FES.length)return[];var a=FES.map(function(x){return x.d}).sort(),s=a[0],t=a[a.length-1],y=+s.slice(0,4),m=+s.slice(5,7),ey=+t.slice(0,4),em=+t.slice(5,7),o=[];while(y<ey||(y===ey&&m<=em)){o.push(y+"-"+(m<10?"0":"")+m);m++;if(m>12){m=1;y++}}return o}
+function curM(){return g("fesM")?g("fesM").value:"all"}
+function sel(){var v=curM();return FES.filter(function(x){return v==="all"||mon(x.d)===v}).sort(srt)}
+function load(){return db.collection("festivals").get().then(function(q){FES=q.docs.map(function(d){var o=d.data();o.id=d.id;return o}).filter(function(x){return x.d});SRC="db";ERR=""}).catch(function(x){FES=DEF.map(mkd);SRC="def";ERR=x.message||"error"})}
+
+/* ---------- print builders ---------- */
+function lb(it,lg){var s=it.t==="T"?" *":"";
+ if(lg==="ta")return"<b>"+e(it.ta||it.en)+s+"</b>";
+ if(lg==="en")return"<b>"+e(it.en||it.ta)+s+"</b>";
+ return"<b>"+e(it.ta||it.en)+s+"</b>"+(it.ta&&it.en?"<i>"+e(it.en)+"</i>":"")}
+function ttl(L,lg){var a=L.length?L[0].d:"",b=L.length?L[L.length-1].d:"",r=a?sh(a)+(mon(a)===mon(b)?"":" – "+sh(b)):"";
+ return'<div class="ftt"><span>'+(lg==="en"?"Festivals &amp; Special Days":"முக்கிய நாட்கள் &amp; பண்டிகைகள்")+"</span><span>"+(lg==="both"?"Festivals &amp; Special Days · ":"")+e(r)+"</span></div>"}
+function leg(lg){var t="● தமிழ்நாடு அரசு பொது விடுமுறை &nbsp;·&nbsp; * சந்திர / பஞ்சாங்கக் கணக்கு – ±1 நாள் மாறலாம் &nbsp;·&nbsp; இஸ்லாமிய பண்டிகைகள் பிறை தெரிவதைப் பொறுத்து மாறலாம்",
+ en="● TN Govt public holiday &nbsp;·&nbsp; * tentative, may change by ±1 day &nbsp;·&nbsp; Muslim festivals depend on moon sighting";
+ return'<div class="fft">'+(lg!=="en"?t.replace("●","<b>●</b>"):"")+(lg==="both"?"<br>":"")+(lg!=="ta"?en.replace("●","<b>●</b>"):"")+"</div>"}
+function rows(L,lg){return'<div class="fl-'+lg+'">'+L.map(function(x){var w=pd(x.d).getDay(),s=x.t==="T"?" *":"";
+ return'<div class="fr'+(x.t==="H"?" h":"")+'"><span class="mk">'+(x.t==="H"?"●":"")+'</span><span class="dn">'+(+x.d.slice(8))+'</span><span class="wd">'+(lg==="en"?"":TD[w]+" ")+(lg==="ta"?"":"<i>"+ED[w]+"</i>")+"</span>"+(lg!=="en"?'<span class="ta">'+e(x.ta||x.en)+s+"</span>":"")+(lg!=="ta"?'<span class="en">'+e(x.en||x.ta)+s+"</span>":"")+"</div>"}).join("")+"</div>"}
+function fA(L,lg){var G={},K=[];L.forEach(function(x){var k=mon(x.d);if(!G[k]){G[k]=[];K.push(k)}G[k].push(x)});
+ var h="<div>"+ttl(L,lg);
+ K.forEach(function(k){var m=mlab(k);h+='<section class="fsec"><div class="fmh">'+(lg!=="en"?"<span>"+e(m.ta)+"</span>":"")+(lg!=="ta"?'<span class="en">'+e(m.en)+"</span>":"")+"</div>"+rows(G[k],lg)+"</section>"});
+ return h+leg(lg)+"</div>"}
+function cal(k,L,lg,ch){var p=k.split("-"),y=+p[0],mo=+p[1]-1,f=new Date(y,mo,1).getDay(),n=new Date(y,mo+1,0).getDate(),M={};
+ L.forEach(function(x){if(mon(x.d)===k){var d=+x.d.slice(8);(M[d]=M[d]||[]).push(x)}});
+ var h='<table class="fcal"><thead><tr>'+TD.map(function(t,i){return"<th"+(i===0?' class="su"':"")+">"+(lg==="en"?ED[i]:t+(lg==="both"?"<i>"+ED[i]+"</i>":""))+"</th>"}).join("")+"</tr></thead><tbody>";
+ var d=1-f;while(d<=n){h+="<tr>";for(var c=0;c<7;c++,d++){if(d<1||d>n){h+='<td class="o" style="height:'+ch+'mm"></td>';continue}
+  var ev=M[d]||[],hol=ev.some(function(x){return x.t==="H"});
+  h+='<td class="'+(c===0?"su ":"")+(hol?"ho":"")+'" style="height:'+ch+'mm"><div class="cd">'+d+"</div>"+ev.map(function(x){return'<div class="ce'+(x.t==="H"?" h":"")+'">'+lb(x,lg)+"</div>"}).join("")+"</td>"}h+="</tr>"}
+ return h+"</tbody></table>"}
+function gh(k,lg){var m=mlab(k);return'<div class="fgh"><span>'+(lg==="en"?e(m.en):e(m.ta))+"</span>"+(lg==="both"?'<span class="en">'+e(m.en)+"</span>":"")+"</div>"}
+function fB(L,lg){var v=curM(),K=v==="all"?allMonths():[v];return K.map(function(k){return'<div class="fpg">'+gh(k,lg)+cal(k,L,lg,29)+leg(lg)+"</div>"}).join("")}
+function fC(L,lg){var v=curM(),A=allMonths(),k=v!=="all"?v:(A.indexOf(new Date().toISOString().slice(0,7))>-1?new Date().toISOString().slice(0,7):A[0]);if(!k)return"";
+ var M=FES.filter(function(x){return mon(x.d)===k}).sort(srt);
+ return'<div class="fpg fc">'+gh(k,lg)+cal(k,M,lg,21)+'<div class="fbig">'+rows(M,lg)+"</div>"+leg(lg)+"</div>"}
+function fD(L,lg){var H=L.filter(function(x){return x.t==="H"});if(!H.length){alert("No govt holidays in this selection");return""}
+ var a=H[0].d,b=H[H.length-1].d,r=sh(a)+(mon(a)===mon(b)?"":" – "+sh(b));
+ return'<div><div class="fpt"><div class="a">'+(lg==="en"?"Government Holidays":"அரசு விடுமுறை நாட்கள்")+"</div>"+(lg==="both"?'<div class="b">Government Holidays</div>':"")+'<div class="c">'+e(r)+"</div></div>"+
+ H.map(function(x){var w=pd(x.d).getDay(),s=x.t==="T"?" *":"";return'<div class="fpr"><div class="fpd"><b>'+(+x.d.slice(8))+"</b><span>"+EM[+x.d.slice(5,7)-1].slice(0,3)+'</span></div><div class="fpw">'+(lg==="en"?ED[w]:TD[w]+(lg==="both"?"<i>"+ED[w]+"</i>":""))+'</div><div class="fpn">'+lb(x,lg)+"</div></div>"}).join("")+leg(lg)+"</div>"}
+window.fesBuild=function(f,lg,L){return f==="a"?fA(L,lg):f==="b"?fB(L,lg):f==="c"?fC(L,lg):fD(L,lg)};
+
+/* ---------- screen ---------- */
+g("v-ord").insertAdjacentHTML("beforebegin",'<div id="v-fes" class="pg" hidden><fieldset><legend>Festival &amp; Special Days (admin only)</legend><div class="r2"><div><label for="fesM">Month</label><select id="fesM"></select></div><div><label for="fesQ">Search</label><input id="fesQ" placeholder="Tamil or English"></div></div><div class="acts"><button class="pri" id="fesA">+ Add day</button><button class="ac" id="fesL" hidden>Load default list (Nov 2026 – Dec 2027)</button></div><small id="fesI"></small></fieldset>'+
+'<fieldset><legend>Print (A4)</legend><div class="r2"><div><label for="fesF">Format</label><select id="fesF"><option value="a">1. Month-wise list (compact, 2 pages)</option><option value="b">2. Calendar grid (one month per page)</option><option value="c">3. Selected month (calendar + big list)</option><option value="d">4. Wall poster – Govt holidays only</option></select></div><div><label for="fesG">Language</label><select id="fesG"><option value="both">Tamil + English</option><option value="ta">Tamil only</option><option value="en">English only</option></select></div></div><div class="acts"><button class="pri" id="fesP">🖨 Print / Save as PDF</button></div><small>Month box: "All months" prints the full list. Format 3 uses the chosen month (this month if "All"). In the print window choose "Save as PDF" to get a file.</small></fieldset>'+
+'<div class="tw"><table class="tb"><thead><tr><th>Date</th><th>Day</th><th>தமிழ்</th><th>English</th><th>Type</th><th></th></tr></thead><tbody id="fesT"></tbody></table></div></div>');
+function fillM(){var s=g("fesM"),v=s.value||"all",A=allMonths();s.innerHTML='<option value="all">All months</option>'+A.map(function(k){var m=mlab(k);return'<option value="'+k+'">'+e(m.en)+" · "+e(m.ta)+"</option>"}).join("");s.value=A.indexOf(v)>-1?v:"all"}
+function draw(){fillM();var v=curM(),q=g("fesQ").value.trim().toLowerCase(),L=FES.filter(function(x){return(v==="all"||mon(x.d)===v)&&(!q||(x.ta||"").toLowerCase().indexOf(q)>-1||(x.en||"").toLowerCase().indexOf(q)>-1)}).sort(srt),rw=SRC==="db";
+ g("fesT").innerHTML=L.length?L.map(function(x){var w=pd(x.d).getDay();return'<tr data-id="'+e(x.id)+'"><td>'+fd(x.d)+"</td><td>"+TD[w]+" <small>"+ED[w]+"</small></td><td>"+e(x.ta||"")+"</td><td>"+e(x.en||"")+"</td><td>"+(x.t==="H"?'<span class="bd bad">Govt holiday</span>':x.t==="T"?'<span class="bd">Tentative *</span>':"")+"</td><td>"+(rw?'<button data-a="ed">✎</button> <button data-a="dl">✕</button>':"")+"</td></tr>"}).join(""):'<tr><td colspan="6">No days found.</td></tr>';
+ g("fesL").hidden=!(SRC==="db"&&!FES.length);g("fesA").disabled=!rw;
+ g("fesI").textContent=SRC==="def"?"⚠ Showing the built-in list (read-only). Database access is not enabled yet – publish the new firestore.rules, then reopen this tab. ("+ERR+")":L.length+" day(s) shown · total "+FES.length}
+function dlg(it){var n=!it;it=it||{d:"",ta:"",en:"",t:""};
+ var m=md('<h3 style="margin:0 0 8px">'+(n?"Add":"Edit")+' day</h3><label>Date</label><input id="fedd" type="date" value="'+e(it.d)+'"><label>தமிழ் (Tamil name)</label><input id="fedt" value="'+e(it.ta||"")+'"><label>English name</label><input id="fede" value="'+e(it.en||"")+'"><label>Type</label><select id="fedy"><option value="">Normal special day</option><option value="H">Govt public holiday ●</option><option value="T">Tentative * (date may change)</option></select><div class="acts"><button class="pri" id="feds">Save</button><button id="fedc">Cancel</button></div>');
+ g("fedy").value=it.t||"";g("fedc").onclick=function(){m.remove()};
+ g("feds").onclick=function(){var d=g("fedd").value,ta=g("fedt").value.trim(),en=g("fede").value.trim();if(!d||(!ta&&!en)){alert("Date and at least one name are needed");return}
+  var o={d:d,ta:ta,en:en,t:g("fedy").value,upd:Date.now()},r=n?db.collection("festivals").add(o):db.collection("festivals").doc(it.id).update(o);
+  r.then(function(){m.remove();toast("Saved ✓");return load()}).then(draw).catch(function(x){alert(x.message)})}}
+g("fesM").onchange=draw;g("fesQ").oninput=draw;g("fesA").onclick=function(){dlg()};
+g("fesL").onclick=function(){var b=this;b.disabled=true;var w=db.batch();DEF.forEach(function(a){w.set(db.collection("festivals").doc(),{d:a[0],ta:a[1],en:a[2],t:a[3]||"",upd:Date.now()})});
+ w.commit().then(function(){toast("Default list loaded ✓");return load()}).then(draw).catch(function(x){alert(x.message)}).then(function(){b.disabled=false})};
+g("fesT").onclick=function(ev){var b=ev.target.closest("[data-a]");if(!b)return;var id=b.closest("tr").dataset.id,it=FES.filter(function(x){return x.id===id})[0];if(!it)return;
+ if(b.dataset.a==="ed")dlg(it);else if(confirm("Delete \""+(it.en||it.ta)+"\" ("+fd(it.d)+")?"))db.collection("festivals").doc(id).delete().then(function(){toast("Deleted");return load()}).then(draw).catch(function(x){alert(x.message)})};
+g("fesP").onclick=async function(){var L=sel(),f=g("fesF").value,lg=g("fesG").value;if(!L.length&&f!=="c"&&f!=="b"){alert("Nothing to print");return}
+ var h=window.fesBuild(f,lg,L);if(!h)return;var P=g("fesPrint");if(!P){P=document.createElement("div");P.id="fesPrint";document.body.appendChild(P)}P.innerHTML=h;
+ try{await document.fonts.ready}catch(x){}document.body.classList.add("pf");var done=function(){document.body.classList.remove("pf");window.removeEventListener("afterprint",done)};window.addEventListener("afterprint",done);setTimeout(function(){window.print()},300)};
+window.fesView=function(){if(ROLE!=="admin")return;load().then(draw)};
+VW.push("fes");
+var _go=go;go=function(v){_go.apply(this,arguments);if(v==="fes")window.fesView()};
 })();
 </script>
 </body>
