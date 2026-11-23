@@ -6,7 +6,7 @@ if(window.__wp)return;window.__wp=1;
 var g=function(i){return document.getElementById(i)};
 var COL={orders:"wpOrders",sites:"wpSites",teams:"wpTeams",ledger:"wpLedger",stock:"wpStock",cost:"wpCost"};
 var D={orders:[],sites:[],teams:[],ledger:[],stock:[],cost:[]};
-var WP={tab:"orders",ord:"",ft:"",fs:"",fq:"",lim:150,team:"",mon:"",eo:"",es:"",et:"",sf:""};
+var WP={tab:"orders",ord:"",ft:"",fs:"",fq:"",lim:150,team:"",mon:"",eo:"",es:"",et:"",el:"",em:"",ec:"",sf:""};
 var started=false,err="",KEEP={};
 var STS=[["booked","Booked"],["assigned","Assigned"],["painted","Painted"],["measured","Measured"],["verified","Verified"]];
 var LTY=[["food","Food"],["advance","Advance"],["brush","Brush / material"],["paint","Paint"],["vehicle","Tata Ace / vehicle"],["other","Other"],["pay","Payment to team (settlement)"]];
@@ -15,7 +15,7 @@ var UNITS=["Litre","Kg","Tin","Bucket","Piece","Box","Packet","Nos","Meter","Rol
 function R(v){v=nm(v);return(v<0?"-":"")+"₹"+fmt(Math.abs(v))}
 function q2(v){return Math.round(nm(v)*100)/100}
 function Q(v){return q2(v).toLocaleString("en-IN")}
-function tn(t){var n=String(t&&t.name||"").trim();return /^team/i.test(n)?n:"Team "+n}
+function tn(t){var n=String(t&&t.name||"").trim();return !n?"Team (no name)":/^team/i.test(n)?n:"Team "+n}
 function byId(a,id){for(var i=0;i<a.length;i++)if(a[i].id===id)return a[i];return null}
 function opt(v,l,s){return'<option value="'+e(v)+'"'+(String(s)===String(v)?" selected":"")+">"+e(l)+"</option>"}
 function dl(id,arr){return'<datalist id="'+id+'">'+arr.map(function(x){return'<option value="'+e(x)+'">'}).join("")+"</datalist>"}
@@ -23,7 +23,7 @@ function uniq(a){var o={},r=[];a.forEach(function(x){x=String(x||"").trim();if(x
 function sortNo(a,b){return nm(a.no)-nm(b.no)}
 function isDone(s){return s.st==="measured"||s.st==="verified"}
 function stLabel(k){for(var i=0;i<STS.length;i++)if(STS[i][0]===k)return STS[i][1];return k||""}
-function ordName(o){return o?(o.company||"")+(o.title?" – "+o.title:""):"(deleted order)"}
+function ordName(o){return o?((o.company||"")+(o.title?" – "+o.title:"")).trim()||"(no name)":"(deleted order)"}
 function val(id){var x=g(id);return x?x.value.trim():""}
 function who(){return typeof UNAME!=="undefined"?UNAME:""}
 function log(t){try{logAct(t)}catch(x){}}
@@ -63,7 +63,7 @@ function profitCalc(){
 function stockBal(){
   var P={},B={},T={};
   D.stock.forEach(function(m){var k=String(m.pr||"").trim().toLowerCase()+"|"+String(m.un||"").trim().toLowerCase();
-    if(!P[k])P[k]={pr:String(m.pr||"").trim(),un:String(m.un||"").trim()};var q=nm(m.qt);
+    if(!P[k])P[k]={pr:String(m.pr||"").trim()||"(no name)",un:String(m.un||"").trim()};var q=nm(m.qt);
     if(m.fr==="SHOP")T[k]=(T[k]||0)+q;else{B[m.fr]=B[m.fr]||{};B[m.fr][k]=(B[m.fr][k]||0)-q}
     B[m.to]=B[m.to]||{};B[m.to][k]=(B[m.to][k]||0)+q});
   return{P:P,B:B,T:T}}
@@ -158,6 +158,9 @@ function tabSites(){
   '<div><label for="ws_sq">Sq ft (auto = W×H, or type)</label><input id="ws_sq" type="number" min="0" step="0.01" value="'+e(s0.sq)+'"></div></div>'+
   '<div class="r2"><div><label for="ws_ag">Agreement amount ₹ (to wall owner, 1 year)</label><input id="ws_ag" type="number" min="0" value="'+e(s0.ag)+'"></div>'+
   '<div><label for="ws_nt">Note</label><input id="ws_nt" value="'+e(s0.nt)+'"></div></div>'+
+  '<div class="r3"><div><label for="ws_agp">Agreement paid to wall owner?</label><select id="ws_agp">'+opt("0","No",s0.agp?"1":"0")+opt("1","Yes",s0.agp?"1":"0")+'</select></div>'+
+  '<div><label for="ws_agd">Paid date</label><input id="ws_agd" type="date" value="'+e(s0.agd)+'"></div>'+
+  '<div><label for="ws_ver">Verified by (company person)</label><input id="ws_ver" value="'+e(s0.ver)+'"></div></div>'+
   '<div class="acts"><button class="pri" data-a="ssave">'+(s0.id?"Update site":"Add site no. "+nextNo)+'</button>'+(s0.id?'<button data-a="scancel">Cancel</button>':"")+'</div>'+
   dl("ws_dlp",uniq(D.sites.map(function(s){return s.pl})))+'</fieldset>';
   h+='<details><summary>Paste many sites at once</summary><label for="ws_bulk">One site per line: owner, village, phone, width, height, agreement amount (copy from Excel works too; blanks are OK)</label><textarea id="ws_bulk" rows="5" placeholder="Murugan Stores, Musiri, 9876543210, 10, 6, 3000"></textarea><div class="acts"><button data-a="sbulk">Add these sites</button></div></details>';
@@ -193,7 +196,7 @@ function tabTeams(){
   if(!byId(D.teams,WP.team))WP.team=TS[0].id;
   h+='<div class="tw"><table class="tb"><thead><tr><th>Team</th><th>Sites</th><th class="r">Done sq ft</th><th class="r">Earned</th><th class="r">Deductions</th><th class="r">Paid</th><th class="r">Balance to pay</th></tr></thead><tbody>'+
   TS.map(function(t){var c=teamCalc(t.id);return'<tr data-tid="'+t.id+'" class="'+(t.id===WP.team?"sel":"")+'" style="cursor:pointer"><td><b>'+e(tn(t))+"</b>"+(t.leader?"<small>"+e(t.leader)+"</small>":"")+'</td><td>'+c.sites+'</td><td class="r">'+Q(c.done)+'</td><td class="r">'+R(c.earned)+'</td><td class="r">'+R(c.ded)+'</td><td class="r">'+R(c.pay)+'</td><td class="r"><b>'+R(c.bal)+"</b></td></tr>"}).join("")+'</tbody></table></div><small>Tap a team row to open its ledger.</small>';
-  var t=byId(D.teams,WP.team),c=teamCalc(t.id);
+  var t=byId(D.teams,WP.team),c=teamCalc(t.id),l0=WP.el?byId(D.ledger,WP.el):null;l0=l0||{};
   h+='<fieldset><legend>'+e(tn(t))+(t.leader?" · "+e(t.leader):"")+(t.phone?" · "+e(t.phone):"")+'</legend>'+
   '<div class="acts" style="margin:0 0 8px"><button data-a="tedit">Edit team</button><button data-a="tprint">Print statement</button><button data-a="tdel">Delete team</button></div>'+
   '<div class="kp"><div><small>Work done (measured)</small><span class="big">'+Q(c.done)+' sq ft</span></div><div><small>Earned</small><span class="big">'+R(c.earned)+'</span></div><div><small>Deductions (food, advance…)</small><span class="big">'+R(c.ded)+'</span></div><div><small>Net payable</small><span class="big">'+R(c.net)+'</span></div><div><small>Already paid</small><span class="big">'+R(c.pay)+'</span></div><div><small>Balance to pay</small><span class="big '+(c.bal<0?"neg":"pos")+'">'+R(c.bal)+"</span></div></div>"+
@@ -201,13 +204,13 @@ function tabTeams(){
   (c.notDed?'<small>Not deducted (decide at final account): '+R(c.notDed)+"</small>":"")+
   '<div class="tw"><table class="tb"><thead><tr><th>Order</th><th class="r">Sites</th><th class="r">Measured sq ft</th><th class="r">Team rate</th><th class="r">Earned</th></tr></thead><tbody>'+
   (Object.keys(c.ords).map(function(k){var x=c.ords[k];return"<tr><td>"+e(ordName(byId(D.orders,k)))+'</td><td class="r">'+x.n+'</td><td class="r">'+Q(x.done)+'</td><td class="r">₹'+x.rate+'</td><td class="r">'+R(x.done*x.rate)+"</td></tr>"}).join("")||'<tr><td colspan="5">No sites assigned yet.</td></tr>')+'</tbody></table></div>'+
-  '<h4 style="margin:14px 0 4px">Ledger entry</h4><div class="r3"><div><label for="wl_dt">Date</label><input id="wl_dt" type="date" value="'+today()+'"></div><div><label for="wl_ty">Type</label><select id="wl_ty" data-f="lty">'+LTY.map(function(x){return opt(x[0],x[1],"food")}).join("")+'</select></div><div><label for="wl_am">Amount ₹</label><input id="wl_am" type="number" min="0"></div></div>'+
-  '<div class="r2"><div><label for="wl_nt">Note</label><input id="wl_nt" placeholder="e.g. brush bought at Murugan store, Tata Ace Salem trip"></div><div><label>&nbsp;</label><label class="chk"><input type="checkbox" id="wl_dd" checked> Deduct from final amount</label></div></div>'+
-  '<div class="acts"><button class="pri" data-a="lsave">Add entry</button></div>'+
+  '<h4 style="margin:14px 0 4px">'+(l0.id?"Edit ledger entry":"Ledger entry")+'</h4><div class="r3"><div><label for="wl_dt">Date</label><input id="wl_dt" type="date" value="'+e(l0.dt||today())+'"></div><div><label for="wl_ty">Type</label><select id="wl_ty" data-f="lty">'+LTY.map(function(x){return opt(x[0],x[1],l0.ty||"food")}).join("")+'</select></div><div><label for="wl_am">Amount ₹</label><input id="wl_am" type="number" min="0" value="'+e(l0.amt)+'"></div></div>'+
+  '<div class="r3"><div><label for="wl_tm">Team</label><select id="wl_tm">'+TS.map(function(x){return opt(x.id,tn(x),l0.team||t.id)}).join("")+'</select></div><div><label for="wl_nt">Note</label><input id="wl_nt" value="'+e(l0.nt)+'" placeholder="e.g. brush bought at Murugan store, Tata Ace Salem trip"></div><div><label>&nbsp;</label><label class="chk" style="'+(l0.ty==="pay"?"display:none":"")+'"><input type="checkbox" id="wl_dd"'+(l0.ded===false?"":" checked")+'> Deduct from final amount</label></div></div>'+
+  '<div class="acts"><button class="pri" data-a="lsave">'+(l0.id?"Update entry":"Add entry")+'</button>'+(l0.id?'<button data-a="lcancel">Cancel</button>':"")+'</div>'+
   '<div class="tw"><table class="tb"><thead><tr><th>Date</th><th>Type</th><th>Note</th><th class="r">Amount</th><th>Deduct</th><th></th></tr></thead><tbody>'+
   (D.ledger.filter(function(l){return l.team===t.id}).sort(function(a,b){return(b.dt||"").localeCompare(a.dt||"")||(b.created||0)-(a.created||0)}).map(function(l){
     var ty=LTY.filter(function(x){return x[0]===l.ty})[0];
-    return'<tr data-lid="'+l.id+'"><td>'+fd(l.dt)+'</td><td>'+e(ty?ty[1]:l.ty)+'</td><td>'+e(l.nt)+'</td><td class="r">'+R(l.amt)+'</td><td>'+(l.ty==="pay"?"—":'<button data-a="ldd">'+(l.ded===false?"✗ No":"✓ Yes")+"</button>")+'</td><td><button data-a="ldel">✕</button></td></tr>'}).join("")||'<tr><td colspan="6">No entries yet.</td></tr>')+'</tbody></table></div></fieldset>';
+    return'<tr data-lid="'+l.id+'"><td>'+fd(l.dt)+'</td><td>'+e(ty?ty[1]:l.ty)+'</td><td>'+e(l.nt)+'</td><td class="r">'+R(l.amt)+'</td><td>'+(l.ty==="pay"?"—":'<button data-a="ldd">'+(l.ded===false?"✗ No":"✓ Yes")+"</button>")+'</td><td><button data-a="ledit">Edit</button> <button data-a="ldel">✕</button></td></tr>'}).join("")||'<tr><td colspan="6">No entries yet.</td></tr>')+'</tbody></table></div></fieldset>';
   return h}
 
 /* ---------- STOCK ---------- */
@@ -215,16 +218,17 @@ function holderOpts(from,sel){var a=[];if(from)a.push(["SHOP","🏪 Shop / vendo
   D.teams.slice().sort(function(x,y){return String(x.name).localeCompare(String(y.name))}).forEach(function(t){a.push(["T:"+t.id,tn(t)])});if(!from)a.push(["USED","Used / finished"]);
   return a.map(function(x){return opt(x[0],x[1],sel)}).join("")}
 function tabStock(){
-  var h='<fieldset><legend>Stock movement</legend><div class="r3"><div><label for="ss_dt">Date</label><input id="ss_dt" type="date" value="'+today()+'"></div>'+
-  '<div><label for="ss_pr">Product</label><input id="ss_pr" list="ss_dlp" placeholder="Yellow paint, Distemper, Brush..."></div>'+
-  '<div><label for="ss_qt">Quantity</label><input id="ss_qt" type="number" min="0" step="0.01"></div></div>'+
-  '<div class="r3"><div><label for="ss_un">Unit</label><input id="ss_un" list="ss_dlu" placeholder="Litre, Kg, Tin, Piece..."></div>'+
-  '<div><label for="ss_fr">From</label><select id="ss_fr" data-f="sfr">'+holderOpts(true,"SHOP")+'</select></div>'+
-  '<div><label for="ss_to">To</label><select id="ss_to">'+holderOpts(false,"SUP")+'</select></div></div>'+
-  '<div class="r3"><div><label for="ss_shop">Shop name (if bought)</label><input id="ss_shop" list="ss_dls" placeholder="Murugan Painting Store"></div>'+
-  '<div><label for="ss_rc">Received by</label><input id="ss_rc"></div>'+
-  '<div><label for="ss_nt">Note / via</label><input id="ss_nt" placeholder="Bus parcel – Salem"></div></div>'+
-  '<div class="acts"><button class="pri" data-a="mssave">Add movement</button></div>'+
+  var m0=WP.em?byId(D.stock,WP.em):null;m0=m0||{};
+  var h='<fieldset><legend>'+(m0.id?"Edit stock movement":"Stock movement")+'</legend><div class="r3"><div><label for="ss_dt">Date</label><input id="ss_dt" type="date" value="'+e(m0.dt||today())+'"></div>'+
+  '<div><label for="ss_pr">Product</label><input id="ss_pr" list="ss_dlp" value="'+e(m0.pr)+'" placeholder="Yellow paint, Distemper, Brush..."></div>'+
+  '<div><label for="ss_qt">Quantity</label><input id="ss_qt" type="number" min="0" step="0.01" value="'+e(m0.qt)+'"></div></div>'+
+  '<div class="r3"><div><label for="ss_un">Unit</label><input id="ss_un" list="ss_dlu" value="'+e(m0.un)+'" placeholder="Litre, Kg, Tin, Piece..."></div>'+
+  '<div><label for="ss_fr">From</label><select id="ss_fr" data-f="sfr">'+holderOpts(true,m0.fr||"SHOP")+'</select></div>'+
+  '<div><label for="ss_to">To</label><select id="ss_to">'+holderOpts(false,m0.to||"SUP")+'</select></div></div>'+
+  '<div class="r3"><div><label for="ss_shop">Shop name (if bought)</label><input id="ss_shop" list="ss_dls" value="'+e(m0.shop)+'" placeholder="Murugan Painting Store"></div>'+
+  '<div><label for="ss_rc">Received by</label><input id="ss_rc" value="'+e(m0.rc)+'"></div>'+
+  '<div><label for="ss_nt">Note / via</label><input id="ss_nt" value="'+e(m0.nt)+'" placeholder="Bus parcel – Salem"></div></div>'+
+  '<div class="acts"><button class="pri" data-a="mssave">'+(m0.id?"Update movement":"Add movement")+'</button>'+(m0.id?'<button data-a="mscancel">Cancel</button>':"")+'</div>'+
   dl("ss_dlp",uniq(D.stock.map(function(m){return m.pr})))+dl("ss_dlu",uniq(UNITS.concat(D.stock.map(function(m){return m.un}))))+dl("ss_dls",uniq(D.stock.map(function(m){return m.shop})))+'</fieldset>';
   var B=stockBal(),keys=Object.keys(B.P).sort();
   if(keys.length){
@@ -236,11 +240,12 @@ function tabStock(){
   var pf=WP.sf,L=D.stock.slice().filter(function(m){return!pf||String(m.pr||"").trim().toLowerCase()===pf}).sort(function(a,b){return(b.dt||"").localeCompare(a.dt||"")||(b.created||0)-(a.created||0)});
   h+='<div class="r2"><div><label for="sf_p">Filter product</label><select id="sf_p" data-f="sf"><option value="">All products</option>'+uniq(D.stock.map(function(m){return m.pr})).map(function(p){return opt(p.toLowerCase(),p,pf)}).join("")+'</select></div></div>'+
   '<div class="tw"><table class="tb"><thead><tr><th>Date</th><th>Product</th><th class="r">Qty</th><th>From → To</th><th>Received by / note</th><th></th></tr></thead><tbody>'+
-  (L.slice(0,300).map(function(m){return'<tr data-mid="'+m.id+'"><td>'+fd(m.dt)+'</td><td>'+e(m.pr)+'</td><td class="r">'+Q(m.qt)+" "+e(m.un)+'</td><td>'+e(holderName(m.fr,m))+" → "+e(holderName(m.to))+'</td><td>'+e(m.rc)+(m.nt?"<small>"+e(m.nt)+"</small>":"")+'</td><td><button data-a="msdel">✕</button></td></tr>'}).join("")||'<tr><td colspan="6">No stock entries yet.</td></tr>')+'</tbody></table></div>';
+  (L.slice(0,300).map(function(m){return'<tr data-mid="'+m.id+'"><td>'+fd(m.dt)+'</td><td>'+e(m.pr)+'</td><td class="r">'+Q(m.qt)+" "+e(m.un)+'</td><td>'+e(holderName(m.fr,m))+" → "+e(holderName(m.to))+'</td><td>'+e(m.rc)+(m.nt?"<small>"+e(m.nt)+"</small>":"")+'</td><td><button data-a="msedit">Edit</button> <button data-a="msdel">✕</button></td></tr>'}).join("")||'<tr><td colspan="6">No stock entries yet.</td></tr>')+'</tbody></table></div>';
   return h}
 
 /* ---------- PROFIT ---------- */
 function tabProfit(){
+  var c0=WP.ec?byId(D.cost,WP.ec):null;c0=c0||{};
   var P=profitCalc(),cs=D.cost.filter(function(c){return!WP.mon||(c.dt||"").slice(0,7)===WP.mon}).sort(function(a,b){return(b.dt||"").localeCompare(a.dt||"")}),cc=0;
   cs.forEach(function(c){cc+=nm(c.amt)});
   var net=P.tot.profit-cc,ag=0,pd=0;D.sites.forEach(function(s){ag+=nm(s.ag);if(s.agp)pd+=nm(s.ag)});
@@ -250,9 +255,9 @@ function tabProfit(){
   (P.rows.map(function(r){return"<tr><td>"+e(ordName(r.o))+(r.pn?"<small>Painted, not measured: "+Q(r.pn)+" sq ft</small>":"")+'</td><td class="r">₹'+e(r.o.rate)+'</td><td class="r">₹'+e(r.o.trate)+'</td><td class="r">'+Q(r.sq)+'</td><td class="r">'+Q(r.ver)+'</td><td class="r">'+R(r.bill)+'</td><td class="r">'+R(r.cost)+'</td><td class="r"><b>'+R(r.profit)+"</b></td></tr>"}).join("")||'<tr><td colspan="8">No measured sites in this period.</td></tr>')+'</tbody></table></div>'+
   '<small>Food, advance, brush and Tata Ace money is deducted from the team\'s payment, so it does not reduce your profit here.</small>'+
   '<div class="msg" style="margin-top:10px">Agreement amounts to wall owners: total '+R(ag)+' · paid by you '+R(pd)+' · not yet paid '+R(ag-pd)+' (the company reimburses this; not counted in profit).</div>'+
-  '<fieldset><legend>Supervisor salary &amp; other costs</legend><div class="r3"><div><label for="wc_dt">Date</label><input id="wc_dt" type="date" value="'+today()+'"></div><div><label for="wc_ty">Type</label><select id="wc_ty"><option>Supervisor salary</option><option>Other</option></select></div><div><label for="wc_am">Amount ₹</label><input id="wc_am" type="number" min="0"></div></div>'+
-  '<label for="wc_nt">Note</label><input id="wc_nt"><div class="acts"><button class="pri" data-a="csave">Add cost</button></div>'+
-  '<div class="tw"><table class="tb"><tbody>'+(cs.map(function(c){return'<tr data-cid="'+c.id+'"><td>'+fd(c.dt)+"</td><td>"+e(c.ty)+"</td><td>"+e(c.nt)+'</td><td class="r">'+R(c.amt)+'</td><td><button data-a="cdel">✕</button></td></tr>'}).join("")||'<tr><td colspan="5">No costs in this period.</td></tr>')+'</tbody></table></div></fieldset>';
+  '<fieldset><legend>Supervisor salary &amp; other costs'+(c0.id?" (editing)":"")+'</legend><div class="r3"><div><label for="wc_dt">Date</label><input id="wc_dt" type="date" value="'+e(c0.dt||today())+'"></div><div><label for="wc_ty">Type</label><select id="wc_ty">'+opt("Supervisor salary","Supervisor salary",c0.ty||"Supervisor salary")+opt("Other","Other",c0.ty||"")+'</select></div><div><label for="wc_am">Amount ₹</label><input id="wc_am" type="number" min="0" value="'+e(c0.amt)+'"></div></div>'+
+  '<label for="wc_nt">Note</label><input id="wc_nt" value="'+e(c0.nt)+'"><div class="acts"><button class="pri" data-a="csave">'+(c0.id?"Update cost":"Add cost")+'</button>'+(c0.id?'<button data-a="ccancel">Cancel</button>':"")+'</div>'+
+  '<div class="tw"><table class="tb"><tbody>'+(cs.map(function(c){return'<tr data-cid="'+c.id+'"><td>'+fd(c.dt)+"</td><td>"+e(c.ty)+"</td><td>"+e(c.nt)+'</td><td class="r">'+R(c.amt)+'</td><td><button data-a="cedit">Edit</button> <button data-a="cdel">✕</button></td></tr>'}).join("")||'<tr><td colspan="5">No costs in this period.</td></tr>')+'</tbody></table></div></fieldset>';
   return h}
 
 /* ---------- printing / csv ---------- */
@@ -268,7 +273,7 @@ function bind(){
   v.addEventListener("click",function(ev){
     var tr,b=ev.target.closest("[data-a]");
     if(!b){var r=ev.target.closest("tr[data-tid]");if(r){WP.team=r.dataset.tid;render(true)}return}
-    var a=b.dataset.a;if(a==="tab"){WP.tab=b.dataset.t;WP.eo=WP.es=WP.et="";render(true);return}
+    var a=b.dataset.a;if(a==="tab"){WP.tab=b.dataset.t;WP.eo=WP.es=WP.et=WP.el=WP.em=WP.ec="";render(true);return}
     var row=b.closest("tr"),A={
       osave:oSave,ocancel:function(){WP.eo="";render(true)},
       oedit:function(){WP.eo=row.dataset.oid;render(true);window.scrollTo(0,0)},
@@ -282,10 +287,10 @@ function bind(){
       sag:function(){var s=byId(D.sites,row.dataset.sid);upd("sites",s.id,s.agp?{agp:false,agd:""}:{agp:true,agd:today()})},
       asplit:aSplit,arange:aRange,scsv:sCsv,sprint:sPrint,
       tsave:tSave,tcancel:function(){WP.et="";render(true)},tedit:function(){WP.et=WP.team;render(true);window.scrollTo(0,0)},tdel:tDel,tprint:tPrint,
-      lsave:lSave,ldd:function(){var l=byId(D.ledger,row.dataset.lid);upd("ledger",l.id,{ded:l.ded===false})},
+      lsave:lSave,lcancel:function(){WP.el="";render(true)},ledit:function(){var l=byId(D.ledger,row.dataset.lid);WP.el=l.id;if(l.team)WP.team=l.team;render(true);jump("wl_dt")},ldd:function(){var l=byId(D.ledger,row.dataset.lid);upd("ledger",l.id,{ded:l.ded===false})},
       ldel:function(){if(confirm("Delete this entry?"))del("ledger",row.dataset.lid)},
-      mssave:mSave,msdel:function(){if(confirm("Delete this stock entry?"))del("stock",row.dataset.mid)},
-      csave:cSave,cdel:function(){if(confirm("Delete this cost?"))del("cost",row.dataset.cid)},pprint:pPrint};
+      mssave:mSave,mscancel:function(){WP.em="";render(true)},msedit:function(){WP.em=row.dataset.mid;render(true);jump("ss_pr")},msdel:function(){if(confirm("Delete this stock entry?"))del("stock",row.dataset.mid)},
+      csave:cSave,ccancel:function(){WP.ec="";render(true)},cedit:function(){WP.ec=row.dataset.cid;render(true);jump("wc_dt")},cdel:function(){if(confirm("Delete this cost?"))del("cost",row.dataset.cid)},pprint:pPrint};
     if(A[a])A[a](b)});
   v.addEventListener("change",function(ev){
     var t=ev.target,f=t.dataset&&t.dataset.f;if(!f)return;
@@ -302,28 +307,28 @@ function bind(){
     if(t.id==="ws_w"||t.id==="ws_h"){var w=nm(g("ws_w").value),h=nm(g("ws_h").value),sq=g("ws_sq");if(sq&&!sq.dataset.man)sq.value=w&&h?q2(w*h):""}
     else if(t.id==="ws_sq")t.dataset.man=t.value?"1":""});
 }
+function jump(id){var x=g(id);if(x&&x.scrollIntoView)x.scrollIntoView({block:"center"})}
 function sStatus(s,st){
-  if(isDone({st:st})&&!(nm(s.sq)>0)){alert("Add the wall size (sq ft) first. Use Edit on this site.");render();return}
   var o={st:st};
   if(isDone({st:st})&&!s.mdate)o.mdate=today();
   if(st==="verified"){var n=prompt("Verified by (company person's name)",s.ver||"");if(n===null){render();return}o.ver=n.trim();o.verAt=today()}
   else if(s.st==="verified"){o.ver="";o.verAt=""}
   upd("sites",s.id,o)}
 function oSave(){
-  var co=val("wo_co");if(!co){alert("Enter the company name");return}
+  var co=val("wo_co");
   var o={company:co,title:val("wo_ti"),rate:nm(val("wo_rt")),trate:nm(val("wo_tr")),date:val("wo_dt")||today(),area:val("wo_ar"),note:val("wo_nt")};
-  if(!(o.rate>0)||!(o.trate>=0)){alert("Enter the company rate and team rate");return}
   var p=WP.eo?upd("orders",WP.eo,o):add("orders",Object.assign(o,{closed:false}));
   log("WP: "+(WP.eo?"edited":"added")+" order "+co);WP.eo="";p.then(function(){render(true)})}
 function sSave(){
   var o=curOrder();if(!o)return;
-  var s={own:val("ws_own"),pl:val("ws_pl"),ph:val("ws_ph"),w:nm(val("ws_w"))||"",h:nm(val("ws_h"))||"",sq:nm(val("ws_sq")),ag:nm(val("ws_ag")),nt:val("ws_nt")};
-  if(!s.own&&!s.pl){alert("Enter the owner / shop name or village");return}
+  var s={own:val("ws_own"),pl:val("ws_pl"),ph:val("ws_ph"),w:nm(val("ws_w"))||"",h:nm(val("ws_h"))||"",sq:nm(val("ws_sq")),ag:nm(val("ws_ag")),nt:val("ws_nt"),agp:val("ws_agp")==="1",agd:val("ws_agd"),ver:val("ws_ver")};
+  if(s.agp&&!s.agd)s.agd=today();if(!s.agp)s.agd="";
+  var old=WP.es?byId(D.sites,WP.es):null;s.verAt=s.ver?((old&&old.ver===s.ver&&old.verAt)||today()):"";
   if(!s.sq&&s.w&&s.h)s.sq=q2(s.w*s.h);
   var p;
   if(WP.es){p=upd("sites",WP.es,s)}
   else{var no=D.sites.filter(function(x){return x.oid===o.id}).reduce(function(m,x){return Math.max(m,nm(x.no))},0)+1;
-    p=add("sites",Object.assign(s,{oid:o.id,no:no,team:"",st:"booked",agp:false,agd:"",mdate:"",ver:"",verAt:""}))}
+    p=add("sites",Object.assign(s,{oid:o.id,no:no,team:"",st:"booked",mdate:""}))}
   WP.es="";p.then(function(){render(true);var f=g("ws_own");if(f)f.focus()})}
 function sBulk(){
   var o=curOrder();if(!o)return;var t=val("ws_bulk");if(!t){alert("Paste the lines first");return}
@@ -363,7 +368,7 @@ function sPrint(){
   printHtml("Sites – "+ordName(o),"<h1>"+e(ordName(o))+"</h1><small>Sites list · "+fd(today())+"</small><table><tr><th>No</th><th>Owner</th><th>Village</th><th>Phone</th><th>Size</th><th class='r'>Sq ft</th><th>Team</th><th>Status</th></tr>"+
     L.map(function(s){var t=byId(D.teams,s.team);return"<tr><td>"+e(s.no)+"</td><td>"+e(s.own)+"</td><td>"+e(s.pl)+"</td><td>"+e(s.ph)+"</td><td>"+(s.w&&s.h?e(s.w)+"×"+e(s.h):"")+"</td><td class='r'>"+(s.sq?Q(s.sq):"")+"</td><td>"+e(t?tn(t):"")+"</td><td>"+e(stLabel(s.st))+"</td></tr>"}).join("")+"</table>")}
 function tSave(){
-  var n=val("wt_nm");if(!n){alert("Enter the team name");return}
+  var n=val("wt_nm");
   var o={name:n,leader:val("wt_ld"),phone:val("wt_ph")};
   var p=WP.et?upd("teams",WP.et,o):add("teams",o).then(function(){});
   WP.et="";Promise.resolve(p).then(function(){render(true)})}
@@ -372,9 +377,10 @@ function tDel(){
   if(D.sites.some(function(s){return s.team===t.id})||D.ledger.some(function(l){return l.team===t.id})){alert("This team has sites or ledger entries, so it cannot be deleted. Unassign the sites and delete the entries first.");return}
   if(confirm("Delete "+tn(t)+"?"))del("teams",t.id)}
 function lSave(){
-  var t=byId(D.teams,WP.team),am=nm(val("wl_am"));if(!t)return;if(!(am>0)){alert("Enter the amount");return}
-  var ty=val("wl_ty"),d=g("wl_dd");
-  add("ledger",{team:t.id,dt:val("wl_dt")||today(),ty:ty,amt:am,nt:val("wl_nt"),ded:ty==="pay"?null:!!(d&&d.checked)}).then(function(){log("WP: "+tn(t)+" "+ty+" ₹"+am);render(true)})}
+  var am=nm(val("wl_am")),t=byId(D.teams,val("wl_tm"))||byId(D.teams,WP.team);if(!t)return;
+  var ty=val("wl_ty"),d=g("wl_dd"),o={team:t.id,dt:val("wl_dt")||today(),ty:ty,amt:am,nt:val("wl_nt"),ded:ty==="pay"?null:!!(d&&d.checked)};
+  var p=WP.el?upd("ledger",WP.el,o):add("ledger",o);WP.el="";WP.team=t.id;
+  p.then(function(){log("WP: "+tn(t)+" "+ty+" ₹"+am);render(true)})}
 function tPrint(){
   var t=byId(D.teams,WP.team);if(!t)return;var c=teamCalc(t.id);
   var L=D.ledger.filter(function(l){return l.team===t.id}).sort(function(a,b){return(a.dt||"").localeCompare(b.dt||"")});
@@ -387,12 +393,13 @@ function tPrint(){
     "<h2>Account</h2><table><tr><td>Earned</td><td class='r'>"+R(c.earned)+"</td></tr><tr><td>Less deductions</td><td class='r'>"+R(c.ded)+"</td></tr><tr><td>Net payable</td><td class='r'>"+R(c.net)+"</td></tr><tr><td>Less already paid</td><td class='r'>"+R(c.pay)+"</td></tr><tr><th>Balance to pay</th><th class='r'>"+R(c.bal)+"</th></tr></table>")}
 function mSave(){
   var pr=val("ss_pr"),qt=nm(val("ss_qt")),fr=val("ss_fr"),to=val("ss_to");
-  if(!pr){alert("Enter the product name");return}if(!(qt>0)){alert("Enter the quantity");return}
-  if(fr===to){alert("From and To cannot be the same");return}
-  add("stock",{dt:val("ss_dt")||today(),pr:pr,qt:qt,un:val("ss_un"),fr:fr,to:to,shop:fr==="SHOP"?val("ss_shop"):"",rc:val("ss_rc"),nt:val("ss_nt")}).then(function(){log("WP: stock "+pr+" "+qt+" "+holderName(fr)+" → "+holderName(to));render(true)})}
+  var o={dt:val("ss_dt")||today(),pr:pr,qt:qt,un:val("ss_un"),fr:fr,to:to,shop:fr==="SHOP"?val("ss_shop"):"",rc:val("ss_rc"),nt:val("ss_nt")};
+  var p=WP.em?upd("stock",WP.em,o):add("stock",o);WP.em="";
+  p.then(function(){log("WP: stock "+pr+" "+qt+" "+holderName(fr)+" → "+holderName(to));render(true)})}
 function cSave(){
-  var am=nm(val("wc_am"));if(!(am>0)){alert("Enter the amount");return}
-  add("cost",{dt:val("wc_dt")||today(),ty:val("wc_ty"),amt:am,nt:val("wc_nt")}).then(function(){render(true)})}
+  var am=nm(val("wc_am"));
+  var o={dt:val("wc_dt")||today(),ty:val("wc_ty"),amt:am,nt:val("wc_nt")};
+  var p=WP.ec?upd("cost",WP.ec,o):add("cost",o);WP.ec="";p.then(function(){render(true)})}
 function pPrint(){
   var P=profitCalc(),cs=D.cost.filter(function(c){return!WP.mon||(c.dt||"").slice(0,7)===WP.mon}),cc=0;cs.forEach(function(c){cc+=nm(c.amt)});
   printHtml("Profit report","<h1>Saagee Ads – Wall painting profit</h1><div>"+(WP.mon?"Month: "+e(WP.mon):"All time")+" · "+fd(today())+"</div><table><tr><th>Order</th><th class='r'>Rate</th><th class='r'>Team</th><th class='r'>Sq ft</th><th class='r'>Billing</th><th class='r'>Team cost</th><th class='r'>Profit</th></tr>"+
